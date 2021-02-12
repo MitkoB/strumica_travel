@@ -1,0 +1,106 @@
+<style>
+    #header {
+        transition: all 0.4s;
+        z-index: 997;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .nav-link:hover, .nav-link.active {
+        border-bottom: 1px cornflowerblue solid;
+    }
+
+    #CssLogin, #CssLogout {
+        background: darkolivegreen;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 50px;
+        padding: 8px 25px 9px 25px;
+        white-space: nowrap;
+        transition: 0.3s;
+        display: inline-block;
+    }
+    #CssLogin:hover #CssLogout:hover{
+        background: darkolivegreen;
+        color: #fff;
+    }
+    .drop-down ul {
+        display: block;
+        position: absolute;
+        top: calc(100% + 30px);
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        padding: 10px 0;
+        background: #fff;
+        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+        transition: 0.3s;
+        border-top: 2px solid cornflowerblue;
+        list-style: none;
+    }
+
+    .drop-down:hover > ul {
+        opacity: 1;
+        top: 100%;
+        visibility: visible;
+    }
+
+    .drop-down li {
+        min-width: 180px;
+        position: relative;
+    }
+
+    .drop-down ul a {
+        padding: 10px 20px;
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: none;
+        color: cornflowerblue;
+    }
+</style>
+<header id=header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+    <nav class="navbar navbar-expand navbar-light nav-menu" style="z-index:500;width: 100%; max-width:100%; top:0;">
+        <p class="display-1" style="font-family: 'Brush Script MT'; color: cornflowerblue; font-size: 40px;">Strumica Travel</p>
+        <ul class="navbar-nav font-weight-bold ml-auto" >
+            <li class="nav-item mr-1 active" >
+                    <a style="font-family: 'Open Sans'; color: cornflowerblue; font-size: 20px;" href="/" class="nav-link active">Home <i class="fa  fa-home"></i></a>
+            </li>
+            <li class="nav-item mr-1" >
+                    <a style="font-family:'Open Sans'; color: cornflowerblue; font-size: 20px;" href="/categories" class="nav-link ">Attractions </a>
+            </li>
+            <li class="nav-item mr-1" >
+                    <a style="font-family: 'Open Sans'; color: cornflowerblue; font-size: 20px;"href="/categories" class="nav-link ">Routes </a>
+            </li>
+            <li class="drop-down nav-item mr-1 ">
+                    <a style="font-family: 'Open Sans'; color: cornflowerblue; font-size: 20px;" href="/help" class="nav-link ">Culture</a>
+                <ul>
+                    <li><a href="/">Traditional Food</a></li>
+                    <li><a href="/">Famous Events</a></li>
+                </ul>
+            </li>
+            <li class="nav-item mr-1" >
+                <a style="font-family: 'Open Sans'; color: cornflowerblue; font-size: 20px;" class="nav-link" href="/">Team</a>
+            </li>
+            <li class="nav-item mr-1" sec:authorize="isAuthenticated()">
+                <a style="font-family: 'Open Sans'; color: cornflowerblue; font-size: 20px;" class="nav-link" href="/">Favorites <i class="fa fa-heart-o"></i></a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav font-weight-bold ml-auto navbar-right">
+            <li class="nav-item mr-1" sec:authorize="isAuthenticated()">
+                <a style="font-family: 'Open Sans'; color: cornflowerblue; font-size: 20px;"class="nav-link" href="/">
+                    <th:block th:if="${#request.getRemoteUser() != null}"
+                              th:text="${#request.getRemoteUser()}"></th:block>
+                </a>
+            </li>
+            <li id="CssLogin" class="nav-item mr-1" sec:authorize="!isAuthenticated()">
+                <a style="font-family: 'Open Sans';color: white"  href="/login">
+                    <i class="fa fa-user-circle-o"></i> Login
+                </a>
+            </li>
+            <li id="CssLogout" class="nav-item mr-1" sec:authorize="isAuthenticated()">
+                <a style="font-family: 'Open Sans';color: white" href="/logout">
+                    <i class="fa fa-user-circle-o"></i> Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>

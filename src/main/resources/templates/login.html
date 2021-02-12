@@ -1,0 +1,42 @@
+<style>
+    body{
+        background-image: url("https://cdn2.f-cdn.com/contestentries/1490804/32875450/5cbfd5e38fc30_thumb900.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .formColumn{
+        background: rgba(255, 255, 255, 0.8);
+        border: 2px solid darkgray;
+        border-radius: 5px;
+    }
+</style>
+<div class="container" xmlns:th="http://www.thymeleaf.org">
+    <div class="container mt-5 " style="margin-bottom: 300px;">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 formColumn">
+                <form  method="post" action="/login" class="mt-5">
+                    <h2 class="text-center" style="color: cornflowerblue">Login</h2>
+                    <div class="form-group mt-5">
+                        <label for="username" class="sr-only">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+                    </div>
+                    <div th:if="${hasErrors}">
+                        <div th:text="${error}" class="text-danger"></div>
+                    </div>
+                    <div th:text="${param.error}" class="text-danger"></div>
+                    <p>
+                        <input type="checkbox" name="remember_me" id="remember_me" class="">
+                        <label for="remember_me">Remember me!</label>
+                    </p>
+                    <button class="btn btn-lg btn-primary btn-block mb-5" id="submit" type="submit" >Login</button>
+                </form>
+                <a href="/register" class="btn btn-block btn-light" style="color: cornflowerblue">Don't have an account? Register here!</a>
+            </div>
+        </div>
+    </div>
+</div>
