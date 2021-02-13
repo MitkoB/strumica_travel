@@ -34,7 +34,7 @@ public class TouristAttractionServiceImpl implements TouristAttractionService {
 
     @Override
     public Optional<TouristAttraction> save(String name, String location, String description, String pictures) {
-        if(name==null || name.isEmpty() || location==null || location.isEmpty() || description==null || description.isEmpty() || pictures!=null || pictures.isEmpty())
+        if(name==null || name.isEmpty() || location==null || location.isEmpty() || description==null || description.isEmpty() || pictures==null || pictures.isEmpty())
         {
             throw new IllegalArgumentException();
         }

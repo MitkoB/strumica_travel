@@ -1,154 +1,164 @@
-<!--<div class="container-fluid" xmlns:th="http://www.thymeleaf.org">-->
-<style>
-    .timeline {
-        list-style: none;
-        padding: 20px 0 20px;
-        position: relative;
-    }
-
-    .timeline:before {
-        top: 0;
-        bottom: 0;
-        position: absolute;
-        content: " ";
-        width: 3px;
-        background-color: #eeeeee;
-        left: 50%;
-        margin-left: -1.5px;
-    }
-
-    .timeline > li {
-        margin-bottom: 20px;
-        position: relative;
-    }
-
-    .timeline > li:before,
-    .timeline > li:after {
-        content: " ";
-        display: table;
-    }
-
-    .timeline > li:after {
-        clear: both;
-    }
-
-    .timeline > li:before,
-    .timeline > li:after {
-        content: " ";
-        display: table;
-    }
-
-    .timeline > li:after {
-        clear: both;
-    }
-
-    .timeline > li > .timeline-panel {
-        width: 46%;
-        float: left;
-        border: 1px solid #d4d4d4;
-        border-radius: 2px;
-        padding: 20px;
-        position: relative;
-        -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-        box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-    }
-
-    .timeline > li > .timeline-panel:before {
-        position: absolute;
-        top: 26px;
-        right: -15px;
-        display: inline-block;
-        border-top: 15px solid transparent;
-        border-left: 15px solid #ccc;
-        border-right: 0 solid #ccc;
-        border-bottom: 15px solid transparent;
-        content: " ";
-    }
-
-    .timeline > li > .timeline-panel:after {
-        position: absolute;
-        top: 27px;
-        right: -14px;
-        display: inline-block;
-        border-top: 14px solid transparent;
-        border-left: 14px solid #fff;
-        border-right: 0 solid #fff;
-        border-bottom: 14px solid transparent;
-        content: " ";
-    }
-
-    .timeline > li > .timeline-badge {
-        color: #fff;
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-        font-size: 1.4em;
-        text-align: center;
-        position: absolute;
-        top: 16px;
-        left: 50%;
-        margin-left: -25px;
-        background-color: #999999;
-        z-index: 100;
-        /*border-top-right-radius: 50%;*/
-        /*border-top-left-radius: 50%;*/
-        /*border-bottom-right-radius: 50%;*/
-        /*border-bottom-left-radius: 50%;*/
-    }
-
-    .timeline > li.timeline-inverted > .timeline-panel {
-        float: right;
-    }
-
-    .timeline > li.timeline-inverted > .timeline-panel:before {
-        border-left-width: 0;
-        border-right-width: 15px;
-        left: -15px;
-        right: auto;
-    }
-
-    .timeline > li.timeline-inverted > .timeline-panel:after {
-        border-left-width: 0;
-        border-right-width: 14px;
-        left: -14px;
-        right: auto;
-    }
-
-    .timeline-badge.primary {
-        background-color: #2e6da4 !important;
-    }
-
-    .timeline-badge.success {
-        background-color: #3f903f !important;
-    }
-
-    .timeline-badge.warning {
-        background-color: #f0ad4e !important;
-    }
-
-    .timeline-badge.danger {
-        background-color: #d9534f !important;
-    }
-
-    .timeline-badge.info {
-        background-color: #5bc0de !important;
-    }
-
-    .timeline-title {
-        margin-top: 0;
-        color: inherit;
-    }
-
-    .timeline-body > p,
-    .timeline-body > ul {
-        margin-bottom: 0;
-    }
-
-    .timeline-body > p + p {
-        margin-top: 5px;
-    }
-</style>
-    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" xmlns:th="http://www.thymeleaf.org">
+<div  xmlns:th="http://www.thymeleaf.org">
+    <div class="w-100"  style="position:relative;top:0;height: auto; width: 100%; overflow:hidden;">
+        <img  style="background-size: cover" class="d-block w-100"   src="../static/images/background-img.jpg" th:src="@{images/background-img.jpg}"/>
+    </div>
+        <div class="container  mt-5 pl-5 pr-5 mb-5">
+            <div class="text-center">
+                <h1 class="display-4" style="color: #009961">STRUMICA</h1>
+                <hr style="background: linear-gradient(.25turn,#009961, black, white); height:3px;" />
+            </div>
+            <div class="row mt-2" style="font-family: 'Open Sans, sans-serif';color: #0f0f0f">
+                <div class="col-xs-12 .col-md-4 ">
+                <p>
+                    Strumica is a cultural, trade and political center of the Southeast region. According to the 2002 census, the city has 35,311 inhabitants and is therefore the largest city in the region and the tenth largest city in the Republic of Macedonia. Situated in the southeast of Macedonia, the city is surrounded by the Strumica field and Mount Elenica in the west, along with the King’s towers.
+                    The city is the seat of the same-name municipality.
+                </p>
+                </div>
+                <div class="col-xs-12 .col-md-4">
+                    <h2 class="text-muted py-3" style="color: #009961">Location</h2>
+                    <p>
+                        The Municipality of Strumica is located at 41° 22' northern latitude and 22° 35' and 23° 45' east longitude. It occupies the far south-eastern part of the Republic of Macedonia just below the boundary between the state borders with Greece to the south and Bulgaria to the east. The region that actually covers the valley between the mountains Belasica, Ograzden and Elenica. The most important national road M6 passes through the region. With it, the region is connected with the rest of the country, as well as with the Republic of Bulgaria and the Republic of Greece.
+                    </p>
+                </div>
+            </div>
+        </div>
+    <h2 class="text-center text-muted py-3">History</h2>
+    <div class="container py-2 mt-4 mb-4">
+        <!-- timeline item 1 -->
+        <div class="row no-gutters">
+            <div class="col-sm"> <!--spacer--> </div>
+            <!-- timeline item 1 center dot -->
+            <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                <div class="row h-50">
+                    <div class="col">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="badge badge-pill bg-dark border" style="color: #009961">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col border-right">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+            <!-- timeline item 1 event content -->
+            <div class="col-sm py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-muted">Ancient period</h4>
+                        <p class="card-text">The history if the region of Strumica, dates even from the Neolithic period, but Strumica as a town is first mentioned in the 5th century BC, when was settled by the Thracian tribes. Also in the Hellenistic period, during the rule of Philip 2nd and his son Alexander 3rd of Macedonia, the Strumica region was divided between the ancient Macedonian state and the other stayed to the Thracians. The town was mentioned for the first time in the history by the Roman historian Tit Livius in 181 BC, under the name Astraion, and occured in connection with Demetrius, the brother the last ancient Macedonian king Perseius (179-168 BC).
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/row-->
+        <!-- timeline item 2 -->
+        <div class="row no-gutters">
+            <div class="col-sm py-2">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <h4 class="card-title text-muted">Middle Ages</h4>
+                        <p class="card-text">When the Slavs arrived they changed the ancient name Tiveriopol to Strumica. A fortress was built right to the city, which stays in ruins today called Carevi Kuli. Carevi Kuli is a fortress from the late ancient period. It is located on the southern side of Strumica and has size 100 meters and is oriented east-west.The all region of Strumica was settle by the Slavs in the year of 630 AD.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                <div class="row h-50">
+                    <div class="col border-right">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="badge badge-pill bg-light border">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col border-right">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+            <div class="col-sm"> <!--spacer--> </div>
+        </div>
+        <!--/row-->
+        <!-- timeline item 3 -->
+        <div class="row no-gutters">
+            <div class="col-sm"> <!--spacer--> </div>
+            <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                <div class="row h-50">
+                    <div class="col border-right">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="badge badge-pill bg-dark border">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col border-right">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+            <div class="col-sm py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-muted">Ottoman Period</h4>
+                        <p>In the period after 1395 Strumica falls under Turkish authority and by them it was held for 529 years until the Balkan wars in 1913. Then went in the borders of Bulgaria and later after the first world war in Serbia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/row-->
+        <!-- timeline item 4 -->
+        <div class="row no-gutters">
+            <div class="col-sm py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-muted">Late-19th century</h4>
+                        <p>Following the Berlin Congress of 1878, when the Ottoman Empire lost a sizable portion of its territory on the Balkans, a stream of refugees flowed into the area; some of them ending up in Strumica. These people were called "muhajirs". According to the Ottoman General Census of 1881/82-1893, the kaza of Strumica had a total population of 33.024, consisting of 15.760 Muslims, 13.726 Greeks, 2.965 Bulgarians and 573 Jews.The Internal Macedonian Revolutionary Organization for the Ograzden county was formed and operated in these parts. One of the most prominent leaders of the organization in Strumica was Hristo Chernopeev, who took part in the Young Turk Revolution (1908–09). The outcome of this effort did not bring freedom to the local people who still remained under Ottoman rule.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                <div class="row h-50">
+                    <div class="col border-right">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="badge badge-pill bg-light border">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col border-right">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+            <div class="col-sm"> <!--spacer--> </div>
+        </div>
+        <!--/row-->
+<!--        item 5-->
+        <div class="row no-gutters">
+            <div class="col-sm"> <!--spacer--> </div>
+            <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                <div class="row h-50">
+                    <div class="col border-right">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+                <h5 class="m-2">
+                    <span class="badge badge-pill bg-dark border">&nbsp;</span>
+                </h5>
+                <div class="row h-50">
+                    <div class="col border-right">&nbsp;</div>
+                    <div class="col">&nbsp;</div>
+                </div>
+            </div>
+            <div class="col-sm py-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-muted">20th century</h4>
+                        <p>The Kaza of Strumica in 1905 had a total Christian population of 22.860, consisting of 12.736 Exarchist Bulgarians, 8.992 Patriarchist Bulgarians, 624 Protestant Bulgarians, 444 Roma people, 25 Greeks and 6 Vlachs according to the geographers Dimitri Mishev and D. M. Brancoff.In the First Balkan War of 1912 the Ottomans were defeated and driven out of Macedonia (region) by the joint effort of the Balkan League (Serbia, Bulgaria, Greece and Montenegro). Bulgaria annexed the town of Strumica. In the Second Balkan War (1913), which was fought between the three of the Balkan allies against Bulgaria, the latter was defeated, however, according to the Bucharest treaty (28 July 1913) Strumica remained under Bulgarian rule. On 6 April 1941, the first day of the Axis invasion of Yugoslavia, Strumica was captured by the German Army and, as Bulgaria was allied with Germany, Strumica was turned over under occupation of the Bulgarian armies on 18 April 1941. From 1941 to 1944, Strumica, as most of Vardar Macedonia, was annexed by the Kingdom of Bulgaria. On 11 September 1944 the Bulgarian army withdrew from Strumica and on 5 November 1944, the German army also left the town. After the war it became part of the Socialist Republic of Macedonia, one of the republics of Federal Yugoslavia. With the referendum on 8 September 1991, amid the breakup of Yugoslavia, the country became independent under the constitutional name Republic of Macedonia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" >
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -163,7 +173,7 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <img   src="../static/images/strumica6.jpg" th:src="@{images/strumica6.jpg}" alt="Second slide"/>
+                <img   src="../static/images/strumica-s2.jpg" th:src="@{images/strumica-s2.jpg}" alt="Second slide"/>
                 <div class="carousel-caption d-none d-md-block">
                     <h3>If you want to know more about Strumica, click below</h3>
                     <a type="button" class="btn btn-light btn-outline-info" href="/">Read more</a>
@@ -186,84 +196,4 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-<div class="container mt-5 pl-5 pr-5 mb-5">
-    <section class="page-section" id="history">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-heading text-uppercase">STRUMICA</h2>
-                <h3 class="section-subheading text-muted">.</h3>
-                <hr style="background: linear-gradient(.25turn,cornflowerblue, black, white); height:3px;" />
-            </div>
-            <div class="container">
-                <div class="page-header">
-                    <h1 id="timeline">History</h1>
-                </div>
-                <ul class="timeline">
-                    <li>
-                        <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="timeline-title">Ancient period</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p>According to archeological findings, settlement of the area dates back to 6000–5000 BC: a Neolithic settlement (Stranata) located near the village of Angelci, as well as findings from the Emperor's Towers site near Strumica, where traces of a prehistoric culture existed from the early 4th to mid 3rd millennium BC were discovered. The area was populated later by the Paionians.
-                                    The first mention of the city under the name Astraion is in the writings of the Roman historian Titus Livius in 181 BC regarding the execution of Demetrius, brother of the Ancient Macedonian king Perseus (179–168 BC), son of Philip V of Macedon (221–179 BC).</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-badge warning"><i class="glyphicon glyphicon-credit-card"></i></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="timeline-title">Middle ages</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p>In the 6th and 7th centuries, the Roman town became subject of Slavic migration . The Strymonites, a Sclavene tribe, adopted their name after the Strymon river (Struma). The Strymonites were independent until the 9th century, followed by a Byzantine reconquest. Later on, the Strumica region was conquered by Bulgarian Khan Presian (836–852). The Strumica region remained part of the Bulgarian state throughout a period of more than 150 years right up until 1014, when it was retaken by the Byzantines. In the 11th century, written sources begin to refer to the town with its Slavic name as Strumica.</p>
-                                <p>By the end of the 12th century, the Byzantine central power had weakened and, as a result, many local lords broke away and became independent. Initially, the leader of the Vlachs and Bulgarians in eastern Macedonia Dobromir Chrysos (1185–1202) and later the Bulgarian sebastokrator and a member of the Asen dynasty in Veliko Tarnovo Strez (1208–1214) held the region, which became part of the Bulgarian kingdom in 1202.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-badge danger"><i class="glyphicon glyphicon-credit-card"></i></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="timeline-title">Ottoman period</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p>Under Ottoman administration, the town was named Ustrumca. It initially belonged to the Sanjak of Kyustendil, and the timarli-sipahi system was established. Nomads and livestock breeders of Turkic origin were settled, which altered the general look of the city making it more oriental. According to the census of 1519, Strumica had a population of 2,780, of which 1,450 were Christians and 1,330 were Muslims. These were times when conversion to Islam was at its peak in the region, which accounts for the increased number of Muslims (2,200) compared to Christians (1,230) according to the census of 1570.
-                                    In the 17th century, it became seat of a kadiluk. </p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="timeline-badge info"><i class="glyphicon glyphicon-floppy-disk"></i></div>
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="timeline-title">Late-19th century</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p>Following the Berlin Congress of 1878, when the Ottoman Empire lost a sizable portion of its territory on the Balkans, a stream of refugees flowed into the area; some of them ending up in Strumica. These people were called "muhajirs". According to the Ottoman General Census of 1881/82-1893, the kaza of Strumica had a total population of 33.024, consisting of 15.760 Muslims, 13.726 Greeks, 2.965 Bulgarians and 573 Jews.[4]
-                                    The Internal Macedonian Revolutionary Organization for the Ograzden county was formed and operated in these parts. One of the most prominent leaders of the organization in Strumica was Hristo Chernopeev, who took part in the Young Turk Revolution (1908–09). The outcome of this effort did not bring freedom to the local people who still remained under Ottoman rule.</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="timeline-inverted">
-                        <div class="timeline-panel">
-                            <div class="timeline-heading">
-                                <h4 class="timeline-title">20th century</h4>
-                            </div>
-                            <div class="timeline-body">
-                                <p>
-                                    The Kaza of Strumica in 1905 had a total Christian population of 22.860, consisting of 12.736 Exarchist Bulgarians, 8.992 Patriarchist Bulgarians, 624 Protestant Bulgarians, 444 Roma people, 25 Greeks and 6 Vlachs according to the geographers Dimitri Mishev and D. M. Brancoff.[5]
-                                    In the First Balkan War of 1912 the Ottomans were defeated and driven out of Macedonia (region) by the joint effort of the Balkan League (Serbia, Bulgaria, Greece and Montenegro). Bulgaria annexed the town of Strumica. In the Second Balkan War (1913), which was fought between the three of the Balkan allies against Bulgaria, the latter was defeated, however, according to the Bucharest treaty (28 July 1913) Strumica remained under Bulgarian rule. The Greek army stationed in Strumica disapproved of the decision for withdrawal and set the town on fire. It burned from 8 until 15 August 1913, when more than 1900 public buildings, private houses and other constructions were burnt.[6] Strumica was made the center of a homonymous district in Bulgaria (largely corresponding to the present day Blagoevgrad province)[7] and stayed under Bulgarian rule until 1919, when it was ceded to the Kingdom of Serbs, Croats and Slovenes after the Treaty of Neuilly-sur-Seine. From 1929 to 1941, Strumica was part of the Vardar Banovina of the Kingdom of Yugoslavia.
-                                </p>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
 </div>
-<!--</div>-->

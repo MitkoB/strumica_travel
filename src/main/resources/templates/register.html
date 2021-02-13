@@ -1,6 +1,7 @@
+<head>
 <style>
     body{
-        background-image: url("https://cdn2.f-cdn.com/contestentries/1490804/32875450/5cbfd5e38fc30_thumb900.jpg");
+        background-image: url("https://www.chromethemer.com/download/hd-wallpapers/white-out-3840x2160.jpg");
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -11,12 +12,14 @@
         border-radius: 5px;
     }
 </style>
+</head>
+<body>
 <div class="container" xmlns:th="http://www.thymeleaf.org">
     <div class="container mt-5 " style="margin-bottom: 300px;">
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 formColumn">
     <form class="form-signin mt-xl-5" method="post" action="/register">
-        <h2 class="form-signin-heading" style="color: cornflowerblue">Register</h2>
+        <h2 class="form-signin-heading" style="color: #009961">Register</h2>
         <p>
             <label for="username" class="sr-only">Username</label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
@@ -45,11 +48,14 @@
             <input class="form-check-input" name="role"  type="radio" id="ROLE_USER" value="ROLE_USER">
             <label class="form-check-label" for="ROLE_USER">ROLE_USER</label>
         </div>
-
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+         <div>
+             </br>
+             <button class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
+         </div>
+        <a href="/login" class="btn btn-block btn-light" style="color: #009961">Already have an account? Login here!</a>
     </form>
-    <a href="/login" class="btn btn-block btn-light" style="color: cornflowerblue">Already have an account? Login here!</a>
 </div>
 </div>
 </div>
 </div>
+</body>
