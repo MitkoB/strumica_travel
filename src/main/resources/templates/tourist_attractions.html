@@ -1,0 +1,121 @@
+<head>
+    <style>
+        .card-body {
+            height: 300px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            height: 200px;
+            border: 1px solid #f1f1f1;
+            perspective: 1000px; /* Remove this if you don't want the 3D effect */
+        }
+
+        /* This container is needed to position the front and back side */
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        /* Do an horizontal flip when you move the mouse over the flip box container */
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        /* Position the front and back side */
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+        }
+
+        /* Style the front side (fallback if image is missing) */
+        .flip-card-front {
+            background-color: #bbb;
+            color: black;
+        }
+
+        /* Style the back side */
+        .flip-card-back {
+            background-color: darkolivegreen;
+            color: white;
+            transform: rotateY(180deg);
+        }
+        #bgContainer {
+            background: rgba(0,38,77,1);
+            box-shadow: 20px 10px 30px orange;
+        }
+
+        .scroll-animations {
+            display: flex;
+        }
+
+        .scroll-animations div {
+            flex-grow: 1;
+            padding: 30px;
+            text-align: center;
+            opacity: 0;
+            color: #333;
+        }
+
+        .scroll-animations div span {
+            font-size: 4em;
+            color: #5AA9E0;
+        }
+
+        .scroll-animations div h3 {
+            font-size: 1.9em;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+</style>
+</head>
+<body>
+<th:block xmlns:th="http://www.thymeleaf.org">
+<div class="container  mt-5 pl-5 pr-5 mb-5">
+    <div class="mt-5">
+        <h2 class="" style="color: #009961">Tourist Attractions</h2>
+        <hr style="background: linear-gradient(.25turn,#009961, black, #009961); height:3px;" />
+    </div>
+    <div class="row mt-4" >
+        <div class="col-xs-12 col-md-4 mt-3" th:each="attraction:${attractions}">
+            <div class="card">
+                <div class="card-img">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <img  th:src="${attraction.getPictures()}" class="card-img-top" style="height:200px;" />
+                            </div>
+                            <div class="flip-card-back">
+                                <img th:src="${attraction.getPictures()}" class="card-img-top" style="height:200px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="height: 150px; overflow:hidden;">
+                    <h5 th:text="${attraction.getName()}"></h5>
+                    <p class="small" style="white-space: normal" th:text="${attraction.getLocation()}"></p>
+                </div>
+                <div class="card-footer text-muted font-weight-light">
+                    <div class="row pt-2">
+                        <div class="col-12">
+                            <a class="btn btn-link text-white float-left" th:href="@{/attractions/{id}/details (id=${attraction.getId()})}" style="background-color:darkolivegreen">Details</a>
+                            <a href="/" class="btn btn-link text-dark btn-light"><i class="fa fa-cart-plus fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</th:block>
+</body>

@@ -1,0 +1,67 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="container mt-5 mb-5">
+        <div class="bgContainer text-white mr-5 ml-5 pt-3 pb-5 pr-5 pl-5" style="background: #009961; box-shadow: 10px 10px 30px grey">
+            <h3 class="text-center display-4" style="color:antiquewhite">Create Tourist Attraction</h3>
+            <hr style="background: linear-gradient(.25turn,darkolivegreen, #e86f00, darkolivegreen);border:0; height:3px;" />
+            <div class="w3-container w3-animate-zoom">
+                <div form-horizontal mt-4>
+                <form th:method="POST" th:action="@{/attractions/save/{id} (id=${attraction?.id})}">
+                    <div class="form-group row justify-content-center">
+                        <label class="control-label col-3 text-right" for="name">Name</label>
+                        <div class="col-6">
+                        <input type="text"
+                               class="form-control"
+                               id="name"
+                               name="name"
+                               th:value="(${attraction} != null ? ${attraction.getName()} : '')"
+                               required
+                               placeholder="Enter attraction name">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="control-label col-3 text-right"  for="location">Location</label>
+                        <div class="col-6">
+                        <input type="text"
+                               class="form-control"
+                               id="location"
+                               name="location"
+                               th:value="(${attraction} != null ? ${attraction.getLocation()} : '')"
+                               placeholder="Location">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="control-label col-3 text-right"  for="description">Description</label>
+                        <div class="col-6">
+                        <input type="text"
+                               class="form-control"
+                               id="description"
+                               name="description"
+                               th:value="(${attraction} != null ? ${attraction.getDescription()} : '')"
+                               placeholder="Description">
+                        </div>
+                    </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="control-label col-3 text-right"  for="pictures">Pictures</label>
+                        <div class="col-6">
+                        <input type="text"
+                               class="form-control"
+                               id="pictures"
+                               name="pictures"
+                               th:value="(${attraction} != null ? ${attraction.getPictures()} : '')"
+                               placeholder="Pictures">
+                        </div>
+                    </div>
+                    <div class="form-group row mt-3">
+                        <div  class="col-12 text-center">
+                        <button id="submit" type="submit" class="btn btn-success  btn-lg">Submit</button>
+                        </div>
+                        <div class="col-12 text-center mt-4">
+                            <a type="button" class="btn btn-lg  btn-link" style="color: white" href="/attractions" >Back</a>
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
