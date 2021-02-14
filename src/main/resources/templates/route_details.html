@@ -1,0 +1,41 @@
+<div class="container mt-5 mb-5 " xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div class="bgContainer text-white mr-5 ml-5 pt-3 pb-5 pr-5 pl-5" style="background: #009961; box-shadow: 10px 10px 30px grey">
+        <h3 class="text-center display-4" style="color:antiquewhite">Details for <th:block th:text="${route.getName()}"></th:block></h3>
+        <hr style="background: linear-gradient(.25turn,darkolivegreen, #e86f00, darkolivegreen);border:0; height:3px;" />
+        <div class="w3-container w3-animate-zoom">
+            <!--------------------- СЛИКИ------------------------------>
+            <div class="row">
+                <div class="col-12 text-center">
+                    <!------ Тука провери ако има и втора слика внесено стави га до првата у иста колона ваљда добро ќее ----->
+                    <img th:each="attraction:${route.getTouristAttractions()}" th:src="${attraction.getPictures()}" style="width:400px; height:300px;" />
+                </div>
+            </div>
+            <!--------------------- ИНФОРМАЦИИ ------------------------------>
+            <div class="row mt-3 justify-content-center">
+                <div class="col-6 text-right border-right pr-2">
+                    <dl>
+                        <dt style="color:white">Places:</dt>
+                        <dd th:each="attraction:${route.getTouristAttractions()}" th:text="${attraction.getName()}"></dd>
+                        <dt style="color:white">Duration:</dt>
+                        <dd th:text="${route.getDuration()}"></dd>
+                        <dt style="color:white;">Description:</dt>
+                        <dd th:text="${route.getDescription()}"></dd>
+                        <dt style="color:white;">Number of likes:</dt>
+                        <dd th:text="${route.getLikes()}"></dd>
+                    </dl>
+                </div>
+            </div>
+            <!--------------------- КОПЧИЊА------------------------------>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <a href="/attractions" class="btn btn-link btn-md text-white" style="background-color:darkolivegreen">All Attractions</a>
+                    <a th:href="@{/routes/{id}/edit-form (id=${route.id})}" class="btn btn-link btn-md text-white ml-2" style="background-color:darkgoldenrod" sec:authorize="hasRole('ROLE_ADMIN')">Edit</a>
+                    <div><br/></div>
+                    <form th:method="DELETE" th:action="@{/routes/{id}/delete (id=${route.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
+                        <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

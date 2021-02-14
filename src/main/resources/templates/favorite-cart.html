@@ -1,0 +1,67 @@
+<div xmlns:th="http://www.thymeleaf.org">
+<th:block >
+    <div class="container  mt-5 pl-5 pr-5 mb-5">
+        <div class="mt-5">
+            <h2 class="" style="color: #009961">Your favorite cart</h2>
+            <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"></th:block>
+            <hr style="background: linear-gradient(.25turn,#009961, black, #009961); height:3px;" />
+        </div>
+        <div th:if="${hasError}">
+            <h5 class="text-center text-danger" th:text="${error}"></h5>
+        </div>
+        <div class="mt-5" th:if="${routes!=null && routes.size()>0}">
+            <h2 class="" style="color: #009961">Routes</h2>
+        </div>
+        <div class="row mt-4"th:if="${routes!=null && routes.size()>0}" >
+            <table class="table table-light table-hover">
+                <thead>
+                <tr style="color: #009961">
+                    <th scope="col">Name</th>
+                    <th scope="col">Places</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Number of Likes</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="route:${routes}">
+                    <th scope="row" th:text="${route.getName()}"></th>
+                    <td>
+                        <th:block  th:each="attraction:${route.getTouristAttractions()}">
+                            <th:block th:text="${attraction.getName()}"></th:block>
+                            <span>-></span>
+                        </th:block>
+                    </td>
+                    <td  th:text="${route.getDuration()}"></td>
+                    <td  th:text="${route.getLikes()}"></td>
+                    <td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-5" th:if="${attractions!=null && attractions.size()>0}">
+            <h2 class="" style="color: #009961">Attractions</h2>
+        </div>
+        <div class="row mt-4"th:if="${attractions!=null && attractions.size()>0}" >
+            <table class="table table-light table-hover">
+                <thead>
+                <tr style="color: #009961">
+                    <th scope="col">Name</th>
+                    <th scope="col">Location</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="attraction:${attractions}">
+                    <th scope="row" th:text="${attraction.getName()}"></th>
+                    <td  th:text="${attraction.getLocation()}"></td>
+                    <td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</th:block>
+</div>

@@ -24,7 +24,7 @@ public class TouristAttractionController {
     }
     @DeleteMapping("/{id}/delete")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String deleteProduct(@PathVariable Long id)
+    public String deleteAttraction(@PathVariable Long id)
     {
         touristAttractionService.deleteById(id);
         return "redirect:/attractions";

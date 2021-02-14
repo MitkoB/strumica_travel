@@ -1,0 +1,51 @@
+<head xmlns:sec="http://www.w3.org/1999/xhtml">
+</head>
+<body>
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div class="container  mt-5 pl-5 pr-5 mb-5">
+        <div class="mt-5">
+            <h2 class="" style="color: #009961">See some excellent Routes</h2>
+            <hr style="background: linear-gradient(.25turn,#009961, black, #009961); height:3px;" />
+        </div>
+        <div class="row mt-4" >
+            <table class="table table-dark table-hover">
+                    <thead>
+                    <tr style="color: #009961">
+                        <th scope="col">Name</th>
+                        <th scope="col">Places</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Number of Likes</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="route:${routes}">
+                        <th scope="row" th:text="${route.getName()}"></th>
+                        <td>
+                        <th:block  th:each="attraction:${route.getTouristAttractions()}">
+                            <th:block th:text="${attraction.getName()}"></th:block>
+                            <span>-></span>
+                        </th:block>
+                        </td>
+                        <td  th:text="${route.getDuration()}"></td>
+                        <td  th:text="${route.getLikes()}"></td>
+                        <td>
+                            <a class="btn btn-link text-white float-left mr-3" th:href="@{/routes/{id}/details (id=${route.getId()})}" style="background-color:darkolivegreen">Details</a>
+                            <a   style="background-color:darkolivegreen" onclick="myFunction(this)" class="btn btn-link text-white mr-3" th:href="@{/routes/{id}/like (id=${route.getId()})}">Like <i class="fa  fa-thumbs-o-up"></i>
+                            </a>
+                            <form  th:method="POST" th:action="@{/favorite-cart/{id}/routeAdd (id=${route.id})}" sec:authorize="isAuthenticated()">
+                                <button class="btn btn-link text-light btn-dark"><i class="fa fa-cart-plus fa-lg"></i></button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+    </div>
+</th:block>
+<script>
+    function myFunction(x) {
+        x.classList.toggle("fa-thumbs-down");
+    }
+</script>
+</body>

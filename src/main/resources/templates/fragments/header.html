@@ -67,7 +67,7 @@ color: #009961;;
                     <a style="font-family:'Open Sans'; color: #009961;; font-size: 20px;" href="/attractions" class="nav-link ">Attractions </a>
             </li>
             <li class="nav-item mr-1" >
-                    <a style="font-family: 'Open Sans'; color: #009961;; font-size: 20px;"href="/" class="nav-link ">Routes </a>
+                    <a style="font-family: 'Open Sans'; color: #009961;; font-size: 20px;"href="/routes" class="nav-link ">Routes </a>
             </li>
             <li class="drop-down nav-item mr-1 ">
                     <a style="font-family: 'Open Sans'; color: #009961;; font-size: 20px;" href="/" class="nav-link ">Culture</a>
@@ -80,7 +80,7 @@ color: #009961;;
                 <a style="font-family: 'Open Sans'; color: #009961; font-size: 20px;" class="nav-link" href="/">Team</a>
             </li>
             <li class="nav-item mr-1" sec:authorize="isAuthenticated()">
-                <a style="font-family: 'Open Sans'; color: #009961; font-size: 20px;" class="nav-link" href="/">Favorites <i class="fa fa-heart-o"></i></a>
+                <a style="font-family: 'Open Sans'; color: #009961; font-size: 20px;" class="nav-link" href="/favorite-cart">Favorites <i class="fa fa-heart-o"></i></a>
             </li>
         </ul>
         <ul class="nav navbar-nav font-weight-bold ml-auto navbar-right">
@@ -91,10 +91,10 @@ color: #009961;;
                 </a>
             </li>
             <li class="drop-down nav-item mr-1 " sec:authorize="hasRole('ROLE_ADMIN')">
-                <a style="font-family: 'Open Sans'; color: #009961;; font-size: 20px;" href="/" class="nav-link ">Admin Functions</a>
+                <a style="font-family: 'Open Sans'; color: #009961; font-size: 20px;" href="/" class="nav-link ">Admin Functions</a>
                 <ul>
                     <li><a href="/attractions/add-form">Add Tourist Attraction</a></li>
-                    <li><a href="/">Add Route</a></li>
+                    <li><a href="/routes/add-form">Add Route</a></li>
                     <li><a href="/">Add Famous Event</a></li>
                     <li><a href="/">Add Traditional Food</a></li>
                 </ul>
