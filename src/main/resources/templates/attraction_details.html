@@ -35,7 +35,38 @@
 <!--            ZA REVIEWS TUKA-->
             <div class="mt-5">
                 <th:block>
-
+                    <form th:method="POST" th:action="@{/attractions/{id}/add-review (id=${attraction.id})}">
+                       <span>Comment: </span> <input type="text" name="comment" id="comment">
+                       <span> Grade: </span>
+                            <select name="grade" id="grade">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        <button type="submit" class="btn btn-success btn-md text-white ml-2 btn-danger">Submit</button>
+                    </form>
+                    <th:block th:if="${reviews!=null}">
+                    <div th:each="review:${reviews}">
+                        <th:block th:text="${review.getUser().getUsername()}"></th:block>
+                        <span>: </span>
+                        <th:block th:text="${review.getComment()}"></th:block>
+                        <span> Grade:</span>
+                        <th:block th:text="${review.getGrade()}"></th:block>
+                        <th:block th:if="${review.getUser().getUsername().equals(#request.getRemoteUser())}">
+                        <form th:method="DELETE" th:action="@{/attractions/{id}/delete-review (id=${review.id})}">
+                            <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Delete</button>
+                            <input type="hidden" th:value="${attraction.getId}" name="attractionId">
+                        </form>
+                        </th:block>
+                        <form th:method="DELETE" th:action="@{/attractions/{id}/delete-review (id=${review.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <span>Ovoj delete se pokazuva samo ako si admin </span>
+                            <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Admin Delete</button>
+                            <input type="hidden" th:value="${attraction.getId}" name="attractionId">
+                        </form>
+                    </div>
+                    </th:block>
                 </th:block>
             </div>
         </div>

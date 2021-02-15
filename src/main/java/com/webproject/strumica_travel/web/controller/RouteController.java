@@ -1,7 +1,9 @@
 package com.webproject.strumica_travel.web.controller;
 
+import com.webproject.strumica_travel.model.Review;
 import com.webproject.strumica_travel.model.Route;
 import com.webproject.strumica_travel.model.TouristAttraction;
+import com.webproject.strumica_travel.service.ReviewService;
 import com.webproject.strumica_travel.service.RouteService;
 import com.webproject.strumica_travel.service.TouristAttractionService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -16,9 +19,11 @@ import java.util.List;
 public class RouteController {
     private final RouteService routeService;
     private final TouristAttractionService touristAttractionService;
-    public RouteController(RouteService routeService, TouristAttractionService touristAttractionService) {
+    private final ReviewService reviewService;
+    public RouteController(RouteService routeService, TouristAttractionService touristAttractionService, ReviewService reviewService) {
         this.routeService = routeService;
         this.touristAttractionService = touristAttractionService;
+        this.reviewService = reviewService;
     }
 
     @GetMapping
@@ -90,9 +95,10 @@ public class RouteController {
         {
             Route route=this.routeService.findById(id).get();
             model.addAttribute("route",route);
+            List<Review> reviews=this.reviewService.listAllRouteReviews(id);
+            model.addAttribute("reviews",reviews);
             model.addAttribute("bodyContent", "route_details");
             return "master-template";
-
         }
         return "redirect:/routes";
     }
@@ -105,5 +111,21 @@ public class RouteController {
             return "redirect:/routes";
         }
         return "redirect:/routes";
+    }
+    @PostMapping("/{id}/add-review")
+    public String addReview(@PathVariable Long id,
+                            @RequestParam String comment,
+                            @RequestParam String grade, HttpServletRequest request)
+    {
+        Integer grade1=Integer.parseInt(grade);
+        this.reviewService.addReviewForRoute(request.getRemoteUser(),id,comment,grade1);
+        return "redirect:/routes/"+id+"/details";
+
+    }
+    @DeleteMapping("/{id}/delete-review")
+    public String deleteRouteReview(@PathVariable Long id,@RequestParam(required = false) Long routeId, HttpServletRequest request)
+    {
+        reviewService.deleteReview(request.getRemoteUser(),id);
+        return "redirect:/routes/"+routeId+"/details";
     }
 }
