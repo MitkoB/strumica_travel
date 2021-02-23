@@ -1,114 +1,194 @@
 <style>
-#header {
-    position: relative;
-    transition: all 0.4s;
-z-index: 999;
-border-bottom: 1px  #009961 solid;
-}
-.nav-link:hover, .nav-link.active {
-border-bottom: 1px #009961 solid;
-}
-#CssLogin, #CssLogout {
-background: darkolivegreen;
-color: #fff;
-font-size: 20px;
-border-radius: 50px;
-padding: 8px 25px 9px 25px;
-white-space: nowrap;
-transition: 0.3s;
-display: inline-block;
-}
-#CssLogin:hover #CssLogout:hover{
-background: darkolivegreen;
-color: #fff;
-}
-.drop-down ul {
-display: block;
-position: absolute;
-top: calc(100% + 30px);
-z-index: 99;
-opacity: 0;
-visibility: hidden;
-padding: 10px 0;
-background: #fff;
-box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-transition: 0.3s;
-border-top: 2px solid #009961;;
-list-style: none;
-}
+    #header {
+        position: absolute;
+        display: flex;
+        top: 0;
+        z-index: 1;
+        font-family: Tahoma, Verdana, sans-serif;
+        text-transform: uppercase;
+        justify-content: center;
+        min-width: 100%;
+        width: 100%;
+    }
+    .menu-column{
+        width:100%;
+        display: flex;
+        justify-content: center;
+    }
+    .menu {
+        border-radius: 25px;
+        height: fit-content;
+        display: inline-flex;
+        background-color: rgba(255, 255, 255, 1);
+    }
+    .menu>ul>li>a{
+        color: #009961;
+    }
+    li {
+        list-style: none;
+        font-family: sans-serif;
+        position: relative;
+        cursor: pointer;
+    }
+    .menu>li>a{
+        color: #009961;
+    }
+    .menu>li:hover >a{
+        color: white;
+    }
+    li::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        left:0;
+        height:100%;
+        width: 100%;
+        color: #009961;
+        z-index:-1;
+        transition: .2s;
+        border-radius: 25px;
+    }
+    li:hover {
+        color:white;
+        border-radius: 25px;
+        background: linear-gradient(to bottom, #009961, mediumseagreen);
+        box-shadow: 0px 3px 20px 0px green;
+        transform: scale(1.1);
+    }
 
-.drop-down:hover > ul {
-opacity: 1;
-top: 100%;
-visibility: visible;
-}
+    .CssLogin{
+        float: right;
+        background: #009961;
+        color: #fff;
+        border-radius: 25px;
+        transition: 0.3s;
+        display: inline-block;
+    }
 
-.drop-down li {
-min-width: 180px;
-position: relative;
-}
+    .drop-down>ul {
+        display: block;
+        position: absolute;
+        top: calc(100% + 40px);
+        z-index: 10;
+        opacity: 0;
+        visibility: hidden;
+        padding: 10px 3px;
+        width: 100%;
+        background: #fff;
+        border-radius: 30px;
+        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+        transition: 0.3s;
+        list-style: none;
+    }
+    .drop-down>ul{
+        font-size: small;
+    }
+    .drop-down>a{
+        color: #009961;
+    }
+    .drop-down:hover >a{
+        color: white;
+    }
+    .drop-down:hover > ul {
+        opacity: 1;
+        top: 80%;
+        visibility: visible;
+    }
+    .drop-down li {
+        position: relative;
+    }
+    .drop-down>ul>li>a {
+        color: #009961;
+    }
+    .drop-down:hover > ul>li:hover >a{
+        color: white;
+        text-decoration: none;
+    }
+    .logging_buttons{
+        color: white;
+    }
+    .logging_buttons:hover{
+        color: white;
+        text-decoration: none;
+    }
 
-.drop-down ul a {
-padding: 10px 20px;
-font-size: 15px;
-font-weight: 500;
-text-transform: none;
-color: #009961;;
-}
+    #logoutDropdown>a{
+        color: white;
+        font-size: 1vw;
+    }
+    #logoutDropdown:hover{
+        transform: none;
+        transition: none;
+    }
+    #logoutDropdown>ul>div>ul>li>a{
+        color: #009961;
+    }
+    #logoutDropdown>ul>div>ul>li>a:hover{
+        text-decoration: none;
+        color: white;
+    }
+    #logoutDropdown>ul>div>ul>li:hover >a{
+        color: white;
+    }
+
 </style>
+
 <header id=header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <nav class="navbar navbar-expand navbar-light nav-menu " style="width: 100%; max-width:100%; top:0;">
-        <p class="display-1" style="font-family: 'Brush Script MT'; color: #009961;; font-size: 40px;">Strumica Travel</p>
-        <ul class="navbar-nav font-weight-bold ml-auto" >
-            <li class="nav-item mr-1 active" >
-                    <a style="font-family: 'Open Sans'; color: #009961;; font-size: 20px;" href="/" class="nav-link active">Home <i class="fa  fa-home"></i></a>
-            </li>
-            <li class="nav-item mr-1" >
-                    <a style="font-family:'Open Sans'; color: #009961;; font-size: 20px;" href="/attractions" class="nav-link ">Attractions </a>
-            </li>
-            <li class="nav-item mr-1" >
-                    <a style="font-family: 'Open Sans'; color: #009961;; font-size: 20px;"href="/routes" class="nav-link ">Routes </a>
-            </li>
-            <li class="drop-down nav-item mr-1 ">
-                    <a style="font-family: 'Open Sans'; color: #009961;; font-size: 20px;" href="/" class="nav-link ">Culture</a>
-                <ul>
-                    <li><a href="/">Traditional Food</a></li>
-                    <li><a href="/">Famous Events</a></li>
-                </ul>
-            </li>
-            <li class="nav-item mr-1" >
-                <a style="font-family: 'Open Sans'; color: #009961; font-size: 20px;" class="nav-link" href="/">Team</a>
-            </li>
-            <li class="nav-item mr-1" sec:authorize="isAuthenticated()">
-                <a style="font-family: 'Open Sans'; color: #009961; font-size: 20px;" class="nav-link" href="/favorite-cart">Favorites <i class="fa fa-heart-o"></i></a>
-            </li>
-        </ul>
-        <ul class="nav navbar-nav font-weight-bold ml-auto navbar-right">
-            <li class="nav-item mr-1" sec:authorize="isAuthenticated()">
-                <a style="font-family: 'Open Sans'; color: #009961;; font-size: 20px;"class="nav-link" href="/">
-                    <th:block th:if="${#request.getRemoteUser() != null}"
-                              th:text="${#request.getRemoteUser()}"></th:block>
-                </a>
-            </li>
-            <li class="drop-down nav-item mr-1 " sec:authorize="hasRole('ROLE_ADMIN')">
-                <a style="font-family: 'Open Sans'; color: #009961; font-size: 20px;" href="/" class="nav-link ">Admin Functions</a>
-                <ul>
-                    <li><a href="/attractions/add-form">Add Tourist Attraction</a></li>
-                    <li><a href="/routes/add-form">Add Route</a></li>
-                    <li><a href="/">Add Famous Event</a></li>
-                    <li><a href="/">Add Traditional Food</a></li>
-                </ul>
-            </li>
-            <li id="CssLogin" class="nav-item mr-1" sec:authorize="!isAuthenticated()">
-                <a style="font-family: 'Open Sans';color: white"  href="/login">
+    <div class="row w-100">
+        <div class="col-3">
+            <img alt="logo" id="logo" th:src="@{images/white-logo.png}" class="float-left">
+        </div>
+        <div class="col-6 menu-column mt-3">
+            <ul class="menu pl-0">
+                <li>
+                    <a href="/" class="nav-link">Home</a>
+                </li>
+                <li>
+                    <a href="/attractions" class="nav-link">Attractions</a>
+                </li>
+                <li>
+                    <a href="/routes" class="nav-link">Routes</a>
+                </li>
+                <li class="drop-down">
+                    <a href="/learnMore" class="nav-link">Culture</a>
+                    <ul>
+                        <li><a href="/learnMore" class="nav-link">About Strumica</a></li>
+                        <li><a href="/learnMore?jumpSection=food" class="nav-link">Traditional Food</a></li>
+                        <li><a href="/" class="nav-link">Famous Events</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a class="nav-link" href="/">Team</a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a href="/favorite-cart" class="nav-link">Favorites <i class="fa fa-heart-o"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-3 mt-3 pl-0">
+            <li class="CssLogin" sec:authorize="!isAuthenticated()">
+                <a href="/login" class="nav-link logging_buttons">
                     <i class="fa fa-user-circle-o"></i> Login
                 </a>
             </li>
-            <li id="CssLogout" class="nav-item mr-1" sec:authorize="isAuthenticated()">
-                <a style="font-family: 'Open Sans';color: white" href="/logout">
-                    <i class="fa fa-user-circle-o"></i> Logout
+
+            <li id="logoutDropdown" sec:authorize="isAuthenticated()" class="drop-down CssLogin">
+                <a href="/" class="nav-link logging_buttons">
+                    <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"/>
                 </a>
+                <ul class="text-center">
+                    <div sec:authorize="hasRole('ROLE_ADMIN')" class="p-0 m-0">
+                        <ul class="p-0 m-0">
+                            <li><a href="/attractions/add-form">Add Tourist Attraction</a></li>
+                            <li class="mt-1"><a href="/routes/add-form">Add Route</a></li>
+                            <li class="mt-1"><a href="/">Add Famous Event</a></li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <li class="text-center"><a href="/logout">Logout</a></li>
+                </ul>
             </li>
-        </ul>
-    </nav>
+        </div>
+    </div>
+
 </header>

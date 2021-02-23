@@ -33,21 +33,22 @@ public class TouristAttractionServiceImpl implements TouristAttractionService {
     }
 
     @Override
-    public Optional<TouristAttraction> save(String name, String location, String description, String pictures) {
+    public Optional<TouristAttraction> save(String name, String location, String description, String mainPicture,String pictures) {
         if(name==null || name.isEmpty() || location==null || location.isEmpty() || description==null || description.isEmpty() || pictures==null || pictures.isEmpty())
         {
             throw new IllegalArgumentException();
         }
-        TouristAttraction touristAttraction=new TouristAttraction(name,location,description,pictures);
+        TouristAttraction touristAttraction=new TouristAttraction(name,location,description,mainPicture,pictures);
         return Optional.of(touristAttractionRepository.save(touristAttraction));
     }
 
     @Override
-    public Optional<TouristAttraction> edit(Long id, String name, String location, String description, String pictures) {
+    public Optional<TouristAttraction> edit(Long id, String name, String location, String description, String mainPicture,String pictures) {
         TouristAttraction touristAttraction=touristAttractionRepository.findById(id).orElseThrow(()->new TouristAttractionNotFoundException(id));
         touristAttraction.setName(name);
         touristAttraction.setLocation(location);
         touristAttraction.setDescription(description);
+        touristAttraction.setMainPicture(mainPicture);
         touristAttraction.setPictures(pictures);
         return Optional.of(this.touristAttractionRepository.save(touristAttraction));
     }

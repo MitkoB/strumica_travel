@@ -1,61 +1,79 @@
 <head>
-<style>
-    body{
-        background-image: url("https://www.chromethemer.com/download/hd-wallpapers/white-out-3840x2160.jpg");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-    .formColumn{
-        background: rgba(255, 255, 255, 0.8);
-        border: 2px solid darkgray;
-        border-radius: 5px;
-    }
-</style>
+    <style>
+        body {
+            background-image: url('https://scontent.fskp4-1.fna.fbcdn.net/v/t31.0-8/17311369_1492495277448168_2950023655333407452_o.jpg?_nc_cat=104&ccb=3&_nc_sid=19026a&_nc_ohc=xE9lboe2Pn8AX9gUlkh&_nc_ht=scontent.fskp4-1.fna&oh=8d073b4c3c0c48a99bd34e287c97b05d&oe=60524101');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .formColumn {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid darkgray;
+            border-radius: 5px;
+        }
+        .form-signin{
+            color: #009961;
+        }
+        #submit{
+            background-color: #009961;
+            color: white;
+        }
+    </style>
 </head>
 <body>
 <div class="container" xmlns:th="http://www.thymeleaf.org">
-    <div class="container mt-5 " style="margin-bottom: 300px;">
+    <img alt="logo" th:src="@{images/white-logo.png}" class="mt-1">
+    <div class="mt-2 mb-5">
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 formColumn">
-    <form class="form-signin mt-xl-5" method="post" action="/register">
-        <h2 class="form-signin-heading" style="color: #009961">Register</h2>
-        <p>
-            <label for="username" class="sr-only">Username</label>
-            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
-        </p>
-        <p>
-            <label for="password" class="sr-only">Password</label>
-            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
-        </p>
-        <p>
-            <label for="repeatedPassword" class="sr-only">Repeat Password</label>
-            <input type="password" id="repeatedPassword" name="repeatedPassword" class="form-control" placeholder="Repeat Password" required="">
-        </p>
-        <p>
-            <label for="name" class="sr-only">Name</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="Name" required="" autofocus="">
-        </p>
-        <p>
-            <label for="surname" class="sr-only">Surname</label>
-            <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname" required="" autofocus="">
-        </p>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" name="role" type="radio" id="ROLE_ADMIN" value="ROLE_ADMIN">
-            <label class="form-check-label" for="ROLE_ADMIN">ROLE_ADMIN</label>
+                <form class="form-signin mt-3 mb-3" method="post" action="/register">
+                    <h2 class="form-signin-heading pb-3">Register</h2>
+                    <p>
+                        <label for="username" class="sr-only">Username</label>
+                        <input type="text" id="username" name="username" class="form-control" placeholder="Username"
+                               required="" autofocus="">
+                    </p>
+                    <p>
+                        <label for="password" class="sr-only">Password</label>
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Password"
+                               required="">
+                    </p>
+                    <p>
+                        <label for="repeatedPassword" class="sr-only">Repeat Password</label>
+                        <input type="password" id="repeatedPassword" name="repeatedPassword" class="form-control"
+                               placeholder="Repeat Password" required="">
+                    </p>
+                    <p>
+                        <label for="name" class="sr-only">Name</label>
+                        <input type="text" id="name" name="name" class="form-control" placeholder="Name" required=""
+                               autofocus="">
+                    </p>
+                    <p>
+                        <label for="surname" class="sr-only">Surname</label>
+                        <input type="text" id="surname" name="surname" class="form-control" placeholder="Surname"
+                               required="" autofocus="">
+                    </p>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="role" type="radio" id="ROLE_ADMIN" value="ROLE_ADMIN">
+                        <label class="form-check-label" for="ROLE_ADMIN">ROLE_ADMIN</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="role" type="radio" id="ROLE_USER" value="ROLE_USER">
+                        <label class="form-check-label" for="ROLE_USER">ROLE_USER</label>
+                    </div>
+                    <div>
+                        </br>
+                        <button class="btn btn-lg btn-block" id="submit" type="submit">Sign up</button>
+                    </div>
+                    <a href="/login" class="btn btn-block btn-light mt-2">Already have an account? Login here!</a>
+                </form>
+            </div>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" name="role"  type="radio" id="ROLE_USER" value="ROLE_USER">
-            <label class="form-check-label" for="ROLE_USER">ROLE_USER</label>
-        </div>
-         <div>
-             </br>
-             <button class="btn btn-lg btn-success btn-block" type="submit">Sign up</button>
-         </div>
-        <a href="/login" class="btn btn-block btn-light" style="color: #009961">Already have an account? Login here!</a>
-    </form>
+    </div>
 </div>
-</div>
-</div>
-</div>
+<script>
+    var a=document.getElementById("header");
+    a.hidden=true;
+</script>
 </body>

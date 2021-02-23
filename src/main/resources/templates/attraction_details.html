@@ -1,74 +1,207 @@
-<div class="container mt-5 mb-5 " xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <div class="bgContainer text-white mr-5 ml-5 pt-3 pb-5 pr-5 pl-5" style="background: #009961; box-shadow: 10px 10px 30px grey">
-        <h3 class="text-center display-4" style="color:antiquewhite">Details for <th:block th:text="${attraction.getName()}"></th:block></h3>
-        <hr style="background: linear-gradient(.25turn,darkolivegreen, #e86f00, darkolivegreen);border:0; height:3px;" />
+<head>
+    <style>
+        body{
+            font-family: Tahoma, Verdana, sans-serif;
+        }
+        .topDiv{
+            position: relative;
+            top: 2.5vh;
+        }
+        .horizontal_line{
+            background: linear-gradient(.25turn,#009961, black, #009961); height:3px;
+        }
+        #attractionName{
+            font-weight: bold;
+            font-size: 3vh;
+        }
+        .rowContainer{
+            border-radius: 10px;
+        }
+        .back_btn{
+            background-color: #009961;
+        }
+        #listOfStars {
+            list-style: none;
+        }
+        .starList {
+            display: inline-block;
+            font-size: 2.8vh;
+            padding: 0px;
+        }
+        .rateInput {
+            visibility:hidden;
+        }
+        .rateLabel {
+            cursor: pointer;
+        }
+
+        #listOfStars>li:hover{
+            transform: none;
+            transition: none;
+            box-shadow: none;
+            color: black;
+            background: none;
+        }
+        .submitReview{
+            background-color: #009961;
+        }
+    </style>
+</head>
+<body>
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <div class="topDiv">
+        <hr class="mt-5 horizontal_line" />
+    </div>
+    <div class="container mt-5 mb-5">
         <div class="w3-container w3-animate-zoom">
-            <!--------------------- СЛИКИ------------------------------>
-            <div class="row">
-                <div class="col-12 text-center">
-                    <!------ Тука провери ако има и втора слика внесено стави га до првата у иста колона ваљда добро ќее ----->
-                    <img th:src="${attraction.getPictures()}" style="width:400px; height:300px;" />
-                </div>
-            </div>
-            <!--------------------- ИНФОРМАЦИИ ------------------------------>
-            <div class="row mt-3 justify-content-center">
-                <div class="col-6 text-right border-right pr-2">
-                    <dl>
-                        <dt style="color:white">Location:</dt>
-                        <dd th:text="${attraction.getLocation()}"></dd>
-                        <dt style="color:white;">Description:</dt>
-                        <dd th:text="${attraction.getDescription()}"></dd>
-                    </dl>
-                </div>
-            </div>
-            <!--------------------- КОПЧИЊА------------------------------>
-            <div class="row mt-3">
-                <div class="col-12 text-center">
-                    <a href="/attractions" class="btn btn-link btn-md text-white" style="background-color:darkolivegreen">All Attractions</a>
-                    <a th:href="@{/attractions/{id}/edit-form (id=${attraction.id})}" class="btn btn-link btn-md text-white ml-2" style="background-color:darkgoldenrod" sec:authorize="hasRole('ROLE_ADMIN')">Edit</a>
-                      <div><br/></div>
-                        <form th:method="DELETE" th:action="@{/attractions/{id}/delete (id=${attraction.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
-                            <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Delete</button>
-                        </form>
-                </div>
-            </div>
-<!--            ZA REVIEWS TUKA-->
-            <div class="mt-5">
-                <th:block>
-                    <form th:method="POST" th:action="@{/attractions/{id}/add-review (id=${attraction.id})}">
-                       <span>Comment: </span> <input type="text" name="comment" id="comment">
-                       <span> Grade: </span>
-                            <select name="grade" id="grade">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        <button type="submit" class="btn btn-success btn-md text-white ml-2 btn-danger">Submit</button>
-                    </form>
-                    <th:block th:if="${reviews!=null}">
-                    <div th:each="review:${reviews}">
-                        <th:block th:text="${review.getUser().getUsername()}"></th:block>
-                        <span>: </span>
-                        <th:block th:text="${review.getComment()}"></th:block>
-                        <span> Grade:</span>
-                        <th:block th:text="${review.getGrade()}"></th:block>
-                        <th:block th:if="${review.getUser().getUsername().equals(#request.getRemoteUser())}">
-                        <form th:method="DELETE" th:action="@{/attractions/{id}/delete-review (id=${review.id})}">
-                            <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Delete</button>
-                            <input type="hidden" th:value="${attraction.getId}" name="attractionId">
-                        </form>
-                        </th:block>
-                        <form th:method="DELETE" th:action="@{/attractions/{id}/delete-review (id=${review.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
-                            <span>Ovoj delete se pokazuva samo ako si admin </span>
-                            <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Admin Delete</button>
-                            <input type="hidden" th:value="${attraction.getId}" name="attractionId">
-                        </form>
+            <div class="row bg-light p-2 rowContainer">
+                <div class="col-12 col-md-6">
+                    <div class="fotorama" data-minwidth="100%" data-nav="thumbs" data-autoplay="true" data-fit="cover" data-swipe="true">
+                        <img th:src="${attraction.getMainPicture()}"/>
+                        <img th:each="picture:${pictures}" th:src="${picture}">
                     </div>
-                    </th:block>
-                </th:block>
+                </div>
+                <div class="col-12 col-md-6 text-left">
+                    <div class="row">
+                        <div class="col-8">
+                            <p th:text="${attraction.getName()}" id="attractionName" class="pb-0"></p>
+                            <span class="small text-muted pt-0"><th:block th:text="${#lists.size(reviews)}"></th:block> reviews</span>
+                        </div>
+                        <div class="col-4 d-flex justify-content-end">
+                            <form th:method="POST" sec:authorize="isAuthenticated()"
+                                  th:action="@{/favorite-cart/{id}/attractionAdd (id=${attraction.id})}">
+                                <button class="btn btn-sm text-dark btn-light"><i class="fa fa-heart heart_icon"></i></button>
+                            </form>
+                            <form>
+                                <button class="btn btn-sm text-dark btn-light"><i class="fa fa-share"></i></button>
+                            </form>
+                        </div>
+                    </div>
+                    <span class="d-inline">Located in </span><p class="d-inline" th:text="${attraction.getLocation()}"></p>
+                    <p th:text="${attraction.getDescription()}" class="mt-5"></p>
+                   <div class="mt-5">
+                        <a href="/attractions" class="btn text-white back_btn d-inline">All Attractions</a>
+                        <a th:href="@{/attractions/{id}/edit-form (id=${attraction.id})}" class="btn text-white bg-dark d-inline" sec:authorize="hasRole('ROLE_ADMIN')">Edit</a>
+                        <form th:method="DELETE" th:action="@{/attractions/{id}/delete (id=${attraction.id})}" sec:authorize="hasRole('ROLE_ADMIN')" class="d-inline">
+                            <button type="submit" class="btn text-white bg-dark btn-sm">Delete</button>
+                        </form>
+                   </div>
+                </div>
             </div>
-        </div>
+
+            <div class="row mt-4">
+                <div class="col-12 col-md-6 mt-3">
+                    <div class="pl-3 pt-3 pr-3 bg-light rowContainer">
+                        <th:block sec:authorize="isAuthenticated()" class="bg-light">
+                            <h4 class="text-left">Add a review</h4>
+                            <hr>
+                            <form th:method="POST" th:action="@{/attractions/{id}/add-review (id=${attraction.id})}">
+                                <textarea type="text" name="comment" id="comment" class="form-control" placeholder="Write your comment here..."></textarea>
+                                <span class="d-inline float-left">Rate:</span>
+                                <ul id="listOfStars" class="d-inline pl-1">
+                                    <li class="starList">
+                                        <input type='radio' value='1' name='grade' id='radio1' class="rateInput"/>
+                                        <label for='radio1' class="rateLabel" onclick="rate(1)" id="star1">&star;</label>
+                                    </li>
+                                    <li class="starList">
+                                        <input type='radio' value='2' name='grade'  id='radio2' class="rateInput"/>
+                                        <label for='radio2' class="rateLabel" onclick="rate(2)" id="star2">&star;</label>
+                                    </li>
+                                    <li class="starList">
+                                        <input type='radio' value='3' name='grade'  id='radio3' class="rateInput"/>
+                                        <label for='radio3' class="rateLabel" onclick="rate(3)" id="star3">&star;</label>
+                                    </li>
+                                    <li class="starList">
+                                        <input type='radio' value='4' name='grade'  id='radio4' class="rateInput"/>
+                                        <label for='radio4' class="rateLabel" onclick="rate(4)" id="star4">&star;</label>
+                                    </li>
+                                    <li class="starList">
+                                        <input type='radio' value='5' name='grade'  id='radio5' class="rateInput"/>
+                                        <label for='radio5' class="rateLabel" onclick="rate(5)" id="star5">&star;</label>
+                                    </li>
+                                </ul>
+                                <button type="submit" class="btn btn-success text-white d-inline mt-2 float-right submitReview">Submit</button>
+                            </form>
+                        </th:block>
+
+                        <th:block th:if="${reviews!=null}">
+                            <h2 class="text-left mt-2">Reviews</h2>
+                            <hr>
+                            <div th:each="review:${reviews}" class="media pl-2 pr-3">
+
+                                <div class="media-body text-left">
+                                    <h5 th:text="${review.getUser().getUsername()}" class="d-inline font-weight-bold"></h5><span class="d-inline small"> on </span><span class="d-inline small" th:text="${review.getDate()}"></span>
+                                    <br>
+                                    <span th:text="${review.getGrade()}" style="display: none;" class="hiddenGrade"></span>
+                                    <span class="insertGrade"></span>
+                                    <p th:text="${review.getComment()}"></p>
+                                </div>
+
+                                <th:block th:if="${review.getUser().getUsername().equals(#request.getRemoteUser())}">
+                                    <form th:method="DELETE" th:action="@{/attractions/{id}/delete-review (id=${review.id})}">
+                                        <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Delete</button>
+                                        <input type="hidden" th:value="${attraction.getId}" name="attractionId">
+                                    </form>
+                                </th:block>
+                                <form th:method="DELETE" th:action="@{/attractions/{id}/delete-review (id=${review.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
+                                    <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Admin Delete</button>
+                                    <input type="hidden" th:value="${attraction.getId}" name="attractionId">
+                                </form>
+                            </div>
+                        </th:block>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 pb-3 mt-3">
+                    <div class="bg-light rowContainer">
+                        <h2 class="text-left pl-3 pt-3">Location</h2>
+                        <!------------------- TUKA DA STOI MAPATA ZA OVAA ATRAKCIJA SO NEKOJA BIBLIOTEKA ------------------->
+                        <!----SEGA USTE E SO OBICEN LINK GENERATOR -->
+
+                        <div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=kolesino%20waterfall&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><style>.mapouter{position:relative;text-align:right;height:400px;width:100%;}</style><style>.gmap_canvas {overflow:hidden;background:none!important;height:400px;width: 100%;}</style></div></div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
+</th:block>
+    <script>
+        document.getElementById("logo").setAttribute("th:src","@{images/black-logo.png}");
+        document.getElementById("logo").setAttribute("src","images/black-logo.png");
+        var stars = 0;
+
+        function rate(number){
+            stars = number;
+            i=1;
+            while(i<=number)
+            {
+                n=document.getElementById("star"+i);
+                n.innerHTML="&starf;";
+                i++;
+            }
+            while(i<6)
+            {
+                n=document.getElementById("star"+i);
+                n.innerHTML="&star;";
+                i++;
+            }
+
+        }
+        var hiddenGrade=document.getElementsByClassName("hiddenGrade");
+        var insertGrade=document.getElementsByClassName("insertGrade");
+        var j=0;
+        while(j<hiddenGrade.length){
+            n=hiddenGrade.item(j);
+            grade=parseInt(n.innerHTML);
+            k=0;
+            while(k<grade){
+                insertGrade.item(j).innerHTML+="&starf;";
+                k++;
+            }
+            while(k<6){
+                insertGrade.item(j).innerHTML+="&star;";
+                k++;
+            }
+            j++;
+        }
+    </script>
+</body>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -47,9 +48,11 @@ public class TouristAttractionController {
                               @RequestParam String name,
                               @RequestParam String location,
                               @RequestParam String description,
+                              @RequestParam String mainPicture,
                               @RequestParam String pictures)
     {
-        this.touristAttractionService.save(name,location,description,pictures);
+
+        this.touristAttractionService.save(name,location,description,mainPicture,pictures);
         return "redirect:/attractions";
     }
     @GetMapping("/{id}/edit-form")
@@ -71,8 +74,9 @@ public class TouristAttractionController {
                          @RequestParam String name,
                          @RequestParam String location,
                          @RequestParam String description,
+                         @RequestParam String mainPicture,
                          @RequestParam String pictures) {
-        this.touristAttractionService.edit(id, name, location, description,pictures);
+        this.touristAttractionService.edit(id, name, location, description,mainPicture,pictures);
         return "redirect:/attractions";
     }
     @GetMapping("/{id}/details")
@@ -83,6 +87,7 @@ public class TouristAttractionController {
             TouristAttraction touristAttraction=this.touristAttractionService.findById(id).get();
             List<Review> reviews=this.reviewService.listAllTouristAttractionReviews(id);
             model.addAttribute("attraction",touristAttraction);
+            model.addAttribute("pictures",Arrays.asList(touristAttraction.getPictures().split(" ")));
             model.addAttribute("reviews",reviews);
             model.addAttribute("bodyContent", "attraction_details");
             return "master-template";

@@ -1,7 +1,7 @@
 <head>
 <style>
     body{
-        background-image: url("https://www.chromethemer.com/download/hd-wallpapers/white-out-3840x2160.jpg");
+        background-image: url('https://scontent.fskp4-1.fna.fbcdn.net/v/t31.0-8/17311369_1492495277448168_2950023655333407452_o.jpg?_nc_cat=104&ccb=3&_nc_sid=19026a&_nc_ohc=xE9lboe2Pn8AX9gUlkh&_nc_ht=scontent.fskp4-1.fna&oh=8d073b4c3c0c48a99bd34e287c97b05d&oe=60524101');
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -11,15 +11,26 @@
         border: 2px solid darkgray;
         border-radius: 5px;
     }
+    #rememberMe{
+        float: left;
+    }
+    #login_form{
+        color: #009961;
+    }
+    #submit{
+        background-color: #009961;
+        color: white;
+    }
 </style>
 </head>
 <body>
 <div class="container" xmlns:th="http://www.thymeleaf.org">
-    <div class="container mt-5 " style="margin-bottom: 300px;">
+    <img alt="logo" th:src="@{images/white-logo.png}" class="mt-1">
+    <div class="mt-2 mb-5"><br>
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 formColumn">
-                <form  method="post" action="/login" class="mt-5">
-                    <h2 class="text-center" style="color: #009961">Login</h2>
+                <form  method="post" action="/login" id="login_form" class="mt-3 mb-3">
+                    <h2 class="text-center">Login</h2>
                     <div class="form-group mt-5">
                         <label for="username" class="sr-only">Username</label>
                         <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
@@ -32,15 +43,19 @@
                         <div th:text="${error}" class="text-danger"></div>
                     </div>
                     <div th:text="${param.error}" class="text-danger"></div>
-                    <p style="color: #009961">
-                        <input type="checkbox" name="remember_me" id="remember_me" class="">
+                    <p id="rememberMe">
+                        <input type="checkbox" name="remember_me" id="remember_me">
                         <label for="remember_me">Remember me!</label>
                     </p>
-                    <button class="btn btn-lg btn-success btn-block mb-5" id="submit" type="submit" >Login</button>
-                    <a href="/register" class="btn btn-block btn-light" style="color: #009961">Don't have an account? Register here!</a>
+                    <button class="btn btn-lg btn-block mb-3" id="submit" type="submit" >Login</button>
+                    <a href="/register" class="btn btn-block btn-light">Don't have an account? Register here!</a>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script>
+    var a=document.getElementById("header");
+    a.hidden=true;
+</script>
 </body>

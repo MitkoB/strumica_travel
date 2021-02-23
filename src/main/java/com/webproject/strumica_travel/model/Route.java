@@ -17,17 +17,23 @@ public class Route {
     @Column(length = 5000)
     private String description;
     private String duration;
+    private String image;
     @ManyToMany
     private List<TouristAttraction> touristAttractions;
     private Integer likes;
     public Route() {
     }
 
-    public Route(String name, String description, String duration, List<TouristAttraction> touristAttractions) {
+    public Route(String name, String description, String duration,String image, List<TouristAttraction> touristAttractions) {
         this.name = name;
         this.description = description;
         this.duration = duration;
+        this.image=image;
         this.touristAttractions = touristAttractions;
         this.likes=0;
+    }
+
+    public List<TouristAttraction> getTouristAttractions() {
+        return touristAttractions;
     }
 }

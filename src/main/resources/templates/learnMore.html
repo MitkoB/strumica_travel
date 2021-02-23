@@ -1,0 +1,482 @@
+<style>
+    @keyframes showTopText {
+        0% { transform: translate3d(0, 100%, 0); }
+        50% { transform: translate3d(0, 50%, 0); }
+        100% { transform: translate3d(0, 0, 0); }
+    }
+    @keyframes showBottomText {
+        0% { transform: translate3d(0, -100%, 0); }
+        100% { transform: translate3d(0, 0, 0); }
+    }
+    #learnMoreContainer{
+        font-family: Tahoma, Verdana, sans-serif;
+    }
+
+    .shadow {
+        position: relative;
+        box-shadow: 0 1px 3px rgba(0,0,0, 0.2);
+    }
+
+    .come-in {
+        transform: translateX(300px);
+        animation: come-in 1s ease forwards;
+    }
+    .come-in:nth-child(odd) {
+        animation-duration: 1s;
+    }
+    .already-visible {
+        transform: translateX(0);
+        animation: none;
+    }
+
+    @keyframes come-in {
+        to { transform: translateX(0); }
+    }
+
+
+    .animated-title {
+        color: rgba(0,0,0,0.5);
+        height: 30vh;
+        position: absolute;
+        top:20vw;
+        left: 25vw;
+        transform: translate(-50%, -50%);
+        width: 40vw;
+        font-size: 2vw;
+        font-weight: 100;
+        letter-spacing: 3px;
+    }
+    .animated-title > div {
+        height: 50%;
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+    }
+    .animated-title > div div {
+        position: absolute;
+    }
+    .animated-title > div div span {
+        display: block;
+    }
+    .animated-title > div.text-top {
+        border-bottom: 2px solid #009961;
+        top: 0;
+        font-size: 5vw;
+    }
+    .animated-title > div.text-top div {
+        animation: showTopText 1s;
+        animation-delay: 0.5s;
+        animation-fill-mode: forwards;
+        bottom: 0;
+        transform: translate(0, 100%);
+    }
+    .animated-title > div.text-top div span:first-child {
+        color: white;
+    }
+    .animated-title > div.text-bottom {
+        bottom: 0;
+        padding-top: 10px;
+        font-style: italic;
+    }
+    .animated-title > div.text-bottom div {
+        animation: showBottomText 0.5s;
+        animation-delay: 1.75s;
+        animation-fill-mode: forwards;
+        top:0;
+        transform: translate(0, -100%);
+        background: rgba(255,255,255,0.5);
+        border-radius: 20px;
+        margin-top: 3px;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+    .card-horizontal {
+        display: flex;
+        flex: 1 1 auto;
+    }
+
+</style>
+<div xmlns:th="http://www.thymeleaf.org" id="learnMoreContainer">
+    <div style="width: 100%;">
+        <img alt="img" style="background-size: cover" class="d-block w-100"  th:src="@{images/strumica6.jpg}"/>
+        <div class="animated-title">
+            <div class="text-top">
+                <div>
+                    <span>STRUMICA</span>
+                </div>
+            </div>
+            <div class="text-bottom">
+                <div>the city of the stars</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+        <input id="jumpSection" type="hidden" name="jumpSection" th:value="(${jumpSection} != null ? ${jumpSection} : null)">
+        <div class="row mt-2">
+            <div class="col-xs-12 .col-md-4">
+                <p class="text-muted py-3" style="font-size: 6vh;">Location</p>
+                <p>
+                    The Municipality of Strumica is located at 41° 22' northern latitude and 22° 35' and 23° 45' east longitude.
+                    It occupies the far south-eastern part of the Republic of Macedonia just below the boundary between the
+                    state borders with Greece to the south and Bulgaria to the east. The region that actually covers the
+                    valley between the mountains Belasica, Ograzden and Elenica. The most important national road M6 passes
+                    through the region. With it, the region is connected with the rest of the country, as well as with the
+                    Republic of Bulgaria and the Republic of Greece.
+                </p>
+            </div>
+        </div>
+
+        <h2 class="text-center text-muted py-3" style="font-size: 6vh;">History</h2>
+        <div class="mt-3 mb-3">
+            <!-- timeline item 1 -->
+            <div class="row no-gutters">
+                <div class="col-sm"> <!--spacer--> </div>
+                <!-- timeline item 1 center dot -->
+                <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                    <div class="row h-50">
+                        <div class="col">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    <h5 class="m-2">
+                        <span class="badge badge-pill bg-dark border">&nbsp;</span>
+                    </h5>
+                    <div class="row h-50">
+                        <div class="col border-right"> </div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                </div>
+                <!-- timeline item 1 event content -->
+                <div class="col-sm py-2">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title text-muted">Ancient period</h4>
+                            <p class="card-text">The history if the region of Strumica, dates even from the Neolithic period, but Strumica as a town is first mentioned in the 5th century BC, when was settled by the Thracian tribes. Also in the Hellenistic period, during the rule of Philip 2nd and his son Alexander 3rd of Macedonia, the Strumica region was divided between the ancient Macedonian state and the other stayed to the Thracians. The town was mentioned for the first time in the history by the Roman historian Tit Livius in 181 BC, under the name Astraion, and occured in connection with Demetrius, the brother the last ancient Macedonian king Perseius (179-168 BC).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/row-->
+            <!-- timeline item 2 -->
+            <div class="row no-gutters">
+                <div class="col-sm py-2">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title text-muted">Middle Ages</h4>
+                            <p class="card-text">When the Slavs arrived they changed the ancient name Tiveriopol to Strumica.
+                                A fortress was built right to the city, which stays in ruins today called Carevi Kuli.
+                                Carevi Kuli is a fortress from the late ancient period. It is located on the southern side of
+                                Strumica and has size 100 meters and is oriented east-west.The all region of Strumica was
+                                settle by the Slavs in the year of 630 AD.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    <h5 class="m-2">
+                        <span class="badge badge-pill bg-light border">&nbsp;</span>
+                    </h5>
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-sm"> <!--spacer--> </div>
+            </div>
+            <!--/row-->
+            <!-- timeline item 3 -->
+            <div class="row no-gutters">
+                <div class="col-sm"> <!--spacer--> </div>
+                <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    <h5 class="m-2">
+                        <span class="badge badge-pill  border" style="background: #009961">&nbsp;</span>
+                    </h5>
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-sm py-2">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title text-muted">Ottoman Period</h4>
+                            <p>In the period after 1395 Strumica falls under Turkish authority and by them it was held for
+                                529 years until the Balkan wars in 1913. Then went in the borders of Bulgaria and later after
+                                first world war in Serbia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/row-->
+            <!-- timeline item 4 -->
+            <div class="row no-gutters">
+                <div class="col-sm py-2">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title text-muted">Late-19th century</h4>
+                            <p>Following the Berlin Congress of 1878, when the Ottoman Empire lost a sizable portion of its
+                                territory on the Balkans, a stream of refugees flowed into the area; some of them ending up
+                                in Strumica. These people were called "muhajirs". According to the Ottoman General Census of
+                                1881/82-1893, the kaza of Strumica had a total population of 33.024, consisting of 15.760
+                                Muslims, 13.726 Greeks, 2.965 Bulgarians and 573 Jews.The Internal Macedonian Revolutionary
+                                Organization for the Ograzden county was formed and operated in these parts. One of the most
+                                prominent leaders of the organization in Strumica was Hristo Chernopeev, who took part in the
+                                Young Turk Revolution (1908–09). The outcome of this effort did not bring freedom to the local
+                                people who still remained under Ottoman rule.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    <h5 class="m-2">
+                        <span class="badge badge-pill bg-light border">&nbsp;</span>
+                    </h5>
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-sm"> <!--spacer--> </div>
+            </div>
+            <!--/row-->
+            <!--        item 5-->
+            <div class="row no-gutters">
+                <div class="col-sm"> <!--spacer--> </div>
+                <div class="col-sm-1 text-center flex-column d-none d-sm-flex">
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                    <h5 class="m-2">
+                        <span class="badge badge-pill bg-dark border">&nbsp;</span>
+                    </h5>
+                    <div class="row h-50">
+                        <div class="col border-right">&nbsp;</div>
+                        <div class="col">&nbsp;</div>
+                    </div>
+                </div>
+                <div class="col-sm py-2">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h4 class="card-title text-muted">20th century</h4>
+                            <p>The Kaza of Strumica in 1905 had a total Christian population of 22.860, consisting of
+                                12.736 Exarchist Bulgarians, 8.992 Patriarchist Bulgarians, 624 Protestant Bulgarians, 444
+                                Roma people, 25 Greeks and 6 Vlachs according to the geographers Dimitri Mishev and
+                                D. M. Brancoff.In the First Balkan War of 1912 the Ottomans were defeated and driven out
+                                of Macedonia (region) by the joint effort of the Balkan League (Serbia, Bulgaria, Greece
+                                and Montenegro). Bulgaria annexed the town of Strumica. In the Second Balkan War (1913),
+                                which was fought between the three of the Balkan allies against Bulgaria, the latter was
+                                defeated, however, according to the Bucharest treaty (28 July 1913) Strumica remained under
+                                Bulgarian rule. On 6 April 1941, the first day of the Axis invasion of Yugoslavia, Strumica
+                                was captured by the German Army and, as Bulgaria was allied with Germany, Strumica was
+                                turned over under occupation of the Bulgarian armies on 18 April 1941. From 1941 to 1944,
+                                Strumica, as most of Vardar Macedonia, was annexed by the Kingdom of Bulgaria. On 11 September
+                                1944 the Bulgarian army withdrew from Strumica and on 5 November 1944, the German army
+                                also left the town. After the war it became part of the Socialist Republic of Macedonia,
+                                one of the republics of Federal Yugoslavia. With the referendum on 8 September 1991, amid
+                                the breakup of Yugoslavia, the country became independent under the constitutional name
+                                Republic of Macedonia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background-color: #E8E8E8; color: black;" class="mt-5 p-4" id="food">
+            <h1 class="display-3" style="width: 100%; border-bottom: 1px double #000;line-height: 0.4em;margin: 10px 0 20px;
+            padding: 0 20px; ">
+                <span style="background:#E8E8E8; padding:0 5px; ">Traditional food</span></h1>
+            <p style="font-style: italic; color: #009961;">You can never have too much!</p>
+            <div>
+                <p>The food combinations themselves are more like Mediterranean cuisine,
+                    which is not surprising given the fact that Macedonia is near this area.
+                    The rich and vibrant traditional recipes, some dating back centuries, will conjure up food that’s some of
+                    the most delicious you’ll ever try in your life.
+                    Most dishes are a perfect combination of organic produce, quality meat, and dairy.
+                    The climate allows you to eat a raw tomato as it is, and you’ll be blown away by the taste.
+                    But pastry is also a key staple in this cuisine. In fact,every Macedonian eats bread with almost everything you can think of.
+                    The locals enjoy salads before meals, along with the homemade traditional alcoholid drink called rakija.
+                    SPOILER ALERT: it's probably one of the most strong alcohols you will try!</p>
+                <p style="color: #009961; font-size: 1.5vw;">Here are some dishes we recomend you to try on your next trip to Strumica</p>
+            </div>
+
+
+            <div class="row ">
+                <div class="col-12 col-md-6">
+                    <div class="card" style="min-width: 100%; min-height: 100%">
+                        <div class="card-body row no-gutters">
+                            <div class="col-4">
+                                <img src="https://whenfetametolive.com/wp-content/uploads/2011/10/Pickled-Cabbage-Rolls.jpg"
+                                style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="col-8">
+                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Sarma</p>
+                                <p style="font-size: 1.5vw;">Stuffed cabbage rolls</p>
+                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">Cabbage rolls with meat and rice, is one of the country’s most popular foods.
+                                    It's made of fermented cabbage leaves, rice, and ground beef.
+                                    The stuffed cabbage rolls are baked in the oven, and can be eaten with sides, sauces, or own their own.
+                                    Sarma is the ultimate comfort food. It is wholesome, hearty, and soothes the stomach on a cold winter’s evening.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="card" style="min-width: 100%; min-height: 100%;">
+                        <div class="card-body row no-gutters">
+                            <div class="col-4">
+                                <img src="https://www.travelcookrepeat.com/wp-content/uploads/2020/05/tavce-gravce-2.jpg"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="col-8">
+                                <p style="font-size: 2.2vw; border-bottom: 1px solid #009961; margin-left: 10px;">Tavce Gravce</p>
+                                <p style="font-size: 1.5vw;">Baked beans</p>
+                                <p style="font-size: 1.1vw; text-align: left; padding-left: 20px;"> Tavce gravce has an incredibly rich flavor.
+                                    It is made of boiled beans, seasoned with a roux that includes dry red pepper. The mixture is baked in a pan or skillet.
+                                    Macedonians like to combine it with sausages or ribs and fresh paprika.
+                                    According to the tradition, tavce gravce is usually prepared as a Friday lunch.
+                                    It is a dish of Macedonia you simply must try.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="card" style="min-width: 100%; min-height: 100%">
+                        <div class="card-body row no-gutters">
+                            <div class="col-4">
+                                <img src="https://i2.wp.com/www.slavicvegan.com/wp-content/uploads/2020/04/burek-seitan3.jpg?resize=610%2C915"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="col-8">
+                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Burek</p>
+                                <p style="font-size: 1.5vw;">Baked pastry with filling</p>
+                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">
+                                    Burek is a remnant from the Ottoman era, dating back many centuries.
+                                    This crispy thin and layered pastry traditionally contains either cheese or meat. However, nowadays, you can find pizza
+                                    burek as well, containing the toppings of a regular pizza, like mozzarella and tomatoes.
+                                    It’s usually served with yogurt and is an ideal grab-and-go takeaway food.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="card" style="min-width: 100%; min-height: 100%">
+                        <div class="card-body row no-gutters">
+                            <div class="col-4">
+                                <img src="https://balkanlunchbox.com/wp-content/uploads/2016/09/pindjur-balkan-tomato-and-roasted-pepper-spread-salsa-01.jpg"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="col-8">
+                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Pindjur</p>
+                                <p style="font-size: 1.5vw;">Tomato and red pepper spread</p>
+                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">
+                                    Pindjur is a very popular relish, enjoyed in Macedonia during the summer period.
+                                    It’s made of roasted eggplant, tomatoes, peppers, onion, garlic, olive oil, salt, and pepper.
+                                    People here enjoy it while warm with some cheese and bread for lunch or dinner. It’s a truly delicious
+                                    dip or sauce for a variety of other foods.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="card" style="min-width: 100%; min-height: 100%">
+                        <div class="card-body row no-gutters">
+                            <div class="col-4">
+                                <img src="https://feelgoodfoodie.net/wp-content/uploads/2020/12/Lebanese-Baklava-9.jpg"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="col-8">
+                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Sarlii</p>
+                                <p style="font-size: 1.5vw;">Layered pastry dessert with syryp</p>
+                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">
+                                    Sarlii is a special type of the famous Baklava dessert, that people in Strumica love to eat and
+                                    traditionally they make it for the Christmas holidays. It's a layered pastry dessert made of
+                                    filo pastry, filled with chopped nuts, and sweetened with syrup or honey.
+                                    If you have a sweet tooth, this one is for you.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 mt-2">
+                    <div class="card" style="min-width: 100%; min-height: 100%">
+                        <div class="card-body row no-gutters">
+                            <div class="col-4">
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Sopron_barack_07.JPG/1200px-Sopron_barack_07.JPG"
+                                     style="width: 100%; height: 100%; object-fit: cover;">
+                            </div>
+                            <div class="col-8">
+                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Rakija</p>
+                                <p style="font-size: 1.5vw;">Fruit spirit/brandy</p>
+                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">
+                                    Last but not least, we come to the country’s favorite beverage. Rakija is the traditional alcoholic
+                                    drink in Macedonia, also drank in other countries of the Balkans region.
+                                    Macedonians prepare hundreds of liters of rakija in their homes. They drink it not only for pleasure and special occasions,
+                                    but also for alleviating the symptoms of a sore throat, cold, and muscle pain.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<script>
+    (function($) {
+
+        $.fn.visible = function(partial) {
+            var $t            = $(this),
+                $w            = $(window),
+                viewTop       = $w.scrollTop(),
+                viewBottom    = viewTop + $w.height(),
+                _top          = $t.offset().top,
+                _bottom       = _top + $t.height(),
+                compareTop    = partial === true ? _bottom : _top,
+                compareBottom = partial === true ? _top : _bottom;
+            return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
+        };
+
+    })(jQuery);
+
+    var win = $(window);
+    var allMods = $(".shadow");
+    allMods.each(function(i, el) {
+        var el = $(el);
+        if (el.visible(true)) {
+            el.addClass("already-visible");
+        }
+    });
+
+    win.scroll(function(event) {
+        allMods.each(function(i, el) {
+            var el = $(el);
+            if (el.visible(true)) {
+                el.addClass("come-in");
+            }
+        });
+    });
+
+    var jumpToValue= document.getElementById("jumpSection").value;
+    if(jumpToValue!=null){
+        document.getElementById(jumpToValue).scrollIntoView({behavior: 'smooth'});
+    }
+
+</script>

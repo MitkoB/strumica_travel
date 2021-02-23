@@ -10,8 +10,8 @@ public interface RouteService {
     List<Route> findAll();
     Optional<Route> findById(Long id);
     Optional<Route> findByName(String name);
-    Optional<Route> save(String name, String description,String duration,List<Long> touristAttractionsIds);
-    Optional<Route> edit(Long id, String name,String description,String duration,List<Long> touristAttractionsIds);
+    Optional<Route> save(String name, String description,String duration,String image,List<Long> touristAttractionsIds);
+    Optional<Route> edit(Long id, String name,String description,String duration,String image,List<Long> touristAttractionsIds);
     Optional<Route> setLikes(Long id);
     void deleteById(Long id);
 }

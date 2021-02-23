@@ -1,74 +1,52 @@
-<footer id="footer" xmlns:th="http://www.thymeleaf.org">
 <style>
+    #footer {
+        background: black;
+        color: #fff;
+        text-align: center;
+        font-family: Tahoma, Verdana, sans-serif;
+        bottom: 0;
+        width: 100%;
+    }
+    #footer p {
+        font-style: italic;
+        color: #009961;
+    }
+    .container{
+        text-align: center;
+    }
+    .social-links a {
+        display: inline-block;
+        background: #009961;
+        color: #fff;
+        text-align: center;
+        transition: 0.3s;
+        border-radius: 50%;
+        padding: 5px 8px;
+        line-height: 1;
+    }
 
-        #footer {
-            background: #0f0f0f;
-            color: #fff;
-            font-size: 14px;
-            text-align: center;
-            padding: 30px 0;
-        }
+    .social-links a:hover {
+        background: darkolivegreen;
+        color: #fff;
+        text-decoration: none;
+    }
+    .footer_logo{
+        height: 2.5em;
+    }
+</style>
 
-        #footer h3 {
-            font-size: 40px;
-            font-weight: 500;
-            color: #fff;
-            position: relative;
-            font-family: "Brush Script MT", sans-serif;
-            padding: 0;
-            margin: 0 0 15px 0;
-        }
-
-        #footer p {
-            font-size: 15px;
-            font-style: italic;
-            padding: 0;
-            margin: 0 0 40px 0;
-            color: #009961;
-        }
-
-        #footer .social-links {
-            margin: 0 0 40px 0;
-        }
-
-        #footer .social-links a {
-            font-size: 18px;
-            display: inline-block;
-            background: #009961;
-            color: #fff;
-            line-height: 1;
-            padding: 8px 0;
-            margin-right: 4px;
-            border-radius: 50%;
-            text-align: center;
-            width: 36px;
-            height: 36px;
-            transition: 0.3s;
-        }
-
-        #footer .social-links a:hover {
-            background: darkolivegreen;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        #footer .copyright {
-            margin: 0 0 5px 0;
-        }
-    </style>
+<footer id="footer" xmlns:th="http://www.thymeleaf.org">
     <div class="container">
-        <h3>Strumica Travel</h3>
-        <p>"The city of the stars and the city under the King's towers"</p>
-        <div class="social-links">
-            <a href="/" class="twitter"><i class="fa fa-twitter"></i></a>
-            <a href="/" class="facebook"><i class="fa fa-facebook"></i></a>
-            <a href="/" class="instagram"><i class="fa fa-instagram"></i></a>
-            <a href="/" class="google-plus"><i class="fa fa-skype"></i></a>
-            <a href="/" class="linkedin"><i class="fa fa-linkedin"></i></a>
+        <p class="pt-5">"The city of the stars and the city under the King's towers"</p>
+        <div class="social-links pb-4">
+            <a href="/" class="twitter btn-link"><i class="fa fa-twitter"></i></a>
+            <a href="/" class="facebook btn-link "><i class="fa fa-facebook"></i></a>
+            <a href="/" class="instagram btn-link rounded-circle"><i class="fa fa-instagram"></i></a>
+            <a href="/" class="google-plus btn-link rounded-circle"><i class="fa fa-skype"></i></a>
+            <a href="/" class="linkedin btn-link rounded-circle"><i class="fa fa-linkedin"></i></a>
         </div>
-        <div class="copyright">
-            &copy; Copyright <strong><span>StrumicaTravel</span></strong>
-        </div>
+          <span class="mt-3">&copy; Copyright</span><br>
+          <img class="footer_logo" th:src="@{images/white-logo.png}" alt="logo">
     </div>
 </footer>
 

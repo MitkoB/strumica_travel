@@ -9,7 +9,7 @@ public interface TouristAttractionService {
    List<TouristAttraction> findAll();
    Optional<TouristAttraction> findById(Long id);
    Optional<TouristAttraction> findByName(String name);
-   Optional<TouristAttraction> save(String name, String location,String description,String pictures);
-   Optional<TouristAttraction> edit(Long id, String name, String location, String description, String pictures);
+   Optional<TouristAttraction> save(String name, String location,String description,String mainPicture,String pictures);
+   Optional<TouristAttraction> edit(Long id, String name, String location, String description,String mainPicture, String pictures);
    void deleteById(Long id);
 }

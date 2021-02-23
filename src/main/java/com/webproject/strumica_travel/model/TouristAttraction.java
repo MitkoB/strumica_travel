@@ -17,7 +17,7 @@ public class TouristAttraction {
     private String location;
     @Column(length = 5000)
     private String description;
-    @Column(length = 5000)
+    private String mainPicture;
     private String pictures;
     @OneToMany(mappedBy = "touristAttraction")
     private List<Review> reviews;
@@ -25,11 +25,16 @@ public class TouristAttraction {
     public TouristAttraction() {
     }
 
-    public TouristAttraction(String name, String location, String description, String pictures) {
+    public TouristAttraction(String name, String location, String description,String mainPicture, String pictures) {
         this.name = name;
         this.location = location;
         this.description = description;
         this.pictures = pictures;
+        this.mainPicture=mainPicture;
         this.reviews=new ArrayList<>();
+    }
+
+    public String getPictures() {
+        return this.pictures;
     }
 }

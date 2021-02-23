@@ -57,9 +57,10 @@ public class RouteController {
             @RequestParam String name,
             @RequestParam String description,
             @RequestParam String duration,
+            @RequestParam String image,
             @RequestParam List<Long> attractionsIds )
     {
-        this.routeService.save(name,description,duration,attractionsIds);
+        this.routeService.save(name,description,duration,image,attractionsIds);
         return "redirect:/routes";
     }
     @GetMapping("/{id}/edit-form")
@@ -83,8 +84,9 @@ public class RouteController {
                                    @RequestParam String name,
                                    @RequestParam String description,
                                    @RequestParam String duration,
+                                   @RequestParam String image,
                                    @RequestParam List<Long> attractionsIds) {
-        this.routeService.edit(id, name, description, duration,attractionsIds);
+        this.routeService.edit(id, name, description, duration,image,attractionsIds);
         return "redirect:/routes";
     }
 
@@ -96,8 +98,10 @@ public class RouteController {
             Route route=this.routeService.findById(id).get();
             model.addAttribute("route",route);
             List<Review> reviews=this.reviewService.listAllRouteReviews(id);
+            List<TouristAttraction> attractions=route.getTouristAttractions();
             model.addAttribute("reviews",reviews);
             model.addAttribute("bodyContent", "route_details");
+            model.addAttribute("attraction",attractions);
             return "master-template";
         }
         return "redirect:/routes";
