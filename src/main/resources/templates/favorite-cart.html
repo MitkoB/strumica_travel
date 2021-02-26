@@ -1,4 +1,5 @@
-<head>
+<head  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
     <style>
         body{
             font-family: Tahoma, Verdana, sans-serif;
@@ -22,8 +23,7 @@
         }
     </style>
 </head>
-<body xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<th:block>
+<body xmlns:th="http://www.thymeleaf.org">
     <div class="topDiv">
         <hr class="mt-5 horizontal_line" />
     </div>
@@ -45,7 +45,6 @@
                         <th scope="col">Name</th>
                         <th scope="col">Places</th>
                         <th scope="col">Duration</th>
-                        <th scope="col">Number of Likes</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -60,10 +59,12 @@
                             end
                         </td>
                         <td>
-                            <span th:text="${route.getDuration()}" class="d-inline"></span>hours
+                            <span th:text="${route.getDuration()}" class="d-inline"></span> hours
                         </td>
-                        <td th:text="${route.getLikes()}"></td>
                         <td>
+                            <form th:method="DELETE" th:action="@{/favorite-cart/{id}/remove-route (id=${route.getId()})}">
+                                <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Remove</button>
+                            </form>
                         </td>
                     </tr>
                     </tbody>
@@ -79,6 +80,7 @@
                     <tr style="color: #009961">
                         <th scope="col">Name</th>
                         <th scope="col">Location</th>
+                        <th scope="col">Type</th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -86,7 +88,11 @@
                     <tr th:each="attraction:${attractions}">
                         <th scope="row" th:text="${attraction.getName()}"></th>
                         <td  th:text="${attraction.getLocation()}"></td>
+                        <td  th:text="${attraction.getType().toString()}"></td>
                         <td>
+                            <form th:method="DELETE" th:action="@{/favorite-cart/{id}/remove-attr (id=${attraction.getId()})}">
+                                <button type="submit" class="btn btn-link btn-md text-white ml-2 btn-danger">Remove</button>
+                            </form>
                         </td>
                     </tr>
                     </tbody>
@@ -94,7 +100,6 @@
             </div>
         </div>
     </div>
-</th:block>
 <script>
     document.getElementById("logo").setAttribute("th:src","@{images/black-logo.png}");
     document.getElementById("logo").setAttribute("src","images/black-logo.png");

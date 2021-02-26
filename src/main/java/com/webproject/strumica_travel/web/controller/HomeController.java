@@ -20,4 +20,10 @@ public class HomeController {
         model.addAttribute("jumpSection",jumpSection);
         return "master-template";
     }
+    @GetMapping(value = {"/team"})
+    public String getTeamPage(Model model)
+    {
+        model.addAttribute("bodyContent","team");
+        return "master-template";
+    }
 }

@@ -13,6 +13,9 @@ import com.webproject.strumica_travel.repository.UserRepository;
 import com.webproject.strumica_travel.service.FavoriteCartService;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,5 +79,45 @@ public class FavoriteCartServiceImpl implements FavoriteCartService {
         }
         favoriteCart.getRouteList().add(route);
         return favoriteCartRepository.save(favoriteCart);
+    }
+
+    @Override
+    public FavoriteCart deleteTouristAttractionFromFavoriteCart(String username, Long attractionId) {
+        FavoriteCart favoriteCart=this.getActiveFavoriteCart(username);
+        List<TouristAttraction> touristAttractions=favoriteCart.getTouristAttractionList();
+        if(touristAttractions.stream().filter(i->i.getId().equals(attractionId)).findFirst()!=null){
+            List<TouristAttraction> newattractions=new ArrayList<>();
+            for (TouristAttraction t:touristAttractions) {
+                if(!t.getId().equals(attractionId))
+                {
+                    newattractions.add(t);
+                }
+            }
+            favoriteCart.setTouristAttractionList(newattractions);
+            return favoriteCartRepository.save(favoriteCart);
+        }
+        else{
+            throw new TouristAttractionNotFoundException(attractionId);
+        }
+    }
+
+    @Override
+    public FavoriteCart deleteRouteFromFavoriteCart(String username, Long routeId) {
+        FavoriteCart favoriteCart=this.getActiveFavoriteCart(username);
+        List<Route> routes=favoriteCart.getRouteList();
+        if(routes.stream().filter(i->i.getId().equals(routeId)).collect(Collectors.toList()).size()>0){
+            List<Route> newroutes=new ArrayList<>();
+            for (Route r:routes) {
+                if(!r.getId().equals(routeId))
+                {
+                    newroutes.add(r);
+                }
+            }
+            favoriteCart.setRouteList(newroutes);
+            return favoriteCartRepository.save(favoriteCart);
+        }
+        else{
+            throw new RouteNotFoundException(routeId);
+        }
     }
 }

@@ -59,4 +59,31 @@ public class FavoriteCartController {
             return "redirect:/favorite-cart?error="+ex.getMessage();
         }
     }
+    @DeleteMapping("/{id}/remove-attr")
+    public String removeAttractionFromCart(@PathVariable Long id,Authentication authentication)
+    {
+        try{
+            User user = (User) authentication.getPrincipal();
+            favoriteCartService.deleteTouristAttractionFromFavoriteCart(user.getUsername(),id);
+            return "redirect:/favorite-cart";
+        }
+        catch (RuntimeException ex)
+        {
+            return "redirect:/favorite-cart?error="+ex.getMessage();
+        }
+    }
+    @DeleteMapping("/{id}/remove-route")
+    public String removeRoueFromCart(@PathVariable Long id,Authentication authentication)
+    {
+        try{
+            User user = (User) authentication.getPrincipal();
+            favoriteCartService.deleteRouteFromFavoriteCart(user.getUsername(),id);
+            return "redirect:/favorite-cart";
+        }
+        catch (RuntimeException ex)
+        {
+            return "redirect:/favorite-cart?error="+ex.getMessage();
+        }
+    }
+
 }

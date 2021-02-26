@@ -13,5 +13,6 @@ public interface RouteService {
     Optional<Route> save(String name, String description,String duration,String image,List<Long> touristAttractionsIds);
     Optional<Route> edit(Long id, String name,String description,String duration,String image,List<Long> touristAttractionsIds);
     Optional<Route> setLikes(Long id);
+    List<Route> searchRoute(String name);
     void deleteById(Long id);
 }

@@ -27,9 +27,16 @@ public class RouteController {
     }
 
     @GetMapping
-    public String getRoutesPage(Model model)
+    public String getRoutesPage(@RequestParam(required = false) String nameSearch, Model model)
     {
-        List<Route> routes=routeService.findAll();
+        List<Route> routes;
+        if(nameSearch!=null)
+        {
+            routes=routeService.searchRoute(nameSearch);
+        }
+        else {
+            routes=routeService.findAll();
+        }
         model.addAttribute("routes",routes);
         model.addAttribute("bodyContent","all_routes");
         return "master-template";
@@ -99,9 +106,19 @@ public class RouteController {
             model.addAttribute("route",route);
             List<Review> reviews=this.reviewService.listAllRouteReviews(id);
             List<TouristAttraction> attractions=route.getTouristAttractions();
+            int sizeOf1=reviewService.numberOfReviewsInRoutesByGrade(id,1);
+            int sizeOf2=reviewService.numberOfReviewsInRoutesByGrade(id,2);
+            int sizeOf3=reviewService.numberOfReviewsInRoutesByGrade(id,3);
+            int sizeOf4=reviewService.numberOfReviewsInRoutesByGrade(id,4);
+            int sizeOf5=reviewService.numberOfReviewsInRoutesByGrade(id,5);
+            model.addAttribute("sizeOf1",sizeOf1);
+            model.addAttribute("sizeOf2",sizeOf2);
+            model.addAttribute("sizeOf3",sizeOf3);
+            model.addAttribute("sizeOf4",sizeOf4);
+            model.addAttribute("sizeOf5",sizeOf5);
             model.addAttribute("reviews",reviews);
             model.addAttribute("bodyContent", "route_details");
-            model.addAttribute("attraction",attractions);
+            model.addAttribute("attractions",attractions);
             return "master-template";
         }
         return "redirect:/routes";

@@ -1,9 +1,9 @@
 package com.webproject.strumica_travel.model;
 
-import com.webproject.strumica_travel.model.enumeration.Season;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -11,24 +11,42 @@ public class FamousEvent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String title;
     @Column(length = 5000)
     private String description;
-    @Column(length = 5000)
+    private LocalDateTime start;
+    @Column(name = "finish")
+    private LocalDateTime end;
     private String picture;
     private String location;
-    @Enumerated(EnumType.STRING)
-    private Season season;
-
     public FamousEvent() {
     }
-
-    public FamousEvent(String name, String description, String picture, String location, Season season) {
-        this.name = name;
+    public FamousEvent(Long id, String title, String description, LocalDateTime start, LocalDateTime end) {
+        super();
+        this.id = id;
+        this.title = title;
         this.description = description;
-        this.picture = picture;
-        this.location = location;
-        this.season = season;
+        this.start = start;
+        this.end = end;
+    }
+    public FamousEvent(Long id,String title, String description, LocalDateTime start, LocalDateTime end,String picture, String location) {
+        super();
+        this.id=id;
+        this.title = title;
+        this.description = description;
+        this.start = start;
+        this.end = end;
+        this.picture=picture;
+        this.location=location;
+    }
+    public FamousEvent(String title, String description, LocalDateTime start, LocalDateTime end,String picture, String location) {
+        super();
+        this.title = title;
+        this.description = description;
+        this.start = start;
+        this.end = end;
+        this.picture=picture;
+        this.location=location;
     }
 
 }

@@ -1,0 +1,127 @@
+<style>
+    .horizontal_line{
+        background: linear-gradient(.25turn,#009961, black, #009961);
+        height:3px;
+    }
+    .submit_btn{
+        background-color: #F8F8F8;
+        color: #009961;
+    }
+    .back_btn{
+        background-color: lightgrey;
+        color: black;
+        border: 1px solid dimgray;
+    }
+    .back_btn:hover{
+        text-decoration: none;
+        color: black;
+    }
+    .bgContainer{
+        background-color: #009961;
+        box-shadow: 10px 10px 30px grey;
+    }
+    .relativeContainer{
+        position: relative;
+        top: 3vh;
+    }
+</style>
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="container mt-5 mb-5 relativeContainer">
+        <div class="bgContainer text-white mr-5 ml-5 mt-2 p-3">
+            <h3 class="text-center display-4">Create Event</h3>
+            <hr class="horizontal_line"/>
+            <div class="w3-container w3-animate-zoom">
+                <div class="form-horizontal mt-4">
+                    <form th:method="POST" th:action="@{/famousevents/save/{id} (id=${famousEvent?.id})}">
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="title">Name</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="title"
+                                       name="title"
+                                       th:value="(${famousEvent} != null ? ${famousEvent.getTitle()} : '')"
+                                       required
+                                       placeholder="Enter event name">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right"  for="description">Description</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="description"
+                                       name="description"
+                                       th:value="(${famousEvent} != null ? ${famousEvent.getDescription()} : '')"
+                                       placeholder="Description">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right"  for="start">Start date</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="start"
+                                       name="start"
+                                       th:value="(${famousEvent} != null ? ${famousEvent.getStart()} : '')"
+                                       placeholder="Start date">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right"  for="finish">End date</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="finish"
+                                       name="finish"
+                                       th:value="(${famousEvent} != null ? ${famousEvent.getFinish()} : '')"
+                                       placeholder="End date">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="picture">Image URL</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="picture"
+                                       name="picture"
+                                       th:value="(${famousEvent} != null ? ${famousEvent.getPicture()} : '')"
+                                       placeholder="Image URL">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="location">Location</label>
+<!--                            <div class="col-8">-->
+<!--                                <select name="attractionsId" id="attractionsId" class="form-control">-->
+<!--                                    <option-->
+<!--                                            th:each="attraction : ${attractions}"-->
+<!--                                            th:value="${attraction.getId()}"-->
+<!--                                            th:text="${attraction.getName()}">-->
+<!--                                    </option>-->
+<!--                                </select>-->
+<!--                            </div>-->
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="location"
+                                       name="location"
+                                       th:value="(${famousEvent} != null ? ${famousEvent.getLocation()} : '')"
+                                       placeholder="Location">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-end">
+                            <div  class="col-8 text-left">
+                                <button id="submit" type="submit" class="btn btn-lg submit_btn">Submit</button>
+                                <a type="button" class="btn btn-lg btn-link back_btn" href="/famousevents" >Back</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById("logo").setAttribute("th:src","@{../images/black-logo.png}");
+        document.getElementById("logo").setAttribute("src","../images/black-logo.png");
+    </script>
+</div>

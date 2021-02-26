@@ -5,8 +5,6 @@ public enum AttractionType {
     MOUNTAINS,
     MUSEUM,
     ANCIENT_PLACE,
-    LANDMARK,
-    RELIGION,
-    NATURE_OUTDOOR_ACTIVITIES;
-
+    OUTDOOR,
+    LANDMARK
 }

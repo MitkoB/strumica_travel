@@ -12,4 +12,6 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review,Long> {
     List<Review> findAllByTouristAttraction(TouristAttraction touristAttraction);
     List<Review> findAllByRoute(Route route);
+    List<Review> findAllByRouteAndGrade(Route route,Integer grade);
+    List<Review> findAllByTouristAttractionAndGrade(TouristAttraction touristAttraction,Integer grade);
 }

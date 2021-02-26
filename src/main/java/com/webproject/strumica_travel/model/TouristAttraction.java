@@ -1,6 +1,7 @@
 package com.webproject.strumica_travel.model;
 
 
+import com.webproject.strumica_travel.model.enumeration.AttractionType;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,17 +22,19 @@ public class TouristAttraction {
     private String pictures;
     @OneToMany(mappedBy = "touristAttraction")
     private List<Review> reviews;
-
+    @Enumerated(value = EnumType.STRING)
+    private AttractionType type;
     public TouristAttraction() {
     }
 
-    public TouristAttraction(String name, String location, String description,String mainPicture, String pictures) {
+    public TouristAttraction(String name, String location, String description,String mainPicture, String pictures,AttractionType type) {
         this.name = name;
         this.location = location;
         this.description = description;
         this.pictures = pictures;
         this.mainPicture=mainPicture;
         this.reviews=new ArrayList<>();
+        this.type=type;
     }
 
     public String getPictures() {

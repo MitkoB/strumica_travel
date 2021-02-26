@@ -79,4 +79,18 @@ public class ReviewServiceImpl implements ReviewService {
             throw  new PermisionDeniedException();
         }
     }
+
+    @Override
+    public Integer numberOfReviewsInRoutesByGrade(Long routeId,Integer grade) {
+        Route route=routeRepository.findById(routeId).orElseThrow(()->new RouteNotFoundException(routeId));
+        List<Review> reviews=reviewRepository.findAllByRouteAndGrade(route,grade);
+        return reviews.size();
+    }
+
+    @Override
+    public Integer numberOfReviewsInAttractionsByGrade(Long attractionId, Integer grade) {
+        TouristAttraction attraction=touristAttractionRepository.findById(attractionId).orElseThrow(()->new TouristAttractionNotFoundException(attractionId));
+        List<Review> reviews=reviewRepository.findAllByTouristAttractionAndGrade(attraction,grade);
+        return reviews.size();
+    }
 }

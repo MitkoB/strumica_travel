@@ -1,0 +1,83 @@
+<style>
+    .horizontal_line{
+        background: linear-gradient(.25turn,#009961, black, #009961);
+        height:3px;
+    }
+    .submit_btn{
+        background-color: #F8F8F8;
+        color: #009961;
+    }
+    .back_btn{
+        background-color: lightgrey;
+        color: black;
+        border: 1px solid dimgray;
+    }
+    .back_btn:hover{
+        text-decoration: none;
+        color: black;
+    }
+    .bgContainer{
+        background-color: #009961;
+        box-shadow: 10px 10px 30px grey;
+    }
+    .relativeContainer{
+        position: relative;
+        top: 3vh;
+    }
+</style>
+<div xmlns:th="http://www.thymeleaf.org">
+    <div class="container mt-5 mb-5 relativeContainer">
+        <div class="bgContainer text-white mr-5 ml-5 p-3 mt-2">
+            <th:block th:if="${usernameselected!=null && roleselected!=null}">
+                <h5 class="text-left" style="color: green">User with username: <th:block th:text="${usernameselected}"></th:block> was
+                    successfully added to role: <th:block th:text="${roleselected}"></th:block>!
+                </h5>
+            </th:block>
+            <th:block th:if="${hasErrors}">
+                <h5 class="text-center display-4"><th:block th:text="${error}"></th:block>
+                </h5>
+            </th:block>
+            <h3 class="text-center display-4">Add User To Role</h3>
+            <hr class="horizontal_line"/>
+            <div class="w3-container w3-animate-zoom">
+                <div class="form-horizontal mt-4">
+                    <form th:method="POST" th:action="@{/register/add-role-to-user}">
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="username">Choose User</label>
+                            <div class="col-8">
+                                <select name="username" id="username" class="form-control" >
+                                    <option
+                                            th:each="user : ${users}"
+                                            th:value="${user.getUsername()}"
+                                            th:text="${user.getUsername()}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="role" type="radio" id="ROLE_ADMIN" value="ROLE_ADMIN">
+                            <label class="form-check-label" for="ROLE_ADMIN">ROLE_ADMIN</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="role" type="radio" id="ROLE_USER" value="ROLE_USER">
+                            <label class="form-check-label" for="ROLE_USER">ROLE_USER</label>
+                        </div>
+
+                        <div class="form-group row mt-3 justify-content-end">
+                            <div  class="col-8 text-left">
+                                <button id="submit" type="submit" class="btn btn-lg submit_btn">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 200px">
+
+    </div>
+    <script>
+        document.getElementById("logo").setAttribute("th:src","@{../images/black-logo.png}");
+        document.getElementById("logo").setAttribute("src","../images/black-logo.png");
+    </script>
+</div>

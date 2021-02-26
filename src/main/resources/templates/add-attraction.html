@@ -89,6 +89,25 @@
                                placeholder="Pictures">
                         </div>
                     </div>
+                    <div class="form-group row justify-content-center">
+                        <label class="control-label col-4 text-right" for="pictures">Type</label>
+                        <div class="col-8">
+                        <select name="type" class="form-control">
+                            <option th:if="${attraction} != null"
+                                    th:selected="${attraction.getType() != null &&
+                                    attraction.getType().toString().equals(type.toString())}"
+                                    th:each="type:${attractionTypes}"
+                                    th:value="${type}"
+                                    th:text="${type.toString()}">
+                            </option>
+                            <option th:if="${attraction} == null"
+                                    th:each="type:${attractionTypes}"
+                                    th:value="${type}"
+                                    th:text="${type.toString()}">
+                            </option>
+                        </select>
+                        </div>
+                    </div>
                     <div class="form-group row mt-3 justify-content-end">
                         <div  class="col-8 text-left">
                             <button id="submit" type="submit" class="btn btn-lg submit_btn">Submit</button>

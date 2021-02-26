@@ -1,4 +1,4 @@
-<head xmlns:sec="http://www.w3.org/1999/xhtml">
+<head xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body{
@@ -81,8 +81,10 @@
         <div class="row mt-4 justify-content-center">
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="searchbar">
-                    <input class="search_input" type="search" name="" placeholder="Search for a place">
-                    <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                    <form>
+                    <input class="search_input" type="search" name="nameSearch" placeholder="Search for a place">
+                    <button  class="search_icon"><i class="fa fa-search"></i></button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -132,7 +134,6 @@
 
     document.getElementById("logo").setAttribute("th:src","@{images/black-logo.png}");
     document.getElementById("logo").setAttribute("src","images/black-logo.png");
-
     function myFunction(x) {
         x.classList.toggle("fa-thumbs-down");
     }

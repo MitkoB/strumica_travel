@@ -187,24 +187,42 @@
     </div>
     <div class="container mt-5 mb-5">
         <div class="mt-5">
-            <p class="display-4">Tourist Attractions</p>
+            <h1 class="h1" style="color: #009961">Tourist Attractions</h1>
+            <a style="color: #009961" th:href="@{/attractions/export/pdf}">PDF list of Attractions</a>
         </div>
         <div class="row mt-4 justify-content-center">
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="searchbar">
-                    <input class="search_input" type="search" name="" placeholder="Search for a place">
-                    <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                    <form>
+                    <input class="search_input" type="search" name="nameSearch" placeholder="Search for a place">
+                    <button class="search_icon"><i class="fa fa-search"></i></button>
+                    </form>
                 </div>
             </div>
         </div>
-
         <div class="row justify-content-center mt-3 mb-2" style="height: fit-content;">
-            <div class="col-3 col-md-2"><button class="btn rounded-pill thingsToDoBtn">Waterfalls</button></div>
-            <div class="col-3 col-md-2"><button class="btn rounded-pill thingsToDoBtn">Mountains</button></div>
-            <div class="col-3 col-md-2"><button class="btn rounded-pill thingsToDoBtn">Museums</button></div>
-            <div class="col-3 col-md-2"><button class="btn rounded-pill thingsToDoBtn">Ancient place</button></div>
-            <div class="col-3 col-md-2"><button class="btn rounded-pill thingsToDoBtn">Outdoor activities</button></div>
-            <div class="col-3 col-md-2"><button class="btn rounded-pill thingsToDoBtn">Landmarks</button></div>
+              <form  id="typeSearchForm" th:each="type:${attractionTypes}" class="col-3 col-md-2">
+                <input type="hidden" style="display: none" name="typeSearch" th:value="${type}"/>
+                <button  class="btn rounded-pill thingsToDoBtn" th:text="${type.toString()}"></button>
+              </form>
+<!--            <div class="col-3 col-md-2">-->
+<!--                <button onclick="myFunction()" class="btn rounded-pill thingsToDoBtn">Waterfalls</button>-->
+<!--            </div>-->
+<!--            <div class="col-3 col-md-2">-->
+<!--                <button class="btn rounded-pill thingsToDoBtn">Mountains</button>-->
+<!--            </div>-->
+<!--            <div class="col-3 col-md-2">-->
+<!--                <button class="btn rounded-pill thingsToDoBtn">Museums</button>-->
+<!--            </div>-->
+<!--            <div class="col-3 col-md-2">-->
+<!--                <button class="btn rounded-pill thingsToDoBtn">Ancient place</button>-->
+<!--            </div>-->
+<!--            <div class="col-3 col-md-2">-->
+<!--                <button class="btn rounded-pill thingsToDoBtn">Outdoor activities</button>-->
+<!--            </div>-->
+<!--            <div class="col-3 col-md-2">-->
+<!--                <button class="btn rounded-pill thingsToDoBtn">Landmarks</button>-->
+<!--            </div>-->
         </div>
 
         <div class="row mt-4">

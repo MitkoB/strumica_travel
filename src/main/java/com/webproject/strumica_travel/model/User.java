@@ -29,6 +29,7 @@ public class User implements UserDetails {
     public User() {
     }
 
+
     public User(String username, String password, String name, String lastname, Role role) {
         this.username = username;
         this.password = password;
@@ -36,7 +37,12 @@ public class User implements UserDetails {
         this.lastname = lastname;
         this.role = role;
     }
-
+    public User(String username, String password, String name, String lastname) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.lastname = lastname;
+    }
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singletonList(role);

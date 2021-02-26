@@ -1,4 +1,5 @@
-<head>
+<head xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+    <script src="https://d3js.org/d3.v3.min.js"></script>
     <style>
         body{
             font-family: Tahoma, Verdana, sans-serif;
@@ -44,6 +45,40 @@
         }
         .submitReview{
             background-color: #009961;
+        }
+        /*body {*/
+        /*    background-color: #ccc;*/
+        /*    width: 100%;*/
+        /*    font-family: 'Roboto', sans-serif;*/
+        /*    height: 100%;*/
+        /*}*/
+
+        .widget {
+            margin: 0 auto;
+            width:350px;
+            margin-top:50px;
+            background-color:#fff;
+            border-radius: 5px;
+            box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.3);
+
+        }
+
+        .mine{
+            background-color: #eee;
+            height:40px;
+            color:#555;
+            text-align: center;
+            line-height: 40px;
+            border-top-left-radius: 7px;
+            border-top-right-radius: 7px;
+            font-weight: 400;
+            font-size: 1.5em;
+            text-shadow: 1px 1px #fff;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .chart-container{
+            padding:25px;
         }
     </style>
 </head>
@@ -156,15 +191,94 @@
                         <h2 class="text-left pl-3 pt-3">Location</h2>
                         <!------------------- TUKA DA STOI MAPATA ZA OVAA ATRAKCIJA SO NEKOJA BIBLIOTEKA ------------------->
                         <!----SEGA USTE E SO OBICEN LINK GENERATOR -->
-
                         <div class="mapouter"><div class="gmap_canvas"><iframe width="100%" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=kolesino%20waterfall&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><style>.mapouter{position:relative;text-align:right;height:400px;width:100%;}</style><style>.gmap_canvas {overflow:hidden;background:none!important;height:400px;width: 100%;}</style></div></div>
                     </div>
                 </div>
             </div>
     </div>
 </div>
+    <div class="widget">
+        <div class="header mine">Grades</div>
+        <div id="chart" class="chart-container"></div>
+    </div>
 </th:block>
     <script>
+        var size=[[${reviews.size()}]]
+        var size1=[[${sizeOf1}]];
+        var size2=[[${sizeOf2}]];
+        var size3=[[${sizeOf3}]];
+        var size4=[[${sizeOf4}]];
+        var size5=[[${sizeOf5}]];
+        var dataset = [
+            {
+                name: "Grade 1",
+                percent: size1
+            },{
+                name: "Grade 2",
+                percent: size2
+            },{
+                name: "Grade 3",
+                percent: size3
+            },{
+                name: "Grade 4",
+                percent: size4
+            },{
+                name: "Grade 5",
+                percent: size5
+            }
+        ];
+        var w=300,h=300;
+        var radius=(w-20)/2;
+        var pie=d3.layout.pie()
+            .value(function(d){return d.percent})
+            .sort(null);
+        var arc=d3.svg.arc()
+            .innerRadius(0)
+            .outerRadius(radius);
+        var color = d3.scale.ordinal()
+            .range([ '#e75244','#009961']);
+        var svg=d3.select("#chart")
+            .append("svg")
+            .attr({
+                width:w,
+                height:h,
+                class:'shadow'
+            }).append('g')
+            .attr('transform','translate('+(w/2)+','+(h/2)+')');
+        var path=svg.selectAll('path')
+            .data(pie(dataset))
+            .enter()
+            .append('path')
+            .attr({
+                d:arc,
+                fill:function(d,i){
+                    return color(i);
+                }
+            })
+            .style({
+                'fill-opacity':.15,
+                stroke: function(d,i){
+                    return color(i);
+                },
+                'stroke-width': '2px'
+            });
+        var text=svg.selectAll('text')
+            .data(pie(dataset))
+            .enter()
+            .append("text")
+            .attr("transform", function (d) {
+                return "translate(" + arc.centroid(d) + ")";
+            })
+            .attr("text-anchor", "middle")
+            .text(function(d){
+                return d.data.name+" ("+Math.round(((d.data.percent)/size)*100)+"%)" ;
+            })
+            .style({
+                fill:function(d,i){
+                    return color(i);
+                },
+                'font-size':'10px',
+            });
         document.getElementById("logo").setAttribute("th:src","@{images/black-logo.png}");
         document.getElementById("logo").setAttribute("src","images/black-logo.png");
         var stars = 0;
@@ -197,7 +311,7 @@
                 insertGrade.item(j).innerHTML+="&starf;";
                 k++;
             }
-            while(k<6){
+            while(k<5){
                 insertGrade.item(j).innerHTML+="&star;";
                 k++;
             }

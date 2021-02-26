@@ -1,6 +1,7 @@
 package com.webproject.strumica_travel.web.controller;
 import com.webproject.strumica_travel.model.Review;
 import com.webproject.strumica_travel.model.TouristAttraction;
+import com.webproject.strumica_travel.model.enumeration.AttractionType;
 import com.webproject.strumica_travel.service.ReviewService;
 import com.webproject.strumica_travel.service.TouristAttractionService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,9 +23,22 @@ public class TouristAttractionController {
         this.reviewService = reviewService;
     }
     @GetMapping
-    public String getAttractionsPage(Model model)
+    public String getAttractionsPage(@RequestParam(required = false) String nameSearch,@RequestParam(required = false) AttractionType typeSearch, Model model)
     {
-        List<TouristAttraction> touristAttractionList=this.touristAttractionService.findAll();
+        List<TouristAttraction> touristAttractionList;
+        if(nameSearch!=null)
+        {
+            touristAttractionList=touristAttractionService.searchByName(nameSearch);
+        }
+        else if(typeSearch!=null)
+        {
+            touristAttractionList=touristAttractionService.searchByType(typeSearch);
+        }
+        else{
+            touristAttractionList=this.touristAttractionService.findAll();
+        }
+        AttractionType[] attractionTypes=AttractionType.values();
+        model.addAttribute("attractionTypes",attractionTypes);
         model.addAttribute("attractions",touristAttractionList);
         model.addAttribute("bodyContent","tourist_attractions");
         return "master-template";
@@ -40,6 +54,8 @@ public class TouristAttractionController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String getAddAttractionPage(Model model)
     {
+        AttractionType[] attractionTypes=AttractionType.values();
+        model.addAttribute("attractionTypes",attractionTypes);
         model.addAttribute("bodyContent", "add-attraction");
         return "master-template";
     }
@@ -49,10 +65,11 @@ public class TouristAttractionController {
                               @RequestParam String location,
                               @RequestParam String description,
                               @RequestParam String mainPicture,
-                              @RequestParam String pictures)
+                              @RequestParam String pictures,
+                              @RequestParam AttractionType type)
     {
 
-        this.touristAttractionService.save(name,location,description,mainPicture,pictures);
+        this.touristAttractionService.save(name,location,description,mainPicture,pictures,type);
         return "redirect:/attractions";
     }
     @GetMapping("/{id}/edit-form")
@@ -63,6 +80,8 @@ public class TouristAttractionController {
         {
              TouristAttraction touristAttraction=this.touristAttractionService.findById(id).get();
              model.addAttribute("attraction",touristAttraction);
+            AttractionType[] attractionTypes=AttractionType.values();
+            model.addAttribute("attractionTypes",attractionTypes);
              model.addAttribute("bodyContent", "add-attraction");
              return "master-template";
 
@@ -75,8 +94,9 @@ public class TouristAttractionController {
                          @RequestParam String location,
                          @RequestParam String description,
                          @RequestParam String mainPicture,
-                         @RequestParam String pictures) {
-        this.touristAttractionService.edit(id, name, location, description,mainPicture,pictures);
+                         @RequestParam String pictures,
+                                   @RequestParam AttractionType type) {
+        this.touristAttractionService.edit(id, name, location, description,mainPicture,pictures,type);
         return "redirect:/attractions";
     }
     @GetMapping("/{id}/details")
@@ -86,6 +106,17 @@ public class TouristAttractionController {
         {
             TouristAttraction touristAttraction=this.touristAttractionService.findById(id).get();
             List<Review> reviews=this.reviewService.listAllTouristAttractionReviews(id);
+            int sizeOf1=reviewService.numberOfReviewsInAttractionsByGrade(id,1);
+            int sizeOf2=reviewService.numberOfReviewsInAttractionsByGrade(id,2);
+            int sizeOf3=reviewService.numberOfReviewsInAttractionsByGrade(id,3);
+            int sizeOf4=reviewService.numberOfReviewsInAttractionsByGrade(id,4);
+            int sizeOf5=reviewService.numberOfReviewsInAttractionsByGrade(id,5);
+            model.addAttribute("sizeOf1",sizeOf1);
+            model.addAttribute("sizeOf2",sizeOf2);
+            model.addAttribute("sizeOf3",sizeOf3);
+            model.addAttribute("sizeOf4",sizeOf4);
+            model.addAttribute("sizeOf5",sizeOf5);
+            model.addAttribute("reviews",reviews);
             model.addAttribute("attraction",touristAttraction);
             model.addAttribute("pictures",Arrays.asList(touristAttraction.getPictures().split(" ")));
             model.addAttribute("reviews",reviews);

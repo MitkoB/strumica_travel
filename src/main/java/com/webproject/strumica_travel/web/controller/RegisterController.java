@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
@@ -35,13 +37,13 @@ public class RegisterController {
                            @RequestParam String password,
                            @RequestParam String repeatedPassword,
                            @RequestParam String name,
-                           @RequestParam String surname,
-                           @RequestParam Role role)
+                           @RequestParam String surname
+                           )
     {
         User user;
         try
         {
-            user=userService.register(username,password,repeatedPassword,name,surname,role);
+            user=userService.register(username,password,repeatedPassword,name,surname);
             return "redirect:/login";
         }
         catch (PasswordsDoNotMatchException | IllegalArgumentException exception)
@@ -49,4 +51,37 @@ public class RegisterController {
             return "redirect:/register?error="+exception.getMessage();
         }
     }
+    @GetMapping("/add-role-to-user")
+    public String getAddRoleToUserPage(@RequestParam(required=false) String error,Model model)
+    {
+        if(error!=null && error.isEmpty())
+        {
+            model.addAttribute("hasErrors",true);
+            model.addAttribute("error",error);
+        }
+        List<User> users=userService.findAll();
+        model.addAttribute("users",users);
+        model.addAttribute("bodyContent","add-user-to-role");
+        return "master-template";
+    }
+    @PostMapping("/add-role-to-user")
+    public String AddRoleToUser(@RequestParam String username, @RequestParam Role role,Model model)
+    {
+        User user;
+        try{
+            user=this.userService.addRoleToUser(username,role);
+            model.addAttribute("usernameselected",username);
+            model.addAttribute("roleselected",String.valueOf(role));
+            List<User> users=userService.findAll();
+            model.addAttribute("users",users);
+            model.addAttribute("bodyContent","add-user-to-role");
+            return "master-template";
+        }
+        catch (RuntimeException ex)
+        {
+            return "redirect:/register/add-role-to-user?error="+ex.getMessage();
+        }
+
+    }
+
 }

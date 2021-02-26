@@ -59,18 +59,30 @@ public class RouteServiceImpl implements RouteService {
         {
             throw new InvalidTouristAttractionException();
         }
-        //route.setName(name);
-        //route.setDescription(description);
-        //route.setDuration(duration);
-        //route.setTouristAttractions(touristAttractions);
+        route.setName(name);
+        route.setDescription(description);
+        route.setDuration(duration);
+        route.setImage(image);
+        route.setTouristAttractions(touristAttractions);
         return Optional.of(routeRepository.save(route));
     }
 
     @Override
     public Optional<Route> setLikes(Long id) {
         Route route=routeRepository.findById(id).orElseThrow(()->new RouteNotFoundException(id));
-        //route.setLikes(route.getLikes()+1);
+        route.setLikes(route.getLikes()+1);
         return Optional.of(routeRepository.save(route));
+    }
+
+    @Override
+    public List<Route> searchRoute(String name) {
+        if(name!=null)
+        {
+            return routeRepository.findAllByNameLike("%"+name+"%");
+        }
+        else {
+            return this.findAll();
+        }
     }
 
     @Override

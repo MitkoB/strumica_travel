@@ -21,6 +21,7 @@ public class Route {
     @ManyToMany
     private List<TouristAttraction> touristAttractions;
     private Integer likes;
+
     public Route() {
     }
 
@@ -31,8 +32,8 @@ public class Route {
         this.image=image;
         this.touristAttractions = touristAttractions;
         this.likes=0;
-    }
 
+    }
     public List<TouristAttraction> getTouristAttractions() {
         return touristAttractions;
     }

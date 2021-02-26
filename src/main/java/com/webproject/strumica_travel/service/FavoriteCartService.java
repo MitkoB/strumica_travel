@@ -12,4 +12,6 @@ public interface FavoriteCartService {
     FavoriteCart getActiveFavoriteCart(String username);
     List<Route> listAllRoutesInFavoriteCart(Long cartId);
     FavoriteCart addRouteToFavoriteCart(String username, Long routeId);
+    FavoriteCart deleteTouristAttractionFromFavoriteCart(String username,Long attractionId);
+    FavoriteCart deleteRouteFromFavoriteCart(String username,Long routeId);
 }
