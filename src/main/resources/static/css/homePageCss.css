@@ -1,0 +1,72 @@
+#homePageHorizontalLine{
+    background: linear-gradient(.25turn,#009961, black, white);
+    height:3px;
+}
+.animationDiv{
+    position: absolute;
+    top:12vw;
+    font-size: 7vw;
+    font-weight: 100;
+    color: white;
+    margin: 0 auto;
+    letter-spacing: 4px;
+}
+.secondAnimationDiv{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    font-size: 2vw;
+    color: #009961;
+    font-style: italic;
+}
+.divTextAnimation {
+    white-space:nowrap;
+}
+.divTextAnimation:first-of-type {
+    animation: showup 9s ;
+}
+.divTextAnimation:last-of-type span {
+    padding: 0 5px;
+    background-color: rgba(255,255,255,0.8);
+    border-radius: 20px;
+    animation: slidein 5s ;
+}
+.coverDiv{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+#coverImageHomePage{
+    background-size: cover;
+}
+#smallBanner{
+    box-shadow: 0 0 20px gainsboro;
+}
+#smallBanner>div>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+@keyframes showup {
+    0% {opacity:0; }
+    20% {opacity:1; }
+    80% {opacity:1;}
+    100% {opacity:1;}
+}
+
+@keyframes slidein {
+    0% { margin-left:-800px; opacity:0; }
+    20% { margin-left:-800px; opacity:0;}
+    35% { margin-left:35px; opacity: 0.7; }
+    100% { margin-left:35px; opacity: 1; background-color: rgba(255,255,255,0.8); border-radius: 20px; padding: 0 0;}
+}
+
+@keyframes reveal {
+    0% {opacity:0;width:0;}
+    20% {opacity:1;width:0;}
+    30% {width:355px;}
+    80% {opacity:1;}
+    100% {opacity:1;width:355px;}
+}

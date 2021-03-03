@@ -1,104 +1,11 @@
-<style>
-    @keyframes showTopText {
-        0% { transform: translate3d(0, 100%, 0); }
-        50% { transform: translate3d(0, 50%, 0); }
-        100% { transform: translate3d(0, 0, 0); }
-    }
-    @keyframes showBottomText {
-        0% { transform: translate3d(0, -100%, 0); }
-        100% { transform: translate3d(0, 0, 0); }
-    }
-    #learnMoreContainer{
-        font-family: Tahoma, Verdana, sans-serif;
-    }
-
-    .shadow {
-        position: relative;
-        box-shadow: 0 1px 3px rgba(0,0,0, 0.2);
-    }
-
-    .come-in {
-        transform: translateX(300px);
-        animation: come-in 1s ease forwards;
-    }
-    .come-in:nth-child(odd) {
-        animation-duration: 1s;
-    }
-    .already-visible {
-        transform: translateX(0);
-        animation: none;
-    }
-
-    @keyframes come-in {
-        to { transform: translateX(0); }
-    }
-
-
-    .animated-title {
-        color: rgba(0,0,0,0.5);
-        height: 30vh;
-        position: absolute;
-        top:20vw;
-        left: 25vw;
-        transform: translate(-50%, -50%);
-        width: 40vw;
-        font-size: 2vw;
-        font-weight: 100;
-        letter-spacing: 3px;
-    }
-    .animated-title > div {
-        height: 50%;
-        overflow: hidden;
-        position: absolute;
-        width: 100%;
-    }
-    .animated-title > div div {
-        position: absolute;
-    }
-    .animated-title > div div span {
-        display: block;
-    }
-    .animated-title > div.text-top {
-        border-bottom: 2px solid #009961;
-        top: 0;
-        font-size: 5vw;
-    }
-    .animated-title > div.text-top div {
-        animation: showTopText 1s;
-        animation-delay: 0.5s;
-        animation-fill-mode: forwards;
-        bottom: 0;
-        transform: translate(0, 100%);
-    }
-    .animated-title > div.text-top div span:first-child {
-        color: white;
-    }
-    .animated-title > div.text-bottom {
-        bottom: 0;
-        padding-top: 10px;
-        font-style: italic;
-    }
-    .animated-title > div.text-bottom div {
-        animation: showBottomText 0.5s;
-        animation-delay: 1.75s;
-        animation-fill-mode: forwards;
-        top:0;
-        transform: translate(0, -100%);
-        background: rgba(255,255,255,0.5);
-        border-radius: 20px;
-        margin-top: 3px;
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-    .card-horizontal {
-        display: flex;
-        flex: 1 1 auto;
-    }
-
-</style>
-<div xmlns:th="http://www.thymeleaf.org" id="learnMoreContainer">
-    <div style="width: 100%;">
-        <img alt="img" style="background-size: cover" class="d-block w-100"  th:src="@{images/strumica6.jpg}"/>
+<head>
+    <link rel="stylesheet" href="/css/indexCss.css">
+    <link rel="stylesheet" href="/css/learnMoreCss.css">
+</head>
+<body class="text-dark">
+<th:block xmlns:th="http://www.thymeleaf.org">
+    <div>
+        <img alt="img" class="d-block w-100" th:src="@{images/strumica6.jpg}" src="/static/images/strumica6.jpg"/>
         <div class="animated-title">
             <div class="text-top">
                 <div>
@@ -115,7 +22,7 @@
         <input id="jumpSection" type="hidden" name="jumpSection" th:value="(${jumpSection} != null ? ${jumpSection} : null)">
         <div class="row mt-2">
             <div class="col-xs-12 .col-md-4">
-                <p class="text-muted py-3" style="font-size: 6vh;">Location</p>
+                <h2 class="text-muted py-3">Location</h2>
                 <p>
                     The Municipality of Strumica is located at 41° 22' northern latitude and 22° 35' and 23° 45' east longitude.
                     It occupies the far south-eastern part of the Republic of Macedonia just below the boundary between the
@@ -127,7 +34,7 @@
             </div>
         </div>
 
-        <h2 class="text-center text-muted py-3" style="font-size: 6vh;">History</h2>
+        <h2 class="text-center text-muted py-3">History</h2>
         <div class="mt-3 mb-3">
             <!-- timeline item 1 -->
             <div class="row no-gutters">
@@ -198,7 +105,7 @@
                         <div class="col">&nbsp;</div>
                     </div>
                     <h5 class="m-2">
-                        <span class="badge badge-pill  border" style="background: #009961">&nbsp;</span>
+                        <span class="badge badge-pill border greenButton">&nbsp;</span>
                     </h5>
                     <div class="row h-50">
                         <div class="col border-right">&nbsp;</div>
@@ -294,11 +201,11 @@
             </div>
         </div>
 
-        <div style="background-color: #E8E8E8; color: black;" class="mt-5 p-4" id="food">
-            <h1 class="display-3" style="width: 100%; border-bottom: 1px double #000;line-height: 0.4em;margin: 10px 0 20px;
-            padding: 0 20px; ">
-                <span style="background:#E8E8E8; padding:0 5px; ">Traditional food</span></h1>
-            <p style="font-style: italic; color: #009961;">You can never have too much!</p>
+        <div class="mt-5 p-4 text dark" id="food">
+            <h1 class="display-3">
+                <span class="foodSectionHeader">Traditional food</span>
+            </h1>
+            <p class="mt-2 font-italic greenText">You can never have too much!</p>
             <div>
                 <p>The food combinations themselves are more like Mediterranean cuisine,
                     which is not surprising given the fact that Macedonia is near this area.
@@ -309,22 +216,21 @@
                     But pastry is also a key staple in this cuisine. In fact,every Macedonian eats bread with almost everything you can think of.
                     The locals enjoy salads before meals, along with the homemade traditional alcoholid drink called rakija.
                     SPOILER ALERT: it's probably one of the most strong alcohols you will try!</p>
-                <p style="color: #009961; font-size: 1.5vw;">Here are some dishes we recomend you to try on your next trip to Strumica</p>
+                <p class="greenText">Here are some dishes we recomend you to try on your next trip to Strumica</p>
             </div>
 
 
-            <div class="row ">
+            <div class="row">
                 <div class="col-12 col-md-6">
-                    <div class="card" style="min-width: 100%; min-height: 100%">
+                    <div class="card">
                         <div class="card-body row no-gutters">
                             <div class="col-4">
-                                <img src="https://whenfetametolive.com/wp-content/uploads/2011/10/Pickled-Cabbage-Rolls.jpg"
-                                style="width: 100%; height: 100%; object-fit: cover;">
+                                <img class="foodCardImg" src="https://whenfetametolive.com/wp-content/uploads/2011/10/Pickled-Cabbage-Rolls.jpg" alt="food_img">
                             </div>
                             <div class="col-8">
-                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Sarma</p>
-                                <p style="font-size: 1.5vw;">Stuffed cabbage rolls</p>
-                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">Cabbage rolls with meat and rice, is one of the country’s most popular foods.
+                                <p class="foodCardTitle">Sarma</p>
+                                <p class="foodCardSubtitle">Stuffed cabbage rolls</p>
+                                <p class="foodCardDescription">Cabbage rolls with meat and rice, is one of the country’s most popular foods.
                                     It's made of fermented cabbage leaves, rice, and ground beef.
                                     The stuffed cabbage rolls are baked in the oven, and can be eaten with sides, sauces, or own their own.
                                     Sarma is the ultimate comfort food. It is wholesome, hearty, and soothes the stomach on a cold winter’s evening.</p>
@@ -333,16 +239,15 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
-                    <div class="card" style="min-width: 100%; min-height: 100%;">
+                    <div class="card">
                         <div class="card-body row no-gutters">
                             <div class="col-4">
-                                <img src="https://www.travelcookrepeat.com/wp-content/uploads/2020/05/tavce-gravce-2.jpg"
-                                     style="width: 100%; height: 100%; object-fit: cover;">
+                                <img class="foodCardImg" src="https://www.travelcookrepeat.com/wp-content/uploads/2020/05/tavce-gravce-2.jpg" alt="food_image">
                             </div>
                             <div class="col-8">
-                                <p style="font-size: 2.2vw; border-bottom: 1px solid #009961; margin-left: 10px;">Tavce Gravce</p>
-                                <p style="font-size: 1.5vw;">Baked beans</p>
-                                <p style="font-size: 1.1vw; text-align: left; padding-left: 20px;"> Tavce gravce has an incredibly rich flavor.
+                                <p class="foodCardTitle">Tavce Gravce</p>
+                                <p class="foodCardSubtitle">Baked beans</p>
+                                <p class="foodCardDescription"> Tavce gravce has an incredibly rich flavor.
                                     It is made of boiled beans, seasoned with a roux that includes dry red pepper. The mixture is baked in a pan or skillet.
                                     Macedonians like to combine it with sausages or ribs and fresh paprika.
                                     According to the tradition, tavce gravce is usually prepared as a Friday lunch.
@@ -352,16 +257,15 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 mt-2">
-                    <div class="card" style="min-width: 100%; min-height: 100%">
+                    <div class="card">
                         <div class="card-body row no-gutters">
                             <div class="col-4">
-                                <img src="https://i2.wp.com/www.slavicvegan.com/wp-content/uploads/2020/04/burek-seitan3.jpg?resize=610%2C915"
-                                     style="width: 100%; height: 100%; object-fit: cover;">
+                                <img class="foodCardImg" src="https://i2.wp.com/www.slavicvegan.com/wp-content/uploads/2020/04/burek-seitan3.jpg?resize=610%2C915" alt="food_img">
                             </div>
                             <div class="col-8">
-                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Burek</p>
-                                <p style="font-size: 1.5vw;">Baked pastry with filling</p>
-                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">
+                                <p class="foodCardTitle">Burek</p>
+                                <p class="foodCardSubtitle">Baked pastry with filling</p>
+                                <p class="foodCardDescription">
                                     Burek is a remnant from the Ottoman era, dating back many centuries.
                                     This crispy thin and layered pastry traditionally contains either cheese or meat. However, nowadays, you can find pizza
                                     burek as well, containing the toppings of a regular pizza, like mozzarella and tomatoes.
@@ -372,16 +276,15 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 mt-2">
-                    <div class="card" style="min-width: 100%; min-height: 100%">
+                    <div class="card">
                         <div class="card-body row no-gutters">
                             <div class="col-4">
-                                <img src="https://balkanlunchbox.com/wp-content/uploads/2016/09/pindjur-balkan-tomato-and-roasted-pepper-spread-salsa-01.jpg"
-                                     style="width: 100%; height: 100%; object-fit: cover;">
+                                <img class="foodCardImg" src="https://balkanlunchbox.com/wp-content/uploads/2016/09/pindjur-balkan-tomato-and-roasted-pepper-spread-salsa-01.jpg" alt="food_img">
                             </div>
                             <div class="col-8">
-                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Pindjur</p>
-                                <p style="font-size: 1.5vw;">Tomato and red pepper spread</p>
-                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">
+                                <p class="foodCardTitle">Pindjur</p>
+                                <p class="foodCardSubtitle">Tomato and red pepper spread</p>
+                                <p class="foodCardDescription">
                                     Pindjur is a very popular relish, enjoyed in Macedonia during the summer period.
                                     It’s made of roasted eggplant, tomatoes, peppers, onion, garlic, olive oil, salt, and pepper.
                                     People here enjoy it while warm with some cheese and bread for lunch or dinner. It’s a truly delicious
@@ -392,16 +295,15 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 mt-2">
-                    <div class="card" style="min-width: 100%; min-height: 100%">
+                    <div class="card">
                         <div class="card-body row no-gutters">
                             <div class="col-4">
-                                <img src="https://feelgoodfoodie.net/wp-content/uploads/2020/12/Lebanese-Baklava-9.jpg"
-                                     style="width: 100%; height: 100%; object-fit: cover;">
+                                <img class="foodCardImg" src="https://feelgoodfoodie.net/wp-content/uploads/2020/12/Lebanese-Baklava-9.jpg" alt="food_img">
                             </div>
                             <div class="col-8">
-                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Sarlii</p>
-                                <p style="font-size: 1.5vw;">Layered pastry dessert with syryp</p>
-                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">
+                                <p class="foodCardTitle">Sarlii</p>
+                                <p class="foodCardSubtitle">Layered pastry dessert with syryp</p>
+                                <p class="foodCardDescription">
                                     Sarlii is a special type of the famous Baklava dessert, that people in Strumica love to eat and
                                     traditionally they make it for the Christmas holidays. It's a layered pastry dessert made of
                                     filo pastry, filled with chopped nuts, and sweetened with syrup or honey.
@@ -412,16 +314,15 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 mt-2">
-                    <div class="card" style="min-width: 100%; min-height: 100%">
+                    <div class="card">
                         <div class="card-body row no-gutters">
                             <div class="col-4">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Sopron_barack_07.JPG/1200px-Sopron_barack_07.JPG"
-                                     style="width: 100%; height: 100%; object-fit: cover;">
+                                <img class="foodCardImg" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Sopron_barack_07.JPG/1200px-Sopron_barack_07.JPG" alt="food_img">
                             </div>
                             <div class="col-8">
-                                <p style="font-size: 2.5vw;border-bottom: 1px solid #009961; margin-left: 10px;">Rakija</p>
-                                <p style="font-size: 1.5vw;">Fruit spirit/brandy</p>
-                                <p style="font-size: 1.1vw;text-align: left; padding-left: 20px;">
+                                <p class="foodCardTitle">Rakija</p>
+                                <p class="foodCardSubtitle">Fruit spirit/brandy</p>
+                                <p class="foodCardDescription">
                                     Last but not least, we come to the country’s favorite beverage. Rakija is the traditional alcoholic
                                     drink in Macedonia, also drank in other countries of the Balkans region.
                                     Macedonians prepare hundreds of liters of rakija in their homes. They drink it not only for pleasure and special occasions,
@@ -431,52 +332,10 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
-
         </div>
     </div>
-</div>
-<script>
-    (function($) {
-
-        $.fn.visible = function(partial) {
-            var $t            = $(this),
-                $w            = $(window),
-                viewTop       = $w.scrollTop(),
-                viewBottom    = viewTop + $w.height(),
-                _top          = $t.offset().top,
-                _bottom       = _top + $t.height(),
-                compareTop    = partial === true ? _bottom : _top,
-                compareBottom = partial === true ? _top : _bottom;
-            return ((compareBottom <= viewBottom) && (compareTop >= viewTop));
-        };
-
-    })(jQuery);
-
-    var win = $(window);
-    var allMods = $(".shadow");
-    allMods.each(function(i, el) {
-        var el = $(el);
-        if (el.visible(true)) {
-            el.addClass("already-visible");
-        }
-    });
-
-    win.scroll(function(event) {
-        allMods.each(function(i, el) {
-            var el = $(el);
-            if (el.visible(true)) {
-                el.addClass("come-in");
-            }
-        });
-    });
-
-    var jumpToValue= document.getElementById("jumpSection").value;
-    if(jumpToValue!=null){
-        document.getElementById(jumpToValue).scrollIntoView({behavior: 'smooth'});
-    }
-
-</script>
+    <script src="/js/jumpToSectionFunction.js"></script>
+    <script src="/js/slideInCards.js"></script>
+</th:block>
+</body>

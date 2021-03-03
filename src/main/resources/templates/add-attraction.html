@@ -1,127 +1,102 @@
-<style>
-    .horizontal_line{
-        background: linear-gradient(.25turn,#009961, black, #009961);
-        height:3px;
-    }
-    .submit_btn{
-        background-color: #F8F8F8;
-        color: #009961;
-    }
-    .back_btn{
-        background-color: lightgrey;
-        color: black;
-        border: 1px solid dimgray;
-    }
-    .back_btn:hover{
-        text-decoration: none;
-        color: black;
-    }
-    .bgContainer{
-        background-color: #009961;
-        box-shadow: 10px 10px 30px grey;
-    }
-    .relativeContainer{
-        position: relative;
-        top: 3vh;
-    }
-</style>
-<div xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/indexCss.css">
+    <link rel="stylesheet" href="/css/addPageCss.css">
+</head>
+<body>
+<th:block xmlns:th="http://www.thymeleaf.org">
     <div class="container mt-5 mb-5 relativeContainer">
-        <div class="bgContainer text-white mr-5 ml-5 p-3 mt-2">
-            <h3 class="text-center display-4">Create Tourist Attraction</h3>
+        <div class="bgContainer text-white mr-5 ml-5 p-3 mt-4">
+            <p class="text-center display-4">Create Tourist Attraction</p>
             <hr class="horizontal_line"/>
             <div class="w3-container w3-animate-zoom">
                 <div class="form-horizontal mt-4">
-                <form th:method="POST" th:action="@{/attractions/save/{id} (id=${attraction?.id})}">
-                    <div class="form-group row justify-content-center">
-                        <label class="control-label col-4 text-right" for="name">Name</label>
-                        <div class="col-8">
-                        <input type="text"
-                               class="form-control"
-                               id="name"
-                               name="name"
-                               th:value="(${attraction} != null ? ${attraction.getName()} : '')"
-                               required
-                               placeholder="Enter attraction name">
+                    <form th:method="POST" th:action="@{/attractions/save/{id} (id=${attraction?.id})}">
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="name">Name</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="name"
+                                       name="name"
+                                       th:value="(${attraction} != null ? ${attraction.getName()} : '')"
+                                       required
+                                       placeholder="Enter attraction name">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row justify-content-center">
-                        <label class="control-label col-4 text-right" for="location">Location</label>
-                        <div class="col-8">
-                        <input type="text"
-                               class="form-control"
-                               id="location"
-                               name="location"
-                               th:value="(${attraction} != null ? ${attraction.getLocation()} : '')"
-                               placeholder="Location">
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="location">Location</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="location"
+                                       name="location"
+                                       th:value="(${attraction} != null ? ${attraction.getLocation()} : '')"
+                                       placeholder="Location">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row justify-content-center">
-                        <label class="control-label col-4 text-right" for="description">Description</label>
-                        <div class="col-8">
-                        <input type="text"
-                               class="form-control"
-                               id="description"
-                               name="description"
-                               th:value="(${attraction} != null ? ${attraction.getDescription()} : '')"
-                               placeholder="Description">
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="description">Description</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="description"
+                                       name="description"
+                                       th:value="(${attraction} != null ? ${attraction.getDescription()} : '')"
+                                       placeholder="Description">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row justify-content-center">
-                        <label class="control-label col-4 text-right" for="mainPicture">Theme picture</label>
-                        <div class="col-8">
-                            <input type="text"
-                                   class="form-control"
-                                   id="mainPicture"
-                                   name="mainPicture"
-                                   th:value="(${attraction} != null ? ${attraction.getMainPicture()} : '')"
-                                   placeholder="Theme picture">
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="mainPicture">Theme picture</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="mainPicture"
+                                       name="mainPicture"
+                                       th:value="(${attraction} != null ? ${attraction.getMainPicture()} : '')"
+                                       placeholder="Theme picture">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row justify-content-center">
-                        <label class="control-label col-4 text-right" for="pictures">Pictures</label>
-                        <div class="col-8">
-                        <input type="text"
-                               class="form-control"
-                               id="pictures"
-                               name="pictures"
-                               th:value="(${attraction} != null ? ${attraction.getPictures()} : '')"
-                               placeholder="Pictures">
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="pictures">Pictures</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="pictures"
+                                       name="pictures"
+                                       th:value="(${attraction} != null ? ${attraction.getPictures()} : '')"
+                                       placeholder="Pictures">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row justify-content-center">
-                        <label class="control-label col-4 text-right" for="pictures">Type</label>
-                        <div class="col-8">
-                        <select name="type" class="form-control">
-                            <option th:if="${attraction} != null"
-                                    th:selected="${attraction.getType() != null &&
-                                    attraction.getType().toString().equals(type.toString())}"
-                                    th:each="type:${attractionTypes}"
-                                    th:value="${type}"
-                                    th:text="${type.toString()}">
-                            </option>
-                            <option th:if="${attraction} == null"
-                                    th:each="type:${attractionTypes}"
-                                    th:value="${type}"
-                                    th:text="${type.toString()}">
-                            </option>
-                        </select>
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="pictures">Type</label>
+                            <div class="col-8">
+                                <select name="type" class="form-control">
+                                    <option th:if="${attraction} != null"
+                                            th:selected="${attraction.getType() != null && attraction.getType().toString().equals(type.toString())}"
+                                            th:each="type:${attractionTypes}"
+                                            th:value="${type}"
+                                            th:text="${type.toString()}">
+                                    </option>
+                                    <option th:if="${attraction} == null"
+                                            th:each="type:${attractionTypes}"
+                                            th:value="${type}"
+                                            th:text="${type.toString()}">
+                                    </option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row mt-3 justify-content-end">
-                        <div  class="col-8 text-left">
-                            <button id="submit" type="submit" class="btn btn-lg submit_btn">Submit</button>
-                            <a type="button" class="btn btn-lg btn-link back_btn" href="/attractions" >Back</a>
+                        <div class="form-group row mt-3 justify-content-end">
+                            <div class="col-8 text-left">
+                                <button id="submit" type="submit" class="btn btn-lg submit_btn">Submit</button>
+                                <a type="button" class="btn btn-lg btn-link back_btn" href="/attractions">Back</a>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        document.getElementById("logo").setAttribute("th:src","@{../images/black-logo.png}");
-        document.getElementById("logo").setAttribute("src","../images/black-logo.png");
-    </script>
-</div>
+    <script src="/js/changeLogo.js"></script>
+</th:block>
+</body>

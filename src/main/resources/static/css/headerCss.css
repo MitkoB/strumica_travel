@@ -1,0 +1,180 @@
+#header {
+    position: absolute;
+    display: flex;
+    top: 0;
+    z-index: 1;
+    font-family: Tahoma, Verdana, sans-serif;
+    text-transform: uppercase;
+    justify-content: center;
+    min-width: 100%;
+    width: 100%;
+}
+.menu-column{
+    width:100%;
+    display: flex;
+    justify-content: center;
+}
+.menu {
+    border-radius: 25px;
+    height: fit-content;
+    display: inline-flex;
+    background-color: rgba(255, 255, 255, 1);
+}
+.menu>ul>li>a{
+    color: #009961;
+}
+li {
+    list-style: none;
+    font-family: sans-serif;
+    position: relative;
+    cursor: pointer;
+}
+.menu>li>a{
+    color: #009961;
+}
+.menu>li:hover >a{
+    color: white;
+}
+li::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left:0;
+    height:100%;
+    width: 100%;
+    color: #009961;
+    z-index:-1;
+    transition: .2s;
+    border-radius: 25px;
+}
+li:hover {
+    color:white;
+    border-radius: 25px;
+    background: linear-gradient(to bottom, #009961, mediumseagreen);
+    box-shadow: 0px 3px 20px 0px green;
+    transform: scale(1.1);
+}
+
+.CssLogin{
+    float: right;
+    background: #009961;
+    color: #fff;
+    border-radius: 25px;
+    transition: 0.3s;
+    display: inline-block;
+}
+
+.drop-down>ul {
+    display: block;
+    position: absolute;
+    top: calc(100% + 40px);
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    padding: 10px 3px;
+    width: 100%;
+    background: #fff;
+    border-radius: 30px;
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    transition: 0.3s;
+    list-style: none;
+}
+.drop-down>ul{
+    font-size: small;
+}
+.drop-down>a{
+    color: #009961;
+}
+.drop-down:hover >a{
+    color: white;
+}
+.drop-down:hover > ul {
+    opacity: 1;
+    top: 80%;
+    visibility: visible;
+}
+.drop-down li {
+    position: relative;
+}
+.drop-down>ul>li>a {
+    color: #009961;
+}
+.drop-down:hover > ul>li:hover >a{
+    color: white;
+    text-decoration: none;
+}
+.logging_buttons{
+    color: white;
+}
+.logging_buttons:hover{
+    color: white;
+    text-decoration: none;
+}
+
+#logoutDropdown>a{
+    color: white;
+    font-size: 1vw;
+}
+#logoutDropdown:hover{
+    transform: none;
+    transition: none;
+}
+#logoutDropdown>ul>div>ul>li>a{
+    color: #009961;
+}
+#logoutDropdown>ul>div>ul>li>a:hover{
+    text-decoration: none;
+    color: white;
+}
+#logoutDropdown>ul>div>ul>li:hover >a{
+    color: white;
+}
+
+.menu_dropdown{
+    width:100%;
+    margin-top: 5px;
+    cursor:pointer;
+    color: #009961;
+}
+.title{
+    width:15%;
+    box-sizing:border-box;
+    background:#fff;
+    padding:5px;
+    border-radius:4px;
+    position:relative;
+    box-shadow:0 0 40px -10px #000;
+    color:#505050
+}
+
+.dropdown_mobile{
+    width:100%;
+    background:#fff;
+    border-radius:4px;
+    box-shadow:0 0 40px -10px #000;
+    color:#009961;
+    margin-top:25px;
+    max-height:0;
+    overflow:hidden;
+    transition:all .5s}
+.down{
+    max-height:700px;
+}
+a:hover{
+    text-decoration: none;
+}
+.dropdown_mobile>a{
+    color: #009961;
+}
+.dropdown_mobile>div>a{
+    color: #009961;
+}
+#wider_row{
+    position: absolute;
+    top:0;
+    z-index: 5;
+}
+#smaller_row{
+    position: absolute;
+    top:0;
+}

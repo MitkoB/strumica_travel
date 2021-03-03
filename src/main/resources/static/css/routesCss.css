@@ -1,0 +1,25 @@
+body{
+    background-image: url("https://www.fg-a.com/wallpapers/white-marble-3-2018.jpg");
+    background-size: cover;
+}
+.likeButton{
+    background-color: white;
+    border: 1px solid #009961;
+    color: #009961;
+}
+.likeButton:hover{
+    text-decoration: none;
+    color: #009961;
+}
+.routeContainer:hover{
+    box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
+    transform: scale(1.02);
+    transition: 0.3s;
+}
+.detailsButton{
+    background-color: #009961;
+    color: white;
+}
+.detailsButton:hover{
+    text-decoration: none;
+}

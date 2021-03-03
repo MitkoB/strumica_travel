@@ -1,0 +1,130 @@
+@keyframes showTopText {
+    0% { transform: translate3d(0, 100%, 0); }
+    50% { transform: translate3d(0, 50%, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+@keyframes showBottomText {
+    0% { transform: translate3d(0, -100%, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+}
+.foodSectionHeader{
+    background:#E8E8E8;
+    padding:0 5px;
+}
+.card{
+    min-width: 100%;
+    min-height: 100%
+}
+.foodCardImg{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.foodCardTitle{
+    font-size: 2.5vw;
+    border-bottom: 1px solid #009961;
+    margin-left: 10px;
+}
+.foodCardSubtitle{
+    font-size: 1.5vw;
+}
+.foodCardDescription{
+    font-size: 1.1vw;
+    text-align: left;
+    padding-left: 20px;
+}
+.greenText{
+    color: #009961;
+}
+#food{
+    background-color: #E8E8E8;
+}
+#food>h1{
+    width: 100%;
+    border-bottom: 1px double #000;
+    line-height: 0.4em;
+    margin: 10px 0 20px;
+    padding: 0 20px;
+}
+.shadow {
+    position: relative;
+    box-shadow: 0 1px 3px rgba(0,0,0, 0.2);
+}
+
+.come-in {
+    transform: translateX(300px);
+    animation: come-in 1s ease forwards;
+}
+.come-in:nth-child(odd) {
+    animation-duration: 1s;
+}
+.already-visible {
+    transform: translateX(0);
+    animation: none;
+}
+
+@keyframes come-in {
+    to { transform: translateX(0); }
+}
+
+
+.animated-title {
+    color: rgba(0,0,0,0.5);
+    height: 30vh;
+    position: absolute;
+    top:20vw;
+    left: 25vw;
+    transform: translate(-50%, -50%);
+    width: 40vw;
+    font-size: 2vw;
+    font-weight: 100;
+    letter-spacing: 3px;
+}
+.animated-title > div {
+    height: 50%;
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+}
+.animated-title > div div {
+    position: absolute;
+}
+.animated-title > div div span {
+    display: block;
+}
+.animated-title > div.text-top {
+    border-bottom: 2px solid #009961;
+    top: 0;
+    font-size: 5vw;
+}
+.animated-title > div.text-top div {
+    animation: showTopText 1s;
+    animation-delay: 0.5s;
+    animation-fill-mode: forwards;
+    bottom: 0;
+    transform: translate(0, 100%);
+}
+.animated-title > div.text-top div span:first-child {
+    color: white;
+}
+.animated-title > div.text-bottom {
+    bottom: 0;
+    padding-top: 10px;
+    font-style: italic;
+}
+.animated-title > div.text-bottom div {
+    animation: showBottomText 0.5s;
+    animation-delay: 1.75s;
+    animation-fill-mode: forwards;
+    top:0;
+    transform: translate(0, -100%);
+    background: rgba(255,255,255,0.5);
+    border-radius: 20px;
+    margin-top: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.card-horizontal {
+    display: flex;
+    flex: 1 1 auto;
+}

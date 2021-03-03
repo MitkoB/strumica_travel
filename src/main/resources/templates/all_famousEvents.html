@@ -1,124 +1,58 @@
 <head xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <link href="http://fullcalendar.io/js/fullcalendar-2.2.5/fullcalendar.css"
-          th:href="@{/webjars/fullcalendar/2.2.5/fullcalendar.css}" rel="stylesheet"></link>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+    <link rel="stylesheet" href="http://fullcalendar.io/js/fullcalendar-2.2.5/fullcalendar.css"
+          th:href="@{/webjars/fullcalendar/2.2.5/fullcalendar.css}">
     <link href="http://fullcalendar.io/js/fullcalendar-2.2.5/fullcalendar.print.css"
-          th:href="@{/webjars/fullcalendar/2.2.5/fullcalendar.print.css}" rel="stylesheet" media="print"></link>
+          th:href="@{/webjars/fullcalendar/2.2.5/fullcalendar.print.css}" rel="stylesheet" media="print">
     <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"
             th:src="@{/webjars/momentjs/2.9.0/min/moment.min.js}" type="text/javascript"></script>
     <script src="http://cdn.jsdelivr.net/webjars/jquery/3.4.1/jquery.min.js"
             th:src="@{/webjars/jquery/3.4.1/jquery.min.js}" type="text/javascript"></script>
     <script src="http://fullcalendar.io/js/fullcalendar-2.2.5/fullcalendar.min.js"
             th:src="@{/webjars/fullcalendar/2.2.5/fullcalendar.min.js}" type="text/javascript"></script>
-    <style>
-    body{
-        font-family: Tahoma, Verdana, sans-serif;
-    }
-    .scroll-animations {
-        display: flex;
-    }
 
-    .scroll-animations div {
-        flex-grow: 1;
-        padding: 30px;
-        text-align: center;
-        opacity: 0;
-        color: #333;
-    }
-
-    .scroll-animations div span {
-        font-size: 4em;
-        color: #5AA9E0;
-    }
-
-    .scroll-animations div h3 {
-        font-size: 1.9em;
-        font-weight: 400;
-        margin-bottom: 10px;
-    }
-    .horizontal_line{
-        background: linear-gradient(.25turn,#009961, black, #009961); height:3px;
-    }
-    .topDiv{
-        position: relative;
-        top: 2.5vh;
-    }
-</style>
-
+    <link rel="stylesheet" href="/css/indexCss.css">
+    <link rel="stylesheet" href="/css/eventsCss.css">
 </head>
-<body xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+
+<body class="text-dark">
+<th:block xmlns:th="http://www.thymeleaf.org" >
     <div class="topDiv">
         <hr class="mt-5 horizontal_line" />
     </div>
     <div class="container mt-5 mb-5">
         <div class="mt-5">
-            <h1 class="h1" style="color: #009961">See some famous events in Strumica</h1>
+            <h1 class="h1">Famous events in Strumica</h1>
         </div>
     </div>
     <div class="container mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="media">
-                    <div class="media-left">
-                       <div id="calendar" th:id="calendar"></div>
+        <div class="row justify-content-center">
+            <div class="col-8 col-md-4 mb-3">
+                <div id="calendar" th:id="calendar"></div>
+            </div>
+            <div class="col-12 col-md-8">
+                <div class="row no-gutters justify-content-center eventRow rounded mb-2" th:each="event:${famousEvents}" >
+                    <div class="col-12 col-md-4">
+                        <img th:src="${event.getPicture()}" style="height: 100%; object-fit: cover">
+                    </div>
+                    <div class="col-8 p-3">
+                        <p th:text="${event.getTitle()}" class="font-weight-bold"></p>
+                        <p th:text="${event.getLocation()}" class="mt-1 text-muted"></p>
+                        <p th:text="${event.getDescription()}" class="mt-3 text-left"></p>
+                        <div class="mt-3">
+                            <a th:href="@{/famousevents/{id}/edit-form (id=${event.id})}" class="btn btn-link text-light bg-dark d-inline" sec:authorize="hasRole('ROLE_ADMIN')">Edit</a>
+                            <form class="d-inline" th:method="DELETE" th:action="@{/famousevents/{id}/delete (id=${event.id})}" sec:authorize="hasRole('ROLE_ADMIN')">
+                                <button class="text-light bg-dark btn btn-link btn-sm">Delete</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row mt-5" th:each="event:${famousEvents}">
-            <div class="col-md-6">
-                <div class="media">
-                    <div class="media-left">
-                        <a href="#">
-                            <img class="media-object" th:src="${event.getPicture()}" alt="..." style="max-width: 400px">
-                        </a>
-                    </div>
-                    <div class="media-body ml-5" style="min-width:100%">
-                        <h4 class="media-heading" th:text="${event.getTitle()}"></h4>
-                        <p style="color: #009961" th:text="${event.getLocation()}"></p>
-                        <p style=" text-align: justify;" th:text="${event.getDescription()}"></p>
-                        <a th:href="@{'/famousevents/{id}/edit-form' (id=${event.getId()})}" class="btn text-white bg-dark d-inline" sec:authorize="hasRole('ROLE_ADMIN')">Edit</a>
-                        <form th:method="DELETE" th:action="@{'/famousevents/{id}/delete' (id=${event.getId()})}" sec:authorize="hasRole('ROLE_ADMIN')" class="d-inline">
-                            <button type="submit" class="btn text-white bg-dark btn-sm">Delete</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-<script>
-    $(document).ready(function() {
-        $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay'
-            },
-            defaultDate: moment().format("YYYY-MM-DD"),
-            nowIndicator: true,
-            navLinks: true,
-            selectable: true,
-            // editable: true,
-            eventLimit: true, // allow "more" link when too many events
-            eventDidMount: function(info) {
-                var tooltip = new Tooltip(info.el, {
-                    title: info.event.extendedProps.description,
-                    placement: 'top',
-                    trigger: 'hover',
-                    container: 'body'
-                });
-            },
-            events: {
-                url: '/allevents',
-                type: 'GET',
-                error: function() {
-                    alert('there was an error while fetching events!');
-                },
-            },
-            eventBackgroundColor:'#f00',
-        });
+    </div>
 
-    });
-    document.getElementById("logo").setAttribute("th:src","@{images/black-logo.png}");
-    document.getElementById("logo").setAttribute("src","images/black-logo.png");
-</script>
+    <script src="/js/calendarEvents.js"></script>
+    <script src="js/changeLogo.js"></script>
+</th:block>
 </body>
 </html>

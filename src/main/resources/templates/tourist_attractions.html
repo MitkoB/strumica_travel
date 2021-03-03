@@ -1,184 +1,7 @@
 <head>
-    <style>
-        body{
-            font-family: Tahoma, Verdana, sans-serif;
-        }
-        .scroll-animations {
-            display: flex;
-        }
-
-        .scroll-animations div {
-            flex-grow: 1;
-            padding: 30px;
-            text-align: center;
-            opacity: 0;
-            color: #333;
-        }
-
-        .scroll-animations div span {
-            font-size: 4em;
-            color: #5AA9E0;
-        }
-
-        .scroll-animations div h3 {
-            font-size: 1.9em;
-            font-weight: 400;
-            margin-bottom: 10px;
-        }
-
-        .attractionContainer {
-            width: 300px;
-            height: 300px;
-            top:0; right: 0; left: 0; bottom: 0;
-            margin: auto;
-            background-color: black;
-            background-repeat: no-repeat;
-            cursor: pointer;
-            -webkit-box-shadow: 0 0 5px #000;
-            box-shadow: 0 0 5px #000;
-        }
-
-        .overlay {
-            width: 100%;
-            height: 80%;
-            display: grid;
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr 2fr 2fr 1fr;
-            background: rgba(77, 77, 77, .9);
-            color: white;
-            opacity: 0;
-            transition: all 0.5s;
-        }
-
-        .items {
-            padding-left: 20px;
-            letter-spacing: 3px;
-        }
-
-        .head {
-            font-size: 30px;
-            line-height: 40px;
-            transform: translateY(40px);
-            transition: all 0.7s;
-        }
-        .lineInCard {
-            display: block;
-            width: 0;
-            border: none;
-            border-bottom: solid 2px white;
-            position: absolute;
-            bottom: 0; left:20px;
-            transition: all .5s;
-        }
-
-        .cart {
-            font-size: 12px;
-            opacity: 0;
-            letter-spacing: 1px;
-            transform: translateY(40px);
-            transition: all 0.7s;
-        }
-
-        .card>span {
-            margin-left: 10px;
-        }
-
-        .attractionContainer:hover .overlay {
-            height: 100%;
-            opacity: 1;
-        }
-        .attractionContainer:hover .head {
-              transform: translateY(0px);
-        }
-
-         .attractionContainer:hover .lineInCard {
-              width: 80%;
-              transition-delay: 0.4s;
-          }
-
-         .cart {
-              transform: translateY(0px);
-              transition-delay: 0.6s;
-              opacity: 1;
-          }
-
-        .searchbar{
-            height: 100%;
-            background-color: white;
-            border-radius: 30px;
-            border: 1px solid #009961;
-            padding: 5px;
-        }
-
-        .search_input{
-            color: #009961;
-            border: 0;
-            outline: 0;
-            background: none;
-            line-height: 40px;
-            padding: 0 10px;
-            width: 70%;
-        }
-        .search_icon{
-            height: 40px;
-            width: 40px;
-            float: right;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            color:white;
-            text-decoration:none;
-            background: #009961;
-        }
-        .search_icon:hover{
-            text-decoration:none;
-            color: white;
-        }
-
-        .thingsToDoBtn{
-            height: 100%;
-            width: 100%;
-            color: #009961;
-            border: 1px solid #009961;
-            background: white;
-            font-weight: bold;
-        }
-        .thingsToDoBtn:hover{
-            color: white;
-            background-color: #009961;
-        }
-        .heart_icon{
-            color: #009961;
-        }
-        .detailsBtn{
-            color: white;
-            background-color: #009961;
-        }
-        .detailsBtn:hover{
-            text-decoration: none;
-        }
-        .attractionHeader{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0.8;
-            height: 20%;
-            font-size: 1.8vw;
-            background-color: #F8F8F8;
-            color: black;
-        }
-        .attractionContainer:hover .attractionHeader{
-            opacity: 0;
-        }
-        .horizontal_line{
-            background: linear-gradient(.25turn,#009961, black, #009961); height:3px;
-        }
-        .topDiv{
-            position: relative;
-            top: 2.5vh;
-        }
-</style>
+    <title></title>
+    <link rel="stylesheet" href="/css/touristAttractionCss.css">
+    <link rel="stylesheet" href="/css/indexCss.css">
 </head>
 <body>
 <th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
@@ -187,62 +10,44 @@
     </div>
     <div class="container mt-5 mb-5">
         <div class="mt-5">
-            <h1 class="h1" style="color: #009961">Tourist Attractions</h1>
-            <a style="color: #009961" th:href="@{/attractions/export/pdf}">PDF list of Attractions</a>
+            <h1 class="h1" >Tourist Attractions</h1>
+            <a th:href="@{/attractions/export/pdf}">PDF list of Attractions</a>
         </div>
         <div class="row mt-4 justify-content-center">
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="searchbar">
                     <form>
-                    <input class="search_input" type="search" name="nameSearch" placeholder="Search for a place">
-                    <button class="search_icon"><i class="fa fa-search"></i></button>
+                        <input class="search_input" type="search" name="nameSearch" placeholder="Search for a place">
+                        <button class="search_icon"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center mt-3 mb-2" style="height: fit-content;">
-              <form  id="typeSearchForm" th:each="type:${attractionTypes}" class="col-3 col-md-2">
+        <div class="row justify-content-center mt-3 mb-2" id="filterRow">
+              <form id="typeSearchForm" th:each="type:${attractionTypes}" class="col-4 col-md-3 col-lg-2 mb-1">
                 <input type="hidden" style="display: none" name="typeSearch" th:value="${type}"/>
                 <button  class="btn rounded-pill thingsToDoBtn" th:text="${type.toString()}"></button>
               </form>
-<!--            <div class="col-3 col-md-2">-->
-<!--                <button onclick="myFunction()" class="btn rounded-pill thingsToDoBtn">Waterfalls</button>-->
-<!--            </div>-->
-<!--            <div class="col-3 col-md-2">-->
-<!--                <button class="btn rounded-pill thingsToDoBtn">Mountains</button>-->
-<!--            </div>-->
-<!--            <div class="col-3 col-md-2">-->
-<!--                <button class="btn rounded-pill thingsToDoBtn">Museums</button>-->
-<!--            </div>-->
-<!--            <div class="col-3 col-md-2">-->
-<!--                <button class="btn rounded-pill thingsToDoBtn">Ancient place</button>-->
-<!--            </div>-->
-<!--            <div class="col-3 col-md-2">-->
-<!--                <button class="btn rounded-pill thingsToDoBtn">Outdoor activities</button>-->
-<!--            </div>-->
-<!--            <div class="col-3 col-md-2">-->
-<!--                <button class="btn rounded-pill thingsToDoBtn">Landmarks</button>-->
-<!--            </div>-->
         </div>
 
         <div class="row mt-4">
-            <div class="col-12 col-md-6 col-lg-4 mt-3" th:each="attraction:${attractions}">
+            <div class="col-12 col-md-6 col-lg-4 mt-3" th:each="attraction, iStat : ${touristAttractionPage.content}">
                 <div class="attractionContainer"
                      th:style="'background:url('+ ${attraction.getMainPicture()} +');'">
                     <div class="overlay">
-                        <div class = "items"></div>
-                        <div class = "items head">
+                        <div></div>
+                        <div class="items head">
                             <p th:text="${attraction.getName()}"></p>
-                            <hr class="lineInCard">
+                            <hr class="lineInAttractionCard">
                         </div>
                         <div class = "items">
                             <p th:text="${attraction.getLocation()}"></p>
                         </div>
-                        <div class="items cart">
+                        <div class="items attractionCardButtonsDiv">
                             <span>
                                 <a class="btn btn-link text-white float-left detailsBtn" th:href="@{/attractions/{id}/details (id=${attraction.getId()})}">Details</a>
-                                <form  th:method="POST" sec:authorize="isAuthenticated()" th:action="@{/favorite-cart/{id}/attractionAdd (id=${attraction.id})}">
-                                        <button class="btn text-dark btn-light float-right mr-2">Save <i class="fa fa-heart heart_icon"></i></button>
+                                <form th:method="POST" sec:authorize="isAuthenticated()" th:action="@{/favorite-cart/{id}/attractionAdd (id=${attraction.id})}">
+                                        <button class="btn text-dark btn-light float-right mr-3">Save <i class="fa fa-heart heart_icon"></i></button>
                                 </form>
                             </span>
                         </div>
@@ -252,10 +57,20 @@
 
             </div>
         </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-12 text-center">
+                <nav aria-label="Page navigation">
+                    <ul th:if="${touristAttractionPage.totalPages > 0}" class="pagination text-center">
+                        <li class="page-item" th:each="pageNumber : ${pageNumbers}">
+                            <a class="page-link" th:href="@{/attractions(size=${touristAttractionPage.size}, page=${pageNumber})}"
+                               th:text="${pageNumber}"></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </div>
+
 </th:block>
-<script>
-    document.getElementById("logo").setAttribute("th:src","@{images/black-logo.png}");
-    document.getElementById("logo").setAttribute("src","images/black-logo.png");
-</script>
+<script src="/js/changeLogo.js" ></script>
 </body>

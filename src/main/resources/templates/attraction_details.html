@@ -1,88 +1,10 @@
-<head xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="/css/detailsCss.css">
+    <link rel="stylesheet" href="/css/indexCss.css">
+    <link rel="stylesheet" href="/css/detailsChartCss.css">
     <script src="https://d3js.org/d3.v3.min.js"></script>
-    <style>
-        body{
-            font-family: Tahoma, Verdana, sans-serif;
-        }
-        .topDiv{
-            position: relative;
-            top: 2.5vh;
-        }
-        .horizontal_line{
-            background: linear-gradient(.25turn,#009961, black, #009961); height:3px;
-        }
-        #attractionName{
-            font-weight: bold;
-            font-size: 3vh;
-        }
-        .rowContainer{
-            border-radius: 10px;
-        }
-        .back_btn{
-            background-color: #009961;
-        }
-        #listOfStars {
-            list-style: none;
-        }
-        .starList {
-            display: inline-block;
-            font-size: 2.8vh;
-            padding: 0px;
-        }
-        .rateInput {
-            visibility:hidden;
-        }
-        .rateLabel {
-            cursor: pointer;
-        }
-
-        #listOfStars>li:hover{
-            transform: none;
-            transition: none;
-            box-shadow: none;
-            color: black;
-            background: none;
-        }
-        .submitReview{
-            background-color: #009961;
-        }
-        /*body {*/
-        /*    background-color: #ccc;*/
-        /*    width: 100%;*/
-        /*    font-family: 'Roboto', sans-serif;*/
-        /*    height: 100%;*/
-        /*}*/
-
-        .widget {
-            margin: 0 auto;
-            width:350px;
-            margin-top:50px;
-            background-color:#fff;
-            border-radius: 5px;
-            box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.3);
-
-        }
-
-        .mine{
-            background-color: #eee;
-            height:40px;
-            color:#555;
-            text-align: center;
-            line-height: 40px;
-            border-top-left-radius: 7px;
-            border-top-right-radius: 7px;
-            font-weight: 400;
-            font-size: 1.5em;
-            text-shadow: 1px 1px #fff;
-            border-bottom: 1px solid #eaeaea;
-        }
-
-        .chart-container{
-            padding:25px;
-        }
-    </style>
 </head>
-<body>
+<body class="text-dark">
 <th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="topDiv">
         <hr class="mt-5 horizontal_line" />
@@ -99,7 +21,7 @@
                 <div class="col-12 col-md-6 text-left">
                     <div class="row">
                         <div class="col-8">
-                            <p th:text="${attraction.getName()}" id="attractionName" class="pb-0"></p>
+                            <p th:text="${attraction.getName()}" id="placeName" class="pb-0"></p>
                             <span class="small text-muted pt-0"><th:block th:text="${#lists.size(reviews)}"></th:block> reviews</span>
                         </div>
                         <div class="col-4 d-flex justify-content-end">
@@ -195,15 +117,23 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-2 justify-content-end">
+                <div class="col-12 col-md-6">
+                    <div class="bg-light rowContainer widget">
+                        <h2 class="text-left pl-3 pt-3">Grades</h2>
+                        <div id="chart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
     </div>
 </div>
-    <div class="widget">
-        <div class="header mine">Grades</div>
-        <div id="chart" class="chart-container"></div>
-    </div>
 </th:block>
+<script src="/js/changeLogo.js" ></script>
+<script src="/js/rating.js"></script>
+<script src="/js/pieReview.js"></script>
+
     <script>
-        var size=[[${reviews.size()}]]
+        var size=[[${reviews.size()}]];
         var size1=[[${sizeOf1}]];
         var size2=[[${sizeOf2}]];
         var size3=[[${sizeOf3}]];
@@ -242,7 +172,6 @@
             .attr({
                 width:w,
                 height:h,
-                class:'shadow'
             }).append('g')
             .attr('transform','translate('+(w/2)+','+(h/2)+')');
         var path=svg.selectAll('path')
@@ -279,43 +208,5 @@
                 },
                 'font-size':'10px',
             });
-        document.getElementById("logo").setAttribute("th:src","@{images/black-logo.png}");
-        document.getElementById("logo").setAttribute("src","images/black-logo.png");
-        var stars = 0;
-
-        function rate(number){
-            stars = number;
-            i=1;
-            while(i<=number)
-            {
-                n=document.getElementById("star"+i);
-                n.innerHTML="&starf;";
-                i++;
-            }
-            while(i<6)
-            {
-                n=document.getElementById("star"+i);
-                n.innerHTML="&star;";
-                i++;
-            }
-
-        }
-        var hiddenGrade=document.getElementsByClassName("hiddenGrade");
-        var insertGrade=document.getElementsByClassName("insertGrade");
-        var j=0;
-        while(j<hiddenGrade.length){
-            n=hiddenGrade.item(j);
-            grade=parseInt(n.innerHTML);
-            k=0;
-            while(k<grade){
-                insertGrade.item(j).innerHTML+="&starf;";
-                k++;
-            }
-            while(k<5){
-                insertGrade.item(j).innerHTML+="&star;";
-                k++;
-            }
-            j++;
-        }
     </script>
 </body>

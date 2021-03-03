@@ -1,0 +1,40 @@
+body{
+    background-image: url("https://www.fg-a.com/wallpapers/white-marble-3-2018.jpg");
+    background-size: cover;
+}
+#placeName{
+    font-weight: bold;
+    font-size: 3vh;
+}
+.rowContainer{
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.2);
+}
+.back_btn{
+    background-color: #009961;
+}
+#listOfStars {
+    list-style: none;
+}
+.starList {
+    display: inline-block;
+    font-size: 2.8vh;
+    padding: 0px;
+}
+.rateInput {
+    visibility:hidden;
+}
+.rateLabel {
+    cursor: pointer;
+}
+
+#listOfStars>li:hover{
+    transform: none;
+    transition: none;
+    box-shadow: none;
+    color: black;
+    background: none;
+}
+.submitReview{
+    background-color: #009961;
+}

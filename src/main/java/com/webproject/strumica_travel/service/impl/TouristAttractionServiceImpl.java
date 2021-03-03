@@ -1,12 +1,18 @@
 package com.webproject.strumica_travel.service.impl;
 
+
 import com.webproject.strumica_travel.model.TouristAttraction;
 import com.webproject.strumica_travel.model.enumeration.AttractionType;
 import com.webproject.strumica_travel.model.exception.TouristAttractionNotFoundException;
 import com.webproject.strumica_travel.repository.TouristAttractionRepository;
 import com.webproject.strumica_travel.service.TouristAttractionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +27,67 @@ public class TouristAttractionServiceImpl implements TouristAttractionService {
     @Override
     public List<TouristAttraction> findAll() {
         return touristAttractionRepository.findAll();
+    }
+
+    @Override
+    public Page<TouristAttraction> findPaginated(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<TouristAttraction> list;
+
+        if (this.findAll().size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, this.findAll().size());
+            list = this.findAll().subList(startItem, toIndex);
+        }
+
+        Page<TouristAttraction> touristAttractionPage
+                = new PageImpl<TouristAttraction>(list, PageRequest.of(currentPage, pageSize), this.findAll().size());
+
+        return touristAttractionPage;
+    }
+
+    @Override
+    public Page<TouristAttraction> findPaginated(Pageable pageable, AttractionType type) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<TouristAttraction> list;
+
+            if(this.searchByType(type).size() < startItem) {
+                list = Collections.emptyList();
+            } else {
+                int toIndex = Math.min(startItem + pageSize, this.searchByType(type).size());
+                list = this.searchByType(type).subList(startItem, toIndex);
+            }
+
+
+        Page<TouristAttraction> touristAttractionPage
+                = new PageImpl<TouristAttraction>(list, PageRequest.of(currentPage, pageSize), this.searchByType(type).size());
+
+        return touristAttractionPage;
+
+    }
+
+    @Override
+    public Page<TouristAttraction> findPaginated(Pageable pageable, String nameSearch) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
+        List<TouristAttraction> list;
+        if (this.searchByName(nameSearch).size() < startItem) {
+            list = Collections.emptyList();
+        } else {
+            int toIndex = Math.min(startItem + pageSize, this.searchByName(nameSearch).size());
+            list = this.searchByName(nameSearch).subList(startItem, toIndex);
+        }
+
+        Page<TouristAttraction> touristAttractionPage
+                = new PageImpl<TouristAttraction>(list, PageRequest.of(currentPage, pageSize), this.searchByName(nameSearch).size());
+
+        return touristAttractionPage;
     }
 
     @Override

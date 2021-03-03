@@ -1,142 +1,54 @@
-<style>
-    #header {
-        position: absolute;
-        display: flex;
-        top: 0;
-        z-index: 1;
-        font-family: Tahoma, Verdana, sans-serif;
-        text-transform: uppercase;
-        justify-content: center;
-        min-width: 100%;
-        width: 100%;
-    }
-    .menu-column{
-        width:100%;
-        display: flex;
-        justify-content: center;
-    }
-    .menu {
-        border-radius: 25px;
-        height: fit-content;
-        display: inline-flex;
-        background-color: rgba(255, 255, 255, 1);
-    }
-    .menu>ul>li>a{
-        color: #009961;
-    }
-    li {
-        list-style: none;
-        font-family: sans-serif;
-        position: relative;
-        cursor: pointer;
-    }
-    .menu>li>a{
-        color: #009961;
-    }
-    .menu>li:hover >a{
-        color: white;
-    }
-    li::before{
-        content: "";
-        position: absolute;
-        top: 0;
-        left:0;
-        height:100%;
-        width: 100%;
-        color: #009961;
-        z-index:-1;
-        transition: .2s;
-        border-radius: 25px;
-    }
-    li:hover {
-        color:white;
-        border-radius: 25px;
-        background: linear-gradient(to bottom, #009961, mediumseagreen);
-        box-shadow: 0px 3px 20px 0px green;
-        transform: scale(1.1);
-    }
-
-    .CssLogin{
-        float: right;
-        background: #009961;
-        color: #fff;
-        border-radius: 25px;
-        transition: 0.3s;
-        display: inline-block;
-    }
-
-    .drop-down>ul {
-        display: block;
-        position: absolute;
-        top: calc(100% + 40px);
-        z-index: 10;
-        opacity: 0;
-        visibility: hidden;
-        padding: 10px 3px;
-        width: 100%;
-        background: #fff;
-        border-radius: 30px;
-        box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-        transition: 0.3s;
-        list-style: none;
-    }
-    .drop-down>ul{
-        font-size: small;
-    }
-    .drop-down>a{
-        color: #009961;
-    }
-    .drop-down:hover >a{
-        color: white;
-    }
-    .drop-down:hover > ul {
-        opacity: 1;
-        top: 80%;
-        visibility: visible;
-    }
-    .drop-down li {
-        position: relative;
-    }
-    .drop-down>ul>li>a {
-        color: #009961;
-    }
-    .drop-down:hover > ul>li:hover >a{
-        color: white;
-        text-decoration: none;
-    }
-    .logging_buttons{
-        color: white;
-    }
-    .logging_buttons:hover{
-        color: white;
-        text-decoration: none;
-    }
-
-    #logoutDropdown>a{
-        color: white;
-        font-size: 1vw;
-    }
-    #logoutDropdown:hover{
-        transform: none;
-        transition: none;
-    }
-    #logoutDropdown>ul>div>ul>li>a{
-        color: #009961;
-    }
-    #logoutDropdown>ul>div>ul>li>a:hover{
-        text-decoration: none;
-        color: white;
-    }
-    #logoutDropdown>ul>div>ul>li:hover >a{
-        color: white;
-    }
-
-</style>
+<link rel="stylesheet" href="/css/headerCss.css">
 
 <header id=header xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <div class="row w-100">
+
+    <div class="row w-100" id="wider_row" style="display: none;">
+        <div class="col-4">
+            <div class="menu_dropdown">
+                <div class="title text-center" onclick="f()">
+                    <span class="fa fa-bars"></span>
+                </div>
+                <div class="dropdown_mobile">
+                    <a href="/" class="nav-link">Home</a>
+                    <a href="/attractions" class="nav-link">Attractions</a>
+                    <a href="/routes" class="nav-link">Routes</a>
+                    <a href="/famousevents" class="nav-link">Famous Events</a>
+                    <a href="/learnMore" class="nav-link">About Strumica</a>
+                    <a href="/learnMore?jumpSection=food" class="nav-link">Traditional Food</a>
+                    <a class="nav-link" href="/team">Team</a>
+                    <div sec:authorize="isAuthenticated()">
+                        <a href="/favorite-cart" class="nav-link">Favorites <i class="fa fa-heart-o"></i></a>
+                    </div>
+                    <div sec:authorize="!isAuthenticated()">
+                        <a href="/login" class="nav-link ">Login</a>
+                    </div>
+                    <div sec:authorize="hasRole('ROLE_ADMIN')">
+                        <hr>
+                        <a href="/attractions/add-form" class="nav-link small">Add Tourist Attraction</a>
+                        <a href="/routes/add-form" class="nav-link small">Add Route</a>
+                        <a href="/famousevents/add-form" class="nav-link small">Add Famous Event</a>
+                        <a href="/register/add-role-to-user" class="nav-link small">Add User To Role</a>
+                        <hr>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <a href="/logout" class="nav-link">Logout</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row w-100" id="smaller_row" style="display: none;">
+        <div class="col-12 text-center">
+            <img alt="logo" id="logo1" th:src="@{http://localhost:9090/images/white-logo.png}" src="http://localhost:9090/images/white-logo.png">
+        </div>
+    </div>
+
+
+    <div class="row w-100 " id="default_row">
         <div class="col-3">
-            <img alt="logo" id="logo" th:src="@{images/white-logo.png}" class="float-left">
+            <img alt="logo" id="logo" th:src="@{http://localhost:9090/images/white-logo.png}" src="http://localhost:9090/images/white-logo.png" class="float-left">
         </div>
         <div class="col-6 menu-column mt-3">
             <ul class="menu pl-0">
@@ -173,7 +85,7 @@
             </li>
 
             <li id="logoutDropdown" sec:authorize="isAuthenticated()" class="drop-down CssLogin">
-                <a href="/" class="nav-link logging_buttons">
+                <a href="#" class="nav-link logging_buttons">
                     <th:block th:if="${#request.getRemoteUser() != null}" th:text="${#request.getRemoteUser()}"/>
                 </a>
                 <ul class="text-center">
@@ -193,3 +105,4 @@
     </div>
 
 </header>
+<script src="/js/changeMenuHeader.js"></script>

@@ -1,0 +1,18 @@
+body{
+    background-image: url('https://scontent.fskp4-1.fna.fbcdn.net/v/t31.0-8/17311369_1492495277448168_2950023655333407452_o.jpg?_nc_cat=104&ccb=3&_nc_sid=19026a&_nc_ohc=xE9lboe2Pn8AX9gUlkh&_nc_ht=scontent.fskp4-1.fna&oh=8d073b4c3c0c48a99bd34e287c97b05d&oe=60524101');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.back_btn{
+    background-color: #009961;
+    color: white;
+    margin: auto;
+    width: 200px;
+}
+.back_btn:hover{
+    color: white;
+    text-decoration: none;
+}
+.innerContainer{
+    background: rgba(255,255,255,0.5);
+}

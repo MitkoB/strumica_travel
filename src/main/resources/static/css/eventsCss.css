@@ -1,0 +1,9 @@
+body{
+    background-image: url("https://www.fg-a.com/wallpapers/white-marble-3-2018.jpg");
+    background-size: cover;
+}
+.eventRow{
+    border: 1px solid grey;
+    box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.3);
+    border-radius: 10px;
+}

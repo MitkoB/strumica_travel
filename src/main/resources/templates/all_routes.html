@@ -1,97 +1,31 @@
-<head xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        body{
-            font-family: Tahoma, Verdana, sans-serif;
-        }
-        .horizontal_line{
-            background: linear-gradient(.25turn,#009961, black, #009961);
-            height:3px;
-        }
-
-        .topDiv{
-            position: relative;
-            top: 2.5vh;
-        }
-        .searchbar{
-            height: 100%;
-            background-color: white;
-            border-radius: 30px;
-            border: 1px solid #009961;
-            padding: 5px;
-        }
-
-        .search_input{
-            color: #009961;
-            border: 0;
-            outline: 0;
-            background: none;
-            line-height: 40px;
-            padding: 0 10px;
-            width: 70%;
-        }
-        .search_icon{
-            height: 40px;
-            width: 40px;
-            float: right;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border-radius: 50%;
-            color:white;
-            text-decoration:none;
-            background: #009961;
-        }
-        .search_icon:hover{
-            text-decoration:none;
-            color: white;
-        }
-        .likeButton{
-            background-color: white;
-            border: 1px solid #009961;
-            color: #009961;
-        }
-        .likeButton:hover{
-            text-decoration: none;
-            color: #009961;
-        }
-        .detailsButton{
-            background-color: #009961;
-            color: white;
-        }
-        .detailsButton:hover{
-            text-decoration: none;
-        }
-        .routeContainer:hover{
-            box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
-            transform: scale(1.02);
-            transition: 0.3s;
-        }
-    </style>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css">
+    <link rel="stylesheet" href="/css/indexCss.css">
+    <link rel="stylesheet" href="/css/routesCss.css">
 </head>
 <body>
-<th:block xmlns:th="http://www.thymeleaf.org">
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <div class="topDiv">
         <hr class="mt-5 horizontal_line" />
     </div>
     <div class="container mt-5 mb-5">
         <div class="mt-5">
-            <h1 class="h1" style="color: #009961">See some excellent routes</h1>
+            <h1 class="h1">See some excellent routes</h1>
         </div>
         <div class="row mt-4 justify-content-center">
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="searchbar">
                     <form>
-                    <input class="search_input" type="search" name="nameSearch" placeholder="Search for a place">
+                    <input class="search_input" type="search" name="nameSearch" placeholder="Search for a tour">
                     <button  class="search_icon"><i class="fa fa-search"></i></button>
                     </form>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-2" >
-            <div class="flex items-center justify-center min-h-screen row justify-content-center">
-                <div class="max-w-md md:max-w-2xl px-2 col-12 routeContainer" th:each="route:${routes}">
+        <div class="row justify-content-center mt-3" >
+            <div class="flex justify-center min-h-screen row justify-content-center">
+                <div class="max-w-md md:max-w-2xl px-2 col-12 justify-center routeContainer mb-2" th:each="route:${routes}">
                     <div class="bg-white shadow-xl rounded-lg overflow-hidden md:flex">
                         <div class="bg-cover bg-bottom h-56 md:h-auto md:w-56"
                              th:style="'background:url('+ ${route.getImage()} +');'">
@@ -125,18 +59,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </th:block>
-
-<script>
-
-    document.getElementById("logo").setAttribute("th:src","@{images/black-logo.png}");
-    document.getElementById("logo").setAttribute("src","images/black-logo.png");
-    function myFunction(x) {
-        x.classList.toggle("fa-thumbs-down");
-    }
-
-</script>
+<script src="/js/changeLogo.js"></script>
+<script src="/js/likeFunctionRoute.js"></script>
 </body>

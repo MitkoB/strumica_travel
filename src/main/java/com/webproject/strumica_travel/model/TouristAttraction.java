@@ -3,7 +3,6 @@ package com.webproject.strumica_travel.model;
 
 import com.webproject.strumica_travel.model.enumeration.AttractionType;
 import lombok.Data;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,5 +38,9 @@ public class TouristAttraction {
 
     public String getPictures() {
         return this.pictures;
+    }
+
+    public void setName(String name) {
+        this.name=name;
     }
 }

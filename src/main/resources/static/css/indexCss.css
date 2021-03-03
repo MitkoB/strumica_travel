@@ -1,0 +1,64 @@
+body{
+    color: #009961;
+    font-family: Tahoma, Verdana, sans-serif;
+    text-align: center;
+}
+.greenButton{
+    background-color: #009961;
+}
+#thingsToDoSection{
+    height: 10vh;
+}
+.thingsToDoBtn{
+    width: 100%;
+    color: #009961;
+    border: 1px solid #009961;
+    background: white;
+    font-weight: bold;
+    font-size:small;
+}
+.thingsToDoBtn:hover{
+    color: white;
+    background-color: #009961;
+}
+.horizontal_line{
+    background: linear-gradient(.25turn,#009961, black, #009961); height:3px;
+}
+.topDiv{
+    position: relative;
+    top: 2.5vh;
+}
+
+.searchbar{
+    height: 100%;
+    background-color: white;
+    border-radius: 30px;
+    border: 1px solid #009961;
+    padding: 5px;
+}
+
+.search_input{
+    color: #009961;
+    border: 0;
+    outline: 0;
+    background: none;
+    line-height: 40px;
+    padding: 0 10px;
+    width: 70%;
+}
+.search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    text-decoration:none;
+    background: #009961;
+}
+.search_icon:hover{
+    text-decoration:none;
+    color: white;
+}

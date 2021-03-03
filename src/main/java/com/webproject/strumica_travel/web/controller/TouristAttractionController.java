@@ -4,6 +4,8 @@ import com.webproject.strumica_travel.model.TouristAttraction;
 import com.webproject.strumica_travel.model.enumeration.AttractionType;
 import com.webproject.strumica_travel.service.ReviewService;
 import com.webproject.strumica_travel.service.TouristAttractionService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Controller
 @RequestMapping("/attractions")
 public class TouristAttractionController {
+
     private final TouristAttractionService touristAttractionService;
     private final ReviewService reviewService;
     public TouristAttractionController(TouristAttractionService touristAttractionService, ReviewService reviewService) {
@@ -23,23 +29,35 @@ public class TouristAttractionController {
         this.reviewService = reviewService;
     }
     @GetMapping
-    public String getAttractionsPage(@RequestParam(required = false) String nameSearch,@RequestParam(required = false) AttractionType typeSearch, Model model)
+    public String getAttractionsPage(@RequestParam("page") Optional<Integer> page,
+                                     @RequestParam("size") Optional<Integer> size,
+                                     @RequestParam(required = false) String nameSearch,
+                                     @RequestParam(required = false) AttractionType typeSearch, Model model)
     {
-        List<TouristAttraction> touristAttractionList;
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(3);
+        Page<TouristAttraction> touristAttractionPage=touristAttractionService.findPaginated(PageRequest.of(currentPage - 1, pageSize));;
+
         if(nameSearch!=null)
         {
-            touristAttractionList=touristAttractionService.searchByName(nameSearch);
+            touristAttractionPage=touristAttractionService.findPaginated(PageRequest.of(currentPage - 1, pageSize),nameSearch);
         }
         else if(typeSearch!=null)
         {
-            touristAttractionList=touristAttractionService.searchByType(typeSearch);
+            touristAttractionPage=touristAttractionService.findPaginated(PageRequest.of(currentPage - 1, pageSize),typeSearch);
         }
-        else{
-            touristAttractionList=this.touristAttractionService.findAll();
+
+        int totalPages = touristAttractionPage.getTotalPages();
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+                    .boxed()
+                    .collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
         }
+
         AttractionType[] attractionTypes=AttractionType.values();
         model.addAttribute("attractionTypes",attractionTypes);
-        model.addAttribute("attractions",touristAttractionList);
+        model.addAttribute("touristAttractionPage", touristAttractionPage);
         model.addAttribute("bodyContent","tourist_attractions");
         return "master-template";
     }

@@ -1,81 +1,29 @@
-<head xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="/css/detailsCss.css">
+    <link rel="stylesheet" href="/css/indexCss.css">
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script type="text/javascript" src="https://mbostock.github.com/d3/d3.js?2.1.3"></script>
-    <script type="text/javascript" src="https://mbostock.github.com/d3/d3.geom.js?2.1.3"></script>
-    <script type="text/javascript" src="https://mbostock.github.com/d3/d3.layout.js?2.1.3"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/fusioncharts.js"></script>
     <script type="text/javascript" src="https://cdn.fusioncharts.com/fusioncharts/latest/themes/fusioncharts.theme.fusion.js"></script>
 </head>
-    <style>
-        body{
-            font-family: Tahoma, Verdana, sans-serif;
-        }
-        .topDiv{
-            position: relative;
-            top: 2.5vh;
-        }
-        .horizontal_line{
-            background: linear-gradient(.25turn,#009961, black, #009961); height:3px;
-        }
-        #routeName{
-            font-weight: bold;
-            font-size: 3vh;
-        }
-        .rowContainer{
-            border-radius: 10px;
-        }
-        .back_btn{
-            background-color: #009961;
-        }
-        .submitReview{
-            background-color: #009961;
-        }
-        #listOfStars {
-            list-style: none;
-        }
-        .starList {
-            display: inline-block;
-            font-size: 2.8vh;
-            padding: 0px;
-        }
-        .rateInput {
-            visibility:hidden;
-        }
-        .rateLabel {
-            cursor: pointer;
-        }
-
-        #listOfStars>li:hover{
-            transform: none;
-            transition: none;
-            box-shadow: none;
-            color: black;
-            background: none;
-        }
-        .submitReview{
-            background-color: #009961;
-        }
-    </style>
-</head>
-<body xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<body xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml" class="text-dark">
 <th:block>
     <div class="topDiv">
         <hr class="mt-5 horizontal_line" />
     </div>
     <div class="container mt-5 mb-5 ">
         <div class="w3-container w3-animate-zoom">
-
             <div class="row bg-light p-2 rowContainer">
                 <div class="col-12 col-md-6">
                     <div class="fotorama" data-minwidth="100%" data-nav="thumbs" data-autoplay="true" data-fit="cover" data-swipe="true">
-                        <img th:src="${route.getImage()}"/>
+                        <img th:src="${route.getImage()}" alt="TourImage"/>
                         <img th:each="attraction:${attractions}" th:src="${attraction.getMainPicture()}">
                     </div>
                 </div>
                 <div class="col-12 col-md-6 text-left">
                     <div class="row">
                         <div class="col-8">
-                            <p th:text="${route.getName()}" id="routeName" class="pb-0"></p>
+                            <p th:text="${route.getName()}" id="placeName" class="pb-0"></p>
                             <span class="small text-muted pt-0"><th:block th:text="${#lists.size(reviews)}"></th:block> reviews</span>
                             <span class="small text-muted pt-0"><th:block th:text="${route.getLikes()}"></th:block> likes</span>
                         </div>
@@ -91,9 +39,12 @@
                     </div>
                     <span class="font-weight-bold d-inline">Duration: </span><span class="d-inline" th:text="${route.getDuration()}"></span><span class="d-inline"> hours</span><br>
                     <span class="d-inline font-weight-bold">Places: </span><span class="d-inline" th:each="attraction:${route.getTouristAttractions()}">
+
                     <th:block th:text="${attraction.getName()}"></th:block> </span><br>
                     <span class="small text-muted">*Duration is calculated for driving with a car and 40 minutes stops in each place.</span>
+
                     <p th:text="${route.getDescription()}" class="mt-5"></p>
+
                     <div class="mt-5">
                         <a href="/routes" class="btn text-white back_btn d-inline">All Routes</a>
                         <a th:href="@{/routes/{id}/edit-form (id=${route.id})}" class="btn text-white bg-dark d-inline" sec:authorize="hasRole('ROLE_ADMIN')">Edit</a>
@@ -105,7 +56,6 @@
             </div>
 
             <div class="row mt-4">
-
                 <div class="col-12 col-md-6 mt-3">
                     <div class="pl-3 pt-3 pr-3 bg-light rowContainer">
                         <th:block sec:authorize="isAuthenticated()" class="bg-light">
@@ -168,7 +118,7 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-6 mt-3 header">
-                    <div class="pl-3 pt-3 pr-3 bg-light rowContainer">
+                    <div class="pl-3 pt-3 pr-3 pb-3 bg-light rowContainer">
                         <div id="chart-container">
                         </div>
                     </div>
@@ -177,6 +127,9 @@
         </div>
     </div>
 </th:block>
+<script src="/js/rating.js"></script>
+<script src="/js/pieReviewRoutes.js"></script>
+<script src="/js/changeLogo.js"></script>
 <script>
     var size1=[[${sizeOf1}]];
     var size2=[[${sizeOf2}]];
@@ -221,45 +174,6 @@
         var fusioncharts = new FusionCharts(Config);
         fusioncharts.render();
     });
-
-
-    document.getElementById("logo").setAttribute("th:src","@{images/black-logo.png}");
-    document.getElementById("logo").setAttribute("src","images/black-logo.png");
-    var stars = 0;
-
-    function rate(number){
-        stars = number;
-        i=1;
-        while(i<=number)
-        {
-            n=document.getElementById("star"+i);
-            n.innerHTML="&starf;";
-            i++;
-        }
-        while(i<6)
-        {
-            n=document.getElementById("star"+i);
-            n.innerHTML="&star;";
-            i++;
-        }
-
-    }
-    var hiddenGrade=document.getElementsByClassName("hiddenGrade");
-    var insertGrade=document.getElementsByClassName("insertGrade");
-    var j=0;
-    while(j<hiddenGrade.length){
-        n=hiddenGrade.item(j);
-        grade=parseInt(n.innerHTML);
-        k=0;
-        while(k<grade){
-            insertGrade.item(j).innerHTML+="&starf;";
-            k++;
-        }
-        while(k<5){
-            insertGrade.item(j).innerHTML+="&star;";
-            k++;
-        }
-        j++;
-    }
 </script>
+
 </body>
