@@ -35,6 +35,28 @@
                             </div>
                         </div>
                         <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="latitude">Latitude</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="latitude"
+                                       name="latitude"
+                                       th:value="(${attraction} != null ? ${attraction.getLatitude()} : '')"
+                                       placeholder="Latitude">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <label class="control-label col-4 text-right" for="longitude">Longitude</label>
+                            <div class="col-8">
+                                <input type="text"
+                                       class="form-control"
+                                       id="longitude"
+                                       name="longitude"
+                                       th:value="(${attraction} != null ? ${attraction.getLongitude()} : '')"
+                                       placeholder="Longitude">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
                             <label class="control-label col-4 text-right" for="description">Description</label>
                             <div class="col-8">
                                 <input type="text"

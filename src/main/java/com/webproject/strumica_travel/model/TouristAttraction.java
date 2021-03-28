@@ -15,6 +15,8 @@ public class TouristAttraction {
     private Long id;
     private String name;
     private String location;
+    private Double latitude;
+    private Double longitude;
     @Column(length = 5000)
     private String description;
     private String mainPicture;
@@ -26,9 +28,11 @@ public class TouristAttraction {
     public TouristAttraction() {
     }
 
-    public TouristAttraction(String name, String location, String description,String mainPicture, String pictures,AttractionType type) {
+    public TouristAttraction(String name, String location,Double latitude, Double longitude, String description,String mainPicture, String pictures,AttractionType type) {
         this.name = name;
         this.location = location;
+        this.latitude=latitude;
+        this.longitude=longitude;
         this.description = description;
         this.pictures = pictures;
         this.mainPicture=mainPicture;
@@ -42,5 +46,13 @@ public class TouristAttraction {
 
     public void setName(String name) {
         this.name=name;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
     }
 }

@@ -81,13 +81,15 @@ public class TouristAttractionController {
     public String saveAttraction(
                               @RequestParam String name,
                               @RequestParam String location,
+                              @RequestParam Double latitude,
+                              @RequestParam Double longitude,
                               @RequestParam String description,
                               @RequestParam String mainPicture,
                               @RequestParam String pictures,
                               @RequestParam AttractionType type)
     {
 
-        this.touristAttractionService.save(name,location,description,mainPicture,pictures,type);
+        this.touristAttractionService.save(name,location,latitude,longitude,description,mainPicture,pictures,type);
         return "redirect:/attractions";
     }
     @GetMapping("/{id}/edit-form")
@@ -110,11 +112,13 @@ public class TouristAttractionController {
     public String updateAttraction(@PathVariable Long id,
                          @RequestParam String name,
                          @RequestParam String location,
+                         @RequestParam Double latitude,
+                         @RequestParam Double longitude,
                          @RequestParam String description,
                          @RequestParam String mainPicture,
                          @RequestParam String pictures,
                                    @RequestParam AttractionType type) {
-        this.touristAttractionService.edit(id, name, location, description,mainPicture,pictures,type);
+        this.touristAttractionService.edit(id, name, location,latitude,longitude, description,mainPicture,pictures,type);
         return "redirect:/attractions";
     }
     @GetMapping("/{id}/details")
@@ -138,6 +142,8 @@ public class TouristAttractionController {
             model.addAttribute("attraction",touristAttraction);
             model.addAttribute("pictures",Arrays.asList(touristAttraction.getPictures().split(" ")));
             model.addAttribute("reviews",reviews);
+            model.addAttribute("longitude",touristAttraction.getLongitude());
+            model.addAttribute("latitude",touristAttraction.getLatitude());
             model.addAttribute("bodyContent", "attraction_details");
             return "master-template";
         }

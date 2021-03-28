@@ -101,20 +101,22 @@ public class TouristAttractionServiceImpl implements TouristAttractionService {
     }
 
     @Override
-    public Optional<TouristAttraction> save(String name, String location, String description, String mainPicture, String pictures, AttractionType type) {
+    public Optional<TouristAttraction> save(String name, String location,Double latitude,Double longitude, String description, String mainPicture, String pictures, AttractionType type) {
         if(name==null || name.isEmpty() || location==null || location.isEmpty() || description==null || description.isEmpty() || pictures==null || pictures.isEmpty() || type==null)
         {
             throw new IllegalArgumentException();
         }
-        TouristAttraction touristAttraction=new TouristAttraction(name,location,description,mainPicture,pictures,type);
+        TouristAttraction touristAttraction=new TouristAttraction(name,location,latitude,longitude,description,mainPicture,pictures,type);
         return Optional.of(touristAttractionRepository.save(touristAttraction));
     }
 
     @Override
-    public Optional<TouristAttraction> edit(Long id, String name, String location, String description, String mainPicture,String pictures,AttractionType type) {
+    public Optional<TouristAttraction> edit(Long id, String name, String location,Double latitude,Double longitude, String description, String mainPicture,String pictures,AttractionType type) {
         TouristAttraction touristAttraction=touristAttractionRepository.findById(id).orElseThrow(()->new TouristAttractionNotFoundException(id));
         touristAttraction.setName(name);
         touristAttraction.setLocation(location);
+        touristAttraction.setLatitude(latitude);
+        touristAttraction.setLongitude(longitude);
         touristAttraction.setDescription(description);
         touristAttraction.setMainPicture(mainPicture);
         touristAttraction.setPictures(pictures);

@@ -17,8 +17,8 @@ public interface TouristAttractionService {
    Page<TouristAttraction> findPaginated(Pageable pageable, String nameSearch);
    Optional<TouristAttraction> findById(Long id);
    Optional<TouristAttraction> findByName(String name);
-   Optional<TouristAttraction> save(String name, String location, String description, String mainPicture, String pictures, AttractionType type);
-   Optional<TouristAttraction> edit(Long id, String name, String location, String description,String mainPicture, String pictures, AttractionType type);
+   Optional<TouristAttraction> save(String name, String location,Double latitude,Double longitude, String description, String mainPicture, String pictures, AttractionType type);
+   Optional<TouristAttraction> edit(Long id, String name, String location,Double latitude,Double longitude, String description,String mainPicture, String pictures, AttractionType type);
    List<TouristAttraction> searchByName(String name);
    List<TouristAttraction> searchByType(AttractionType type);
    void deleteById(Long id);
