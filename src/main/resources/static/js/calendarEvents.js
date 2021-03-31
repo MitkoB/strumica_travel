@@ -5,6 +5,13 @@ $(document).ready(function() {
             center: 'title',
             right: 'month,agendaWeek,agendaDay'
         },
+        eventClick: function(calEvent, jsEvent, view) {
+
+            alert('Event: ' + calEvent.title+'\n'+ 'Description: '+calEvent.description);
+            // change the border color just for fun
+            $(this).css('border-color', 'red');
+
+        },
         defaultDate: moment().format("YYYY-MM-DD"),
         nowIndicator: true,
         navLinks: true,
@@ -21,6 +28,10 @@ $(document).ready(function() {
                 container: 'body'
             });
         },
+        selectable: true,
+        selectHelper: true,
+        editable: true,
+        eventLimit: true,
         events: {
             url: '/allevents',
             type: 'GET',
