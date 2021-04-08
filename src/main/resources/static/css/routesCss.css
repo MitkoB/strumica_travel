@@ -7,6 +7,10 @@ body{
     border: 1px solid #009961;
     color: #009961;
 }
+.horizontal_line_card{
+    background: linear-gradient(.25turn,#009961, black, #009961);
+    height:1.5px;
+}
 .likeButton:hover{
     text-decoration: none;
     color: #009961;

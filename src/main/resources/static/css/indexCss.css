@@ -22,7 +22,8 @@ body{
     background-color: #009961;
 }
 .horizontal_line{
-    background: linear-gradient(.25turn,#009961, black, #009961); height:3px;
+    background: linear-gradient(.25turn,#009961, black, #009961);
+    height:3px;
 }
 .topDiv{
     position: relative;

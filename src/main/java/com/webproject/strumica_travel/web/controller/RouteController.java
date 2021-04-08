@@ -65,9 +65,9 @@ public class RouteController {
             @RequestParam String description,
             @RequestParam String duration,
             @RequestParam String image,
-            @RequestParam List<Long> attractionsIds )
+            @RequestParam List<Long> selectedAttractions)
     {
-        this.routeService.save(name,description,duration,image,attractionsIds);
+        this.routeService.save(name,description,duration,image,selectedAttractions);
         return "redirect:/routes";
     }
     @GetMapping("/{id}/edit-form")

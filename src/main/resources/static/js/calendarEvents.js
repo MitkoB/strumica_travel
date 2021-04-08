@@ -7,9 +7,13 @@ $(document).ready(function() {
         },
         eventClick: function(calEvent, jsEvent, view) {
 
-            alert('Event: ' + calEvent.title+'\n'+ 'Description: '+calEvent.description);
+           // alert('Event: ' + calEvent.title+'\n'+ 'Description: '+calEvent.description);
+            $("#myModal").modal("show");
+            document.getElementById("modal-title").textContent=calEvent.title;
+            document.getElementById("modal-description").textContent=calEvent.description;
+            document.getElementById("modal-image").setAttribute("src",calEvent.picture);
             // change the border color just for fun
-            $(this).css('border-color', 'red');
+           // $(this).css('border-color', 'red');
 
         },
         defaultDate: moment().format("YYYY-MM-DD"),

@@ -33,7 +33,7 @@
         <div class="row mt-4">
             <div class="col-12 col-md-6 col-lg-4 mt-3" th:each="attraction, iStat : ${touristAttractionPage.content}">
                 <div class="attractionContainer"
-                     th:style="'background:url('+ ${attraction.getMainPicture()} +');'">
+                     th:style="'background:url('+ ${attraction.getMainPicture()} +'); background-size: 100% 100%;'">
                     <div class="overlay">
                         <div></div>
                         <div class="items head">
